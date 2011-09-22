@@ -10,20 +10,33 @@ $(document).ajaxSend(function(event, xhr, settings) {
 	}
 });
 
+function doSuccess(data, success_func, fail_func){
+	if(data.success){
+		success_func()
+	}else{
+		alert(data.message)
+		if(typeof(fail_func) == "function"){
+			fail_func()
+		}
+			
+	}
+}
+
+function refresh(){window.location=window.location}
+
 function login(){
 
 	email = $("#login_email").val()
 	pass = $("#login_password").val()
 	$.post("/login/",{email: email, password: pass},function(data){
-		alert(JSON.stringify(data))
+		doSuccess(data, refresh)
 	})
 	
 }
 
 function logout(){
 	$.post('/logout/',function(data){
-		alert(JSON.stringify(data))
-		window.location = window.location
+		doSuccess(data, refresh)
 	})
 }
 

@@ -7,18 +7,19 @@
     </script>
 {%endblock%}
 
-{%block body%}
-    
-    Welcome Home<br/>
-     {{user}}
-    <br/>
+{%block body%}    
     {%if not user.is_authenticated %}
     login
     <input type="text" id="login_email"/>
     <input type="password" id="login_password"/>
     <input type="submit" id="login_submit" onclick="login()" value="login"/>
+    
     {%else%}
     <input type="button" id="logout" value="Logout" onclick="logout()"/>
+    <br/>
+    
+    Welcome {{user}}
+    
     {%endif%}
 
 
