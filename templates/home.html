@@ -1,0 +1,25 @@
+{%extends 'base_template.html'%}
+{%block head%}
+    <script>
+    $(function(){
+    	$("#login_password").enter(login)
+    })
+    </script>
+{%endblock%}
+
+{%block body%}
+    
+    Welcome Home<br/>
+     {{user}}
+    <br/>
+    {%if not user.is_authenticated %}
+    login
+    <input type="text" id="login_email"/>
+    <input type="password" id="login_password"/>
+    <input type="submit" id="login_submit" onclick="login()" value="login"/>
+    {%else%}
+    <input type="button" id="logout" value="Logout" onclick="logout()"/>
+    {%endif%}
+
+
+{%endblock%}
