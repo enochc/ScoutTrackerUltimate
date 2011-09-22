@@ -17,8 +17,8 @@
     {%else%}
     <input type="button" id="logout" value="Logout" onclick="logout()"/>
     <br/>
-    
-    Welcome {{user}}
+    {{user}} {{user.userprofile.test}}
+    Welcome {{user.userprofile.fullname}}
     
     {%endif%}
 
