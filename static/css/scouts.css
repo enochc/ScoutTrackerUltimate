@@ -1,0 +1,28 @@
+.red{
+	color:#e2003a;
+}
+.blue{
+	color:#005a9a;
+}
+html, body, table, tr, td{
+	margin:0;
+	padding:0;
+	border:0;
+}
+body{
+	font-family:Helvetica, Arial, sans-serif;
+	margin:0;
+	padding:0;
+}
+hr{
+	background-color:#005a9a;
+	border-color:#005a9a;
+}
+
+#outer{
+	width:1000px;
+	margin:0 auto;
+}
+#banner{
+	margin-top:10px;
+}
