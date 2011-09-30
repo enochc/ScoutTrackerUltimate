@@ -29,7 +29,7 @@ function login(){
 	email = $("#login_email").val()
 	pass = $("#login_password").val()
 	$.post("/login/",{email: email, password: pass},function(data){
-		doSuccess(data, refresh)
+		doSuccess(data, window.location = '/user')
 	})
 	
 }

@@ -1,5 +1,6 @@
 <html>
     <head>
+    <LINK REL=StyleSheet HREF="/css/scouts.css" TYPE="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript" src="/js/scouts.js"></script>
@@ -8,7 +9,12 @@
     {%csrf_token%}
     </head>
     <body>
-    {%block body%}  
-    {%endblock%}
+        <div id="outer">
+            {%block nav%}
+                {%include "nav.html"%}
+            {%endblock%}
+            {%block body%}  
+            {%endblock%}
+        </div>
     </body>
 </html>
