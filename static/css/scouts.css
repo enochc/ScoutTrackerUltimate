@@ -1,16 +1,26 @@
 .red{
-	color:#e2003a;
+	color:#b31f36;
 }
 .blue{
-	color:#005a9a;
+	color:#0c5994;
 }
+.gold{
+	color:#f6bc56;
+}
+.grey{
+	color:#616256;
+}
+.green{
+	color:#32523b;
+}
+
 html, body, table, tr, td{
 	margin:0;
 	padding:0;
 	border:0;
 }
 body{
-	font-family:Helvetica, Arial, sans-serif;
+	font-family:Helvetica, Neue, sans-serif;
 	margin:0;
 	padding:0;
 }

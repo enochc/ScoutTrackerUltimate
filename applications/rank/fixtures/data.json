@@ -3,8 +3,63 @@
         "pk": 1, 
         "model": "rank.rank", 
         "fields": {
+            "order": 0, 
             "name": "Scout", 
             "patch": "rank/Scout.gif"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 1, 
+            "name": "Tenderfoot", 
+            "patch": "rank/Tfoot.gif"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 2, 
+            "name": "Second Class", 
+            "patch": "rank/2class.gif"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 3, 
+            "name": "First Class", 
+            "patch": "rank/1class.gif"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 4, 
+            "name": "Star", 
+            "patch": "rank/star.gif"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 5, 
+            "name": "Life", 
+            "patch": "rank/life.gif"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "rank.rank", 
+        "fields": {
+            "order": 6, 
+            "name": "Eagle", 
+            "patch": "rank/eagle.gif"
         }
     }
 ]
