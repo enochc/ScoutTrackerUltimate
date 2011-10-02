@@ -1,0 +1,36 @@
+{%extends 'base_template.html'%}
+
+
+{%block body%}
+<form action='/user/add_scout/' method="POST">
+{% csrf_token %}
+Add scout for Troop {{user.profile.troop}}<br/>
+<input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>
+
+<label for='first_name'>First name:</label><input type="text" id="first_name" name="first_name"/><br/>
+{{form.first_name.errors}}
+<label for='id_last_name'>Last name:</label>{{form.last_name}}<br/>
+{{form.last_name.errors}}
+<label for='id_nickname'>Nickname:</label>{{form.nickname}}<br/>
+{{form.nickname.errors}}
+<label for='id_birthday'>Birthday:</label>{{form.birthday}}<br/>
+{{form.birthday.errors}}
+<label for='id_phone_number'>Phone Number:</label>{{form.phone_number}}<br/>
+{{form.phone_number.errors}}
+<label for='id_state'>State:</label>{{form.state}}<br/>
+{{form.state.errors}}
+<label for='id_city'>City:</label>{{form.city}}<br/>
+{{form.city.errors}}
+<label for='id_street1'>Street1:</label>{{form.street1}}<br/>
+{{form.street1.errors}}
+<label for='id_street2'>Street2:</label>{{form.street2}}<br/>
+{{form.street2.errors}}
+<label for='id_position'>Position:</label>{{form.position}}<br/>
+{{form.position.errors}}
+
+
+
+<input type="submit"/>
+</form>
+
+{%endblock%}

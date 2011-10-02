@@ -1,0 +1,56 @@
+[
+    {
+        "pk": 1, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Committee Member", 
+            "description": "Does everything"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Boy Scout", 
+            "description": "A Member of a troop"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Senior Patrol Leader", 
+            "description": "Leads the patrol"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Patrol Leader", 
+            "description": "leads a patrol"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Scoutmaster", 
+            "description": "watches over the troop"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "position.position", 
+        "fields": {
+            "youth": true, 
+            "name": "Assistant Scoutmaster", 
+            "description": "Assists the Scoutmaster "
+        }
+    }
+]
