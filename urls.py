@@ -26,4 +26,5 @@ urlpatterns = patterns('',
 
     url(r'^$', direct_to_template, {'template':'home.html'}),
     url(r'^user/', include('userprofile.urls')),
+    url(r'^troop/', include('troop.urls')),
 )

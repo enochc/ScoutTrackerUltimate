@@ -3,6 +3,7 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append('%s/applications' % BASE_DIR)
+sys.path.append('%s/contrib-applications' % BASE_DIR)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -123,10 +124,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_extensions', 
+    
+    'position',
 	'userprofile',
 	'troop',
 	'rank',
 	'requirement',
+	
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,6 +1,8 @@
-{%extends 'base_template.html'%}
+{%extends 'page_template.html'%}
 
-{%block body%}
-your home <span class='red'>{{user}}</span>
+{%block content%}
 
+{%if perms.userprofile.add_scout or perms.userprofile.add_leader%}
+    {%include 'troop/troop_home.html'%}
+{%endif%}
 {%endblock%}

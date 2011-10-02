@@ -1,13 +1,14 @@
-{%extends 'base_template.html'%}
+{%extends 'page_template.html'%}
 {%block head%}
     <script>
     $(function(){
+    	alert('hi')
     	$("#login_password").enter(login)
     })
     </script>
 {%endblock%}
 
-{%block body%}    
+{%block content%}    
     {%if not user.is_authenticated %}
     login
     <input type="text" id="login_email"/>

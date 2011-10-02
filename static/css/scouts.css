@@ -1,18 +1,8 @@
-.red{
-	color:#b31f36;
-}
-.blue{
-	color:#0c5994;
-}
-.gold{
-	color:#f6bc56;
-}
-.grey{
-	color:#616256;
-}
-.green{
-	color:#32523b;
-}
+.red{color:#b31f36;}
+.blue{color:#0c5994;}
+.gold{color:#f6bc56;}
+.grey{color:#616256;}
+.green{color:#32523b;}
 
 html, body, table, tr, td{
 	margin:0;
@@ -28,11 +18,45 @@ hr{
 	background-color:#005a9a;
 	border-color:#005a9a;
 }
-
+h1{
+	margin:0;
+	padding:0;
+}
+ul.errorlist{
+	color:red;
+	margin:0;
+}
+ul.errorlist li{
+    color:red;
+    margin:0;
+    padding:0;
+    font-size:smaller;
+}
 #outer{
 	width:1000px;
 	margin:0 auto;
 }
 #banner{
 	margin-top:10px;
+	vertical-align:middle;
+    height:30px;
+}
+#banner h1{
+	line-height:30px;
+}
+#banner .button{
+	margin-top:2px;
+}
+.rt{
+	float:right;
+}
+
+.button{
+	height:20px;
+	line-height:20px;
+	background-color:#f6bc56;
+	padding:3px 10px;
+	cursor:pointer;
+	border-radius:13px;
+	margin:0 5px;
 }

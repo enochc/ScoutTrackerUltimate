@@ -53,3 +53,8 @@ if($){
 		return this;
 	}
 }
+$(function(){
+	$("#add_scout_btn").click(function(){
+		window.open('/user/add_scout/', 'add_scout', 'width=400, height=400')
+	})
+})

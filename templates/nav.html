@@ -1,4 +1,12 @@
 <div id="banner">
     <h1>The Ultimate Scout Tracker</h1>
-    <hr/>
 </div>
+<hr/>
+{% if user.is_authenticated %}
+    {{user.first_name}} {{user.last_name}}  Troop: {{ user.profile.troop }}
+    <div class="button rt red" onclick="logout()">logout</div>
+    {%if perms.userprofile.add_scout%}
+    <div class="button rt red" id='add_scout_btn'>Add scout</div>
+    {%endif%}
+{%endif%}
+<br/><br/>
