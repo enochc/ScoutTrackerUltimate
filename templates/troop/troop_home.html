@@ -1,3 +1,7 @@
-{% for s in user.profile.troop.scouts.all %}
-{{ s }}
+
+{% for s in user.profile.troop.members.all %}
+
+{{ s.fullname}} {{s.position}}<br/>
+
 {% endfor %}
+

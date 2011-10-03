@@ -1,0 +1,30 @@
+body{
+	background-color:#a3d5f7;
+}
+
+form{
+	text-align:center;
+	color:#fff;
+}
+
+form label{
+    width:120px;
+    padding-right:5px;
+    text-align:right;
+    display:inline-block;	
+}
+form input, form select{
+	width:150px;
+	padding:1px;
+	margin:2px;
+}
+form h1{
+	color:#b31f36;
+	margin:5px 0;
+	padding:0 10px;
+	font-size: 1.25em;
+}
+form .button{
+	width:100px;
+	margin:10px auto;
+}

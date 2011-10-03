@@ -1,27 +1,10 @@
 {%extends 'page_template.html'%}
-{%block head%}
-    <script>
-    $(function(){
-    	alert('hi')
-    	$("#login_password").enter(login)
-    })
-    </script>
-{%endblock%}
+
 
 {%block content%}    
-    {%if not user.is_authenticated %}
-    login
-    <input type="text" id="login_email"/>
-    <input type="password" id="login_password"/>
-    <input type="submit" id="login_submit" onclick="login()" value="login"/>
-    
-    {%else%}
-    <input type="button" id="logout" value="Logout" onclick="logout()"/>
-    <br/>
-    {{user}} {{user.userprofile.test}}
-    Welcome {{user.userprofile.fullname}}
-    
-    {%endif%}
+    Welcome to the Ultimate Scout tracker. You can't do much here right now without logging in.
+    If you don't have a login then you'd better figure out how to get one, otherweise, this is 
+    as far as you get.
 
 
 {%endblock%}

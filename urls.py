@@ -23,8 +23,11 @@ urlpatterns = patterns('',
         {'document_root': settings.STATIC_ROOT +'/js'}),
     (r'^css/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.STATIC_ROOT +'/css'}),
+    (r'^images/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.STATIC_ROOT +'/images'}),
 
     url(r'^$', direct_to_template, {'template':'home.html'}),
     url(r'^user/', include('userprofile.urls')),
     url(r'^troop/', include('troop.urls')),
+    url(r'^requirement/', include('requirement.urls')),
 )

@@ -1,8 +1,7 @@
 {%extends 'page_template.html'%}
 
 {%block content%}
+{{scout.profile.fullname}}
+{{scout.rank}}
 
-{%if perms.userprofile.add_scout or perms.userprofile.add_leader%}
-    {%include 'troop/troop_home.html'%}
-{%endif%}
 {%endblock%}

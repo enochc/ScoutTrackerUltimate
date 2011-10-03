@@ -7,9 +7,9 @@ from applications.userprofile.models import Userprofile
 from utils.response import HttpJsonResponse, HttpJsonSuccess, HttpJsonFailure
 
 def login_view(request):
-    email = request.POST['email']
+    username = request.POST['login']
     password = request.POST['password']
-    user = authenticate(username=email, password=password)
+    user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
             login(request, user)

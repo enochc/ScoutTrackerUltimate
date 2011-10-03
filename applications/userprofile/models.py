@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from applications.troop.models import Troop
 from utils.values import states
 from position.models import Position
+from userrequirement.models import UserRequirement
 
 def reverse_states():
 	return [[s[1], s[0]] for s in states]
@@ -16,7 +17,7 @@ class Userprofile(models.Model):
             ("add_scouts", "Can add scouts"),
         )
 		
-	user = models.OneToOneField(User, related_name='profile')
+	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
 	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members', default=1)
@@ -42,3 +43,7 @@ class Userprofile(models.Model):
 	@property
 	def name(self):
 		return self.__unicode__()
+	
+	def completed_list(self):
+		urs = UserRequirement.objects.filter(user=self.user)
+		return [ur.id for ur in urs]

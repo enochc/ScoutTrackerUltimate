@@ -1,18 +1,35 @@
 {%extends 'base_template.html'%}
 
+{%block head%}
+<LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script>
+$(function(){
+	$("#id_birthday").datepicker({
+		changeYear:true,
+		yearRange:'-100:+0',
+		dateFormat:'yy-mm-dd'
+	})
+})
+
+</script>
+{%endblock%}
 
 {%block body%}
-<form action='/user/add_scout/' method="POST">
+<form class="blue" action='/user/add_scout/' method="POST" name='add_scout_form'>
 {% csrf_token %}
-Add scout for Troop {{user.profile.troop}}<br/>
+<h1>Add member for Troop {{user.profile.troop}}</h1>
 <input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>
+<input type="hidden" id="position" name="position" value='{{boyscout.id}}'/>
 
-<label for='first_name'>First name:</label><input type="text" id="first_name" name="first_name"/><br/>
+<label for='id_first_name'>First name:</label>{{form.first_name}}<br/>
 {{form.first_name.errors}}
 <label for='id_last_name'>Last name:</label>{{form.last_name}}<br/>
 {{form.last_name.errors}}
 <label for='id_nickname'>Nickname:</label>{{form.nickname}}<br/>
 {{form.nickname.errors}}
+<label for='id_login_name'>Login:</label>{{form.login_name}}<br/>
+{{form.login_name.errors}}
 <label for='id_birthday'>Birthday:</label>{{form.birthday}}<br/>
 {{form.birthday.errors}}
 <label for='id_phone_number'>Phone Number:</label>{{form.phone_number}}<br/>
@@ -30,7 +47,7 @@ Add scout for Troop {{user.profile.troop}}<br/>
 
 
 
-<input type="submit"/>
+<div class="button" onclick='forms.add_scout_form.submit()'>Add</button>
 </form>
 
 {%endblock%}

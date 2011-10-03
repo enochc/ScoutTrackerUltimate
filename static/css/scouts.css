@@ -4,15 +4,24 @@
 .grey{color:#616256;}
 .green{color:#32523b;}
 
-html, body, table, tr, td{
+div.ui-datepicker{
+ font-size:.7em;
+}
+
+html, body, table, tr, td, th{
 	margin:0;
 	padding:0;
 	border:0;
 }
 body{
 	font-family:Helvetica, Neue, sans-serif;
+	font-size:1em;
 	margin:0;
 	padding:0;
+}
+a{
+	color:#000;
+	text-decoration:underline;
 }
 hr{
 	background-color:#005a9a;
@@ -38,14 +47,21 @@ ul.errorlist li{
 }
 #banner{
 	margin-top:10px;
-	vertical-align:middle;
-    height:30px;
+    padding:0;
 }
 #banner h1{
-	line-height:30px;
+	font-size:32px;
+	line-height:32px;
+	vertical-align:text-bottom;
+	position:relative;
+	bottom:0px;
 }
 #banner .button{
 	margin-top:2px;
+}
+#banner span{
+	margin-top:10px;
+	margin-right:20px;
 }
 .rt{
 	float:right;
@@ -55,8 +71,56 @@ ul.errorlist li{
 	height:20px;
 	line-height:20px;
 	background-color:#f6bc56;
-	padding:3px 10px;
+	padding:0 10px;
+	margin:4px 5px;
 	cursor:pointer;
-	border-radius:13px;
-	margin:0 5px;
+    color:#b31f36;
+	border:1px outset yellow;
+
+}
+.button:hover{
+	border:1px inset yellow;
+	}
+#nav{
+	height:30px;
+	line-height:30px;
+	width:98%;
+	padding: 0 1%;
+	vertical-align:middle;
+	color:#fff;
+	margin-bottom:5px;
+}
+#nav ul{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+}
+#nav li{
+    display:inline-block;
+    margin:0 10px;
+    cursor:pointer;
+}
+#nav a{
+	text-decoration:none;
+	color:#fff;
+}
+#nav a:hover{
+	text-decoration:underline;
+
+	}
+.grade{
+  /* fallback */
+  background-color: #0c5994;
+  background-repeat: repeat-x;  
+  /* Safari 4-5, Chrome 1-9 */
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0c5994), to(#000));  
+  /* Safari 5.1, Chrome 10+ */
+  background: -webkit-linear-gradient(bottom, #0c5994, #000);  
+  /* Firefox 3.6+ */
+  background: -moz-linear-gradient(bottom, #0c5994, #000);  
+  /* IE 10 */
+  background: -ms-linear-gradient(bottom, #0c5994, #000); 
+  /* Opera 11.10+ */
+  background: -o-linear-gradient(bottom, #0c5994, #000);
+
 }

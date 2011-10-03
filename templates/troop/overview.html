@@ -1,0 +1,76 @@
+{%extends 'page_template.html'%}
+
+{%block head%}
+<style>
+table{
+    
+}
+tr{
+    height:20px;
+}
+.req_header{
+    height:50px;
+}
+td.user_requirement{
+    cursor:pointer;
+}
+</style>
+
+<script>
+$(function(){
+	$('td.user_requirement').click(function(e){
+		t = $(this)
+		c = t.attr('class')
+		arr = c.split(' ')
+		r = arr[1]
+		m = arr[2]
+		api = '/requirement/set/'+r+'/'+m+'/'
+		$.get(api,function(data){
+			doSuccess(data, function(){alert('success')})
+		})
+		
+	})
+})
+
+</script>
+{%endblock%}
+
+{%block content%}
+    <div style="width:15%;float:left;">
+    <table border="1" width="100%">
+        <tr style="height:50px;"><td>&nbsp;</td></tr>
+        {% for member in troop.members.all %}
+        
+        <tr>
+            <th><a href="/user/{{member.user.id}}/">{{member}}</a></th>
+        </tr>
+        {%endfor%}
+    
+    
+    
+    </table>
+    </div>
+    <div style="width:85%;float:left;overflow:auto">
+        <table border="1">
+            <tr class="req_header">
+                
+                {%for req in requirements%}
+                <th class='r_{{req.id}}' title='{{req.short_desc}}'><img width="30" src='{{MEDIA_URL}}{{req.rank.patch}}'/></th>
+                {%endfor%}
+            </tr>
+            {% for member in troop.members.all %}
+            <tr>
+                
+                
+                {%for req in requirements%}
+                    <td class='user_requirement {{req.id}} {{member.id}}' align="center">
+                    {%if req.id in member.completed_list%}X{%else%}O{%endif%}
+                    </td>
+                {%endfor%}
+                
+            </tr>
+        {%endfor%}
+        </table>
+    </div>
+    
+{%endblock%}

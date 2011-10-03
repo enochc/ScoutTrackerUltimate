@@ -1,12 +1,30 @@
 <div id="banner">
+    <span class='rt'>{{user.first_name}} {{user.last_name}} : {{ user.profile.troop }}</span>
     <h1>The Ultimate Scout Tracker</h1>
 </div>
-<hr/>
+<div id='nav' class='grade'>
+    
 {% if user.is_authenticated %}
-    {{user.first_name}} {{user.last_name}}  Troop: {{ user.profile.troop }}
     <div class="button rt red" onclick="logout()">logout</div>
     {%if perms.userprofile.add_scout%}
-    <div class="button rt red" id='add_scout_btn'>Add scout</div>
+    <div class="button rt" id='add_scout_btn'>Add Member</div>
     {%endif%}
+{%else%}
+    <div class="button rt red" onclick="login()">login</div>
+    <span class='rt'>
+    Troop: <input type="text" id="login_troop" size="6"/>
+    Login: <input type="text" id="login_username"/>
+    Password: <input type="password" id="login_password"/>
+    </span>
+    
 {%endif%}
-<br/><br/>
+
+
+    <ul>
+        <li><a href="/user">Home</a></li>
+        {%if perms.userprofile.add_scouts or perms.userprofile.add_leaders%}
+        <li id="troop_stats"><a href="/troop/overview/">Troop</a></li>
+        {%endif%}
+    </ul>
+
+</div>
