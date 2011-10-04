@@ -17,6 +17,6 @@ def troopOverview(request):
     requirements = Requirement.objects.all()
     member_list = {}
     for m in troop.members.all():
-        member_list[m.id] = m.completed_list
+        member_list[m.pk] = m.completed_list()
     
     return 'troop/overview.html', {'troop':troop, 'requirements':requirements, 'member_list':member_list}

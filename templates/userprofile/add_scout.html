@@ -2,6 +2,16 @@
 
 {%block head%}
 <LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
+<style>
+#added_message{
+width:100%;
+text-align:center;
+font-weight:bold';
+font-size:larger;
+padding:5px 0;
+}
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 <script>
 $(function(){
@@ -12,11 +22,24 @@ $(function(){
 	})
 })
 
+function submitForm(){
+	$.blockUI()
+	form = $("form[name='add_scout_form']")
+	values = getJsonValues(form)
+	url = "/user/add_scout/"
+	$.post(url,values,function(data){
+		data.form = form
+		doSuccess(data, function(){
+			$("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+		},$.unblockUI())
+	})
+}
+
 </script>
 {%endblock%}
 
 {%block body%}
-<form class="blue" action='/user/add_scout/' method="POST" name='add_scout_form'>
+<form class="blue" method="POST" name='add_scout_form'>
 {% csrf_token %}
 <h1>Add member for Troop {{user.profile.troop}}</h1>
 <input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>
@@ -45,9 +68,9 @@ $(function(){
 <label for='id_position'>Position:</label>{{form.position}}<br/>
 {{form.position.errors}}
 
+<div class='red' id='added_message'>&nbsp;</div>
 
-
-<div class="button" onclick='forms.add_scout_form.submit()'>Add</button>
+<div class="button" onclick='submitForm()'>Add</button>
 </form>
 
 {%endblock%}

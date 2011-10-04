@@ -27,5 +27,8 @@ def req_set(request, req_id, user_id):
     else:
         return HttpJsonFailure('You are not authorized to perform this action')
 
-
+@render_to_html
+def req_info(request, req_id):
+    req = Requirement.objects.get(pk=req_id)
+    return 'requirement/info.html', {'req':req }
 

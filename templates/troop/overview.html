@@ -1,29 +1,72 @@
 {%extends 'page_template.html'%}
-
+{% load scouttags%}
 {%block head%}
 <style>
 table{
     
 }
 tr{
-    height:20px;
+    height:25px;
 }
 .req_header{
-    height:50px;
+    height:80px;
+}
+th{
+    padding:3px;
+}
+th img{
+    width:30px;
+    cursor:pointer;
+}
+th.current{
+    padding:6px;
+}
+th.current img{
+    width:40px;
 }
 td.user_requirement{
     cursor:pointer;
+}
+.member_name{
+    text-align:right;
+}
+#name_list{
+    width:10%;
+    float:left;
+}
+#req_list{
+    width:90%;
+    float:left;
+    overflow:auto;
+}
+.current{
+    background-color:#efeacc;
+}
+#requirement_info{
+    margin-top:20px;
+}
+#requirement_info ol{
+   list-style: lower-alpha;
+   margin:0;
 }
 </style>
 
 <script>
 $(function(){
+	$(".r1").addClass('current')
+	$('#requirement_info').load("/requirement/info/1/")
+	$("th img").click(function(){
+		req = $(this).parent('th').attr('class').split('r')[1]
+		$('.current').removeClass('current')
+		$('.r'+req).addClass('current')
+		$('#requirement_info').load("/requirement/info/"+req+"/")
+	})
 	$('td.user_requirement').click(function(e){
 		t = $(this)
 		c = t.attr('class')
 		arr = c.split(' ')
-		r = arr[1]
-		m = arr[2]
+		r = arr[1].split('r')[1]
+		m = arr[2].split('m')[1]
 		api = '/requirement/set/'+r+'/'+m+'/'
 		$.get(api,function(data){
 			doSuccess(data, function(){alert('success')})
@@ -36,13 +79,12 @@ $(function(){
 {%endblock%}
 
 {%block content%}
-    <div style="width:15%;float:left;">
+    <div id="name_list">
     <table border="1" width="100%">
-        <tr style="height:50px;"><td>&nbsp;</td></tr>
-        {% for member in troop.members.all %}
-        
+        <tr style="height:80px;"><td>&nbsp;</td></tr>
+        {% for member in troop.scouts %}
         <tr>
-            <th><a href="/user/{{member.user.id}}/">{{member}}</a></th>
+            <th class="member_name" id='m{{member.pk}}'><a href="/user/{{member.pk}}/">{{member}}</a>:</th>
         </tr>
         {%endfor%}
     
@@ -50,27 +92,33 @@ $(function(){
     
     </table>
     </div>
-    <div style="width:85%;float:left;overflow:auto">
+    <div id="req_list">
         <table border="1">
             <tr class="req_header">
                 
                 {%for req in requirements%}
-                <th class='r_{{req.id}}' title='{{req.short_desc}}'><img width="30" src='{{MEDIA_URL}}{{req.rank.patch}}'/></th>
+                <th class='r{{req.id}}' title='{{req.short_desc}}'>
+                    <img src='{{MEDIA_URL}}{{req.rank.thumbnail}}'/><br/>
+                    {{req.order}}
+                </th>
                 {%endfor%}
             </tr>
-            {% for member in troop.members.all %}
-            <tr>
-                
-                
-                {%for req in requirements%}
-                    <td class='user_requirement {{req.id}} {{member.id}}' align="center">
-                    {%if req.id in member.completed_list%}X{%else%}O{%endif%}
-                    </td>
-                {%endfor%}
-                
-            </tr>
-        {%endfor%}
+            {% for member in troop.scouts %}
+                <tr>
+    
+                    {%for req in requirements%}
+                        <td title='{{req.short_desc}}' class='user_requirement r{{req.id}} m{{member.pk}}' align="center">
+                        {%if req.id in member_list|attribute:member.pk%}X{%else%}O{%endif%}
+                        </td>
+                    {%endfor%}
+                    
+                </tr>
+            {%endfor%}
         </table>
+    </div>
+    <div class='float_spacer'>&nbsp;</div>
+    <div id='requirement_info'>
+    
     </div>
     
 {%endblock%}

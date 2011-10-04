@@ -46,4 +46,6 @@ class Userprofile(models.Model):
 	
 	def completed_list(self):
 		urs = UserRequirement.objects.filter(user=self.user)
-		return [ur.id for ur in urs]
+		return [int(ur.requirement.id) for ur in urs]
+	
+	

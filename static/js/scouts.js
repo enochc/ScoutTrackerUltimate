@@ -24,7 +24,22 @@ function doSuccess(data, success_func, fail_func){
 	if(data.success){
 		success_func(data)
 	}else{
-		alert(data.message)
+		message = ''
+		data.form.find('.error').removeClass('error')
+		message = data['message']
+		for(d in data){
+			
+			if(d != 'message' && data[d] != data.form && d != 'success'){
+				data.form.find("#id_"+d).addClass('error')
+				message +="\n\r"+d+": ";
+				for(m in data[d]){
+					message+= data[d][m]+" "
+				}
+			}
+		}
+		if(message.length > 0){
+			alert(message)
+		}
 		if(typeof(fail_func) == "function"){
 			fail_func()	
 		}

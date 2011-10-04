@@ -8,6 +8,10 @@ sys.path.append('%s/contrib-applications' % BASE_DIR)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+THUMBNAIL_COLORSPACE = 'RGB'
+THUMBNAIL_EXTENSION = 'PNG'
+THUMBNAIL_FORMAT = 'PNG'
+
 ADMINS = (
 	('Enoch Carter', 'mrenoch@gmail.com'),
 )
@@ -125,6 +129,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_extensions', 
+    'sorl.thumbnail',
     
     'position',
 	'userprofile',
@@ -132,7 +137,7 @@ INSTALLED_APPS = (
 	'rank',
 	'requirement',
 	'userrequirement',
-	
+	'taglib',
 )
 
 # A sample logging configuration. The only tangible logging

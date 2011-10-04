@@ -26,7 +26,7 @@ class NewScoutForm(forms.ModelForm):
     
     def save(self):
         cd = self.cleaned_data
-        username='%s_%s' % (cd.get('login_name'), cd.get('troop'))
+        username='%s' % (cd.get('login_name'))
         
        
         try:

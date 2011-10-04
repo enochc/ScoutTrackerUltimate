@@ -12,6 +12,7 @@ html, body, table, tr, td, th{
 	margin:0;
 	padding:0;
 	border:0;
+	border-collapse: collapse;
 }
 body{
 	font-family:Helvetica, Neue, sans-serif;
@@ -28,8 +29,10 @@ hr{
 	border-color:#005a9a;
 }
 h1{
-	margin:0;
+	margin:5px 0;
 	padding:0;
+	color:#b31f36;
+	font-size:1.6em;
 }
 ul.errorlist{
 	color:red;
@@ -55,6 +58,7 @@ ul.errorlist li{
 	vertical-align:text-bottom;
 	position:relative;
 	bottom:0px;
+	color:#000;
 }
 #banner .button{
 	margin-top:2px;
@@ -123,4 +127,14 @@ ul.errorlist li{
   /* Opera 11.10+ */
   background: -o-linear-gradient(bottom, #0c5994, #000);
 
+}
+
+.error{
+	background-color:yellow;
+}
+.float_spacer{
+	width:0;
+	height:0;
+	float:none;
+	clear:both;
 }

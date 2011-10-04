@@ -114,7 +114,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Present yourself for camp", 
             "order": 1, 
             "rank": 2, 
             "desc": "Present yourself to your leader, properly dressed, before going on an overnight camping trip. Show the camping gear you will use. Show the right way to pack and carry it."
@@ -125,7 +125,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "One campout", 
             "order": 2, 
             "rank": 2, 
             "desc": "Spend at least one night on a patrol or troop campout. Sleep in a tent you have helped pitch."
@@ -136,7 +136,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Cook patrol meal", 
             "order": 3, 
             "rank": 2, 
             "desc": "On the campout, assist in preparing and cooking one of your patrol's meals.  Tell why it is important for each patrol member to share in meal preparation and cleanup, and explain the importance of eating together."
@@ -147,7 +147,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Whipe and fuse, EDGE", 
             "order": 4, 
             "rank": 2, 
             "desc": "<ol>\r\n<li>Demonstrate how to whip and fuse the ends of a rope.</li>\r\n<li>Demonstrate that you know how to tie the following knots and tell what their uses are: two half hitches and the taut-line hitch.</li>\r\n<li>Using the EDGE method teach another person how to tie the square knot.</li>\r\n</ol>"
@@ -158,7 +158,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Safe Hiking", 
             "order": 5, 
             "rank": 2, 
             "desc": "Explain the rules of safe hiking, both on the highway and cross-country, during the day and at night. Explain what to do if you are lost."
@@ -169,7 +169,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Display, raise, lower, American flag", 
             "order": 6, 
             "rank": 2, 
             "desc": "Demonstrate how to display, raise, lower, and fold the American flag."
@@ -180,7 +180,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Scout Oath, Law and Motto", 
             "order": 7, 
             "rank": 2, 
             "desc": "Repeat from memory and explain in your own words the Scout Oath, Law, motto, and slogan."
@@ -191,7 +191,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Patrol name", 
             "order": 8, 
             "rank": 2, 
             "desc": "Know your patrol name, give the patrol yell, and describe your patrol flag."
@@ -202,7 +202,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Buddy System", 
             "order": 9, 
             "rank": 2, 
             "desc": "Explain the importance of the buddy system as it relates to your personal safety on outings and in your neighborhood. Describe what a bully is and how you should respond to one."
@@ -213,10 +213,10 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Fitness Test", 
             "order": 10, 
             "rank": 2, 
-            "desc": "\r\n<ol><li>Record your best in the following tests:</li>\r\n<ul><li>Push-ups</li>\r\n<li>Pull-ups</li>\r\n<li>Sit-ups</li>\r\n<li>Standing long jump</li>\r\n<li>1/4 mile walk/run</li></ul>\r\n<li>Show improvement in the activities listed in requirement 10a after practicing for 30 days.</li></ol>"
+            "desc": "<ol><li>Record your best in the following tests:</li>\r\n<ul><li>Push-ups</li>\r\n<li>Pull-ups</li>\r\n<li>Sit-ups</li>\r\n<li>Standing long jump</li>\r\n<li>1/4 mile walk/run</li></ul>\r\n<li>Show improvement in the activities listed in requirement 10a after practicing for 30 days.</li></ol>"
         }
     }, 
     {
@@ -224,7 +224,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Local poisonous plants", 
             "order": 11, 
             "rank": 2, 
             "desc": "Identify local poisonous plants; tell how to treat for exposure to them."
@@ -235,7 +235,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "First aid", 
             "order": 12, 
             "rank": 2, 
             "desc": "Demonstrate how to care for someone who is choking.\r\nShow first aid for the following:\r\nSimple cuts and scrapes\r\nBlisters on the hand and foot\r\nMinor (thermal/heat) burns or scalds (superficial, or first degree)\r\nBites and stings of insects and ticks\r\nVenomous snakebite\r\nNosebleed\r\nFrostbite and sunburn"
@@ -246,7 +246,7 @@
         "model": "requirement.requirement", 
         "fields": {
             "type": 0, 
-            "short_desc": null, 
+            "short_desc": "Scout spirit", 
             "order": 13, 
             "rank": 2, 
             "desc": "Demonstrate scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life.\r\nDiscuss four specific examples of how you have lived the points of the Scout Law in your daily life."
