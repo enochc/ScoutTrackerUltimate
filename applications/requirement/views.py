@@ -8,6 +8,7 @@ from utils.response import HttpJsonSuccess, HttpJsonFailure
 from requirement.models import Requirement
 from userprofile.models import Userprofile
 from userrequirement.models import UserRequirement
+from rank.models import Rank
 
 @render_to_html
 @login_required
@@ -32,3 +33,12 @@ def req_info(request, req_id):
     req = Requirement.objects.get(pk=req_id)
     return 'requirement/info.html', {'req':req }
 
+
+@render_to_html
+def rank_requirements(request, rank_id):
+    rank = Rank.objects.get(pk=rank_id)
+    troop = request.user.profile.troop
+    member_list = {}
+    for m in troop.members.all():
+        member_list[m.pk] = m.completed_list(rank)
+    return 'requirement/by_rank.html', {'rank':rank, 'troop':troop, 'member_list':member_list}

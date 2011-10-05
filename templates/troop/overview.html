@@ -1,58 +1,69 @@
 {%extends 'page_template.html'%}
-{% load scouttags%}
+
 {%block head%}
 <style>
 table{
+
+}
+div.rank_header{
+    float:left;
+    width:14%;
+    height:136px;
+    text-align:center;
+    padding:10px 0;
     
 }
-tr{
-    height:25px;
-}
-.req_header{
-    height:80px;
-}
-th{
-    padding:3px;
-}
-th img{
-    width:30px;
+div.rank_header img{
+    display:block;
+    width:100px;
+    margin:0 auto;
     cursor:pointer;
 }
-th.current{
-    padding:6px;
-}
-th.current img{
-    width:40px;
-}
-td.user_requirement{
-    cursor:pointer;
-}
-.member_name{
+div.scout_name{
+    width:100%;
     text-align:right;
 }
-#name_list{
-    width:10%;
-    float:left;
-}
-#req_list{
-    width:90%;
-    float:left;
-    overflow:auto;
-}
-.current{
+.current_rank{
     background-color:#efeacc;
+    box-shadow: 10px 10px 5px #32523b;
+    position:relative;
+    z-index:0;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 }
-#requirement_info{
-    margin-top:20px;
+div#requirements{
+    width:922px;
+    padding:10px;
+    background-color:#efeacc;
+    box-shadow: 10px 10px 5px #32523b;
+    position:relative;
+    z-index:1;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-right-radius:5px;
 }
-#requirement_info ol{
-   list-style: lower-alpha;
-   margin:0;
+div#requirements .req_header{
+    float:left;
+    height:30px;
+}
+div#requirements .req{
+    width:60px;
+    text-align:center;
+    float:left;
 }
 </style>
 
 <script>
+var rank = 1
+var req = 1
+
 $(function(){
+	get_rank(rank)
+	$("img.rank_head").click(function(){
+		rank = this.id.split('rank_head_')[1]
+		get_rank(rank)
+	})
+	/*
 	$(".r1").addClass('current')
 	$('#requirement_info').load("/requirement/info/1/")
 	$("th img").click(function(){
@@ -72,53 +83,54 @@ $(function(){
 			doSuccess(data, function(){alert('success')})
 		})
 		
-	})
+	})*/
 })
+
+function get_rank(rid){
+	$(".current_rank").removeClass("current_rank")
+	$("#rank_head_"+rid).parent('div').addClass('current_rank')
+	$('div#requirements').load('/requirement/rank_requirements/'+rid+"/")
+}
 
 </script>
 {%endblock%}
 
 {%block content%}
-    <div id="name_list">
-    <table border="1" width="100%">
-        <tr style="height:80px;"><td>&nbsp;</td></tr>
-        {% for member in troop.scouts %}
-        <tr>
-            <th class="member_name" id='m{{member.pk}}'><a href="/user/{{member.pk}}/">{{member}}</a>:</th>
-        </tr>
-        {%endfor%}
-    
-    
-    
-    </table>
-    </div>
-    <div id="req_list">
-        <table border="1">
-            <tr class="req_header">
-                
-                {%for req in requirements%}
-                <th class='r{{req.id}}' title='{{req.short_desc}}'>
-                    <img src='{{MEDIA_URL}}{{req.rank.thumbnail}}'/><br/>
-                    {{req.order}}
-                </th>
-                {%endfor%}
-            </tr>
-            {% for member in troop.scouts %}
-                <tr>
-    
-                    {%for req in requirements%}
-                        <td title='{{req.short_desc}}' class='user_requirement r{{req.id}} m{{member.pk}}' align="center">
-                        {%if req.id in member_list|attribute:member.pk%}X{%else%}O{%endif%}
-                        </td>
-                    {%endfor%}
-                    
-                </tr>
+<table width="100%" border="1">
+    <tr width="100%">
+        <td></td>
+        <td>
+            
+            {%for r in ranks%}
+            <div class="rank_header">
+                <img class="rank_head" id="rank_head_{{r.id}}" src='{{MEDIA_URL}}{{r.patch}}' title="click to view requirements for {{r}}"/>
+                {{r.name}}
+            </div>
             {%endfor%}
-        </table>
-    </div>
-    <div class='float_spacer'>&nbsp;</div>
-    <div id='requirement_info'>
+            
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" style="padding-top:40px;padding-right:10px;">
+        {%for scout in troop.scouts%}              
+            <div class="scout_name" id='scout_{{scout.pk}}'><a href="/user/{{scout.pk}}/">{{scout}}</a>:</div>
+        {%endfor%}   
+        </td>
+        <td valign="top">
+            <div id='requirements'>
+            &nbsp;
+            </div>
+        </td>
+    </tr>
+
+
+</table>
+<div id="requirement_info">
+
+</div>  
+
+           
     
-    </div>
+   
     
 {%endblock%}

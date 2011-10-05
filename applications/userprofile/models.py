@@ -44,8 +44,10 @@ class Userprofile(models.Model):
 	def name(self):
 		return self.__unicode__()
 	
-	def completed_list(self):
+	def completed_list(self, rank=None):
 		urs = UserRequirement.objects.filter(user=self.user)
+		if rank is not None:
+			urs = urs.filter(requirement__rank=rank)
 		return [int(ur.requirement.id) for ur in urs]
 	
 	

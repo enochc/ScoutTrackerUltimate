@@ -1,8 +1,9 @@
 .red{color:#b31f36;}
-.blue{color:#0c5994;}
+.blue{color:#005e9c;}/*0c5994*/
 .gold{color:#f6bc56;}
 .grey{color:#616256;}
 .green{color:#32523b;}
+.ltgreen{color:#efeacc;}
 
 div.ui-datepicker{
  font-size:.7em;
@@ -114,18 +115,18 @@ ul.errorlist li{
 	}
 .grade{
   /* fallback */
-  background-color: #0c5994;
+  background-color: #005e9c;
   background-repeat: repeat-x;  
   /* Safari 4-5, Chrome 1-9 */
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0c5994), to(#000));  
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#005e9c), to(#000));  
   /* Safari 5.1, Chrome 10+ */
-  background: -webkit-linear-gradient(bottom, #0c5994, #000);  
+  background: -webkit-linear-gradient(bottom, #005e9c, #000);  
   /* Firefox 3.6+ */
-  background: -moz-linear-gradient(bottom, #0c5994, #000);  
+  background: -moz-linear-gradient(bottom, #005e9c, #000);  
   /* IE 10 */
-  background: -ms-linear-gradient(bottom, #0c5994, #000); 
+  background: -ms-linear-gradient(bottom, #005e9c, #000); 
   /* Opera 11.10+ */
-  background: -o-linear-gradient(bottom, #0c5994, #000);
+  background: -o-linear-gradient(bottom, #005e9c, #000);
 
 }
 

@@ -2,6 +2,8 @@ from django.db import models
 from utils.funcs import get_sized_image
 
 
+
+
 class Rank(models.Model):
     class Meta:
         ordering = ['order']
@@ -17,4 +19,8 @@ class Rank(models.Model):
     @property
     def thumbnail(self):
         return get_sized_image(self.patch,(30,30))
+    
+    @property
+    def num_requirements(self):
+        return self.requirement_set.count()
     

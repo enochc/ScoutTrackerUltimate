@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from applications.rank.models import Rank
 
 from userrequirement.models import UserRequirement
 
@@ -15,7 +14,7 @@ class Requirement(models.Model):
         unique_together = (("rank", "order", "type"),)
         
     order = models.IntegerField()
-    rank = models.ForeignKey(Rank)
+    rank = models.ForeignKey('rank.Rank')
     desc = models.TextField()
     short_desc = models.CharField(max_length=255, null=True, blank=True)
     type = models.IntegerField(choices=REQUIREMENT_TYPES, default=0)
