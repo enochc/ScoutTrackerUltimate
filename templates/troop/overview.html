@@ -44,12 +44,21 @@ div#requirements{
 }
 div#requirements .req_header{
     float:left;
-    height:30px;
+    height:20px;
+    padding:5px 0;
+    cursor:pointer;
 }
 div#requirements .req{
     width:60px;
     text-align:center;
     float:left;
+}
+div.current_req{
+    background-color:#d3cfb6;
+}
+div#requirement_info{
+    margin-top:30px;
+    
 }
 </style>
 
@@ -59,19 +68,17 @@ var req = 1
 
 $(function(){
 	get_rank(rank)
+	
 	$("img.rank_head").click(function(){
 		rank = this.id.split('rank_head_')[1]
 		get_rank(rank)
 	})
+	
+	
 	/*
 	$(".r1").addClass('current')
 	$('#requirement_info').load("/requirement/info/1/")
-	$("th img").click(function(){
-		req = $(this).parent('th').attr('class').split('r')[1]
-		$('.current').removeClass('current')
-		$('.r'+req).addClass('current')
-		$('#requirement_info').load("/requirement/info/"+req+"/")
-	})
+	
 	$('td.user_requirement').click(function(e){
 		t = $(this)
 		c = t.attr('class')
@@ -85,13 +92,26 @@ $(function(){
 		
 	})*/
 })
-
+function post_load(){
+	req = $("div.req_header")[0].id.split('r')[1]
+	get_req(req)
+	$("div.req_header").click(function(){
+        req = this.id.split('r')[1]
+        get_req(req)
+    })
+}
 function get_rank(rid){
 	$(".current_rank").removeClass("current_rank")
 	$("#rank_head_"+rid).parent('div').addClass('current_rank')
-	$('div#requirements').load('/requirement/rank_requirements/'+rid+"/")
+	$('div#requirements').load('/requirement/rank_requirements/'+rid+"/", post_load)
+	
 }
-
+function get_req(rid){
+	$('.current_req').removeClass('current_req')
+    $('div.req.r'+req).addClass('current_req')
+    $('div#r'+req).addClass('current_req')
+    $('#requirement_info').load("/requirement/info/"+req+"/")
+}
 </script>
 {%endblock%}
 

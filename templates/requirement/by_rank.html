@@ -5,7 +5,7 @@
      <div class="float_spacer">&nbsp;</div>
 {%for scout in troop.scouts%}
     {%for r in rank.requirement_set.all%}
-        <div class='req {{scout.pk}} {{r.pk}}'>{%if r.id in member_list|attribute:scout.pk%} X {%else%} O {%endif%}</div>
+        <div class='req s{{scout.pk}} r{{r.pk}}'>{%if r.id in member_list|attribute:scout.pk%} X {%else%} O {%endif%}</div>
     {%endfor%}    
     <div class="float_spacer">&nbsp;</div>
 {%endfor%}    
