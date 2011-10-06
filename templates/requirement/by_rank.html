@@ -1,11 +1,15 @@
 {% load scouttags%}
 {%for r in rank.requirement_set.all%}
-    <div class='req req_header' id="r{{r.pk}}" title="{{r.short_desc}}"><span class="red">#{{r.order}}</span></div>
+    <div class='req req_header' id="r{{r.pk}}" title="{{r.short_desc}}"><span class="button">#{{r.order}}</span></div>
 {%endfor%}
      <div class="float_spacer">&nbsp;</div>
 {%for scout in troop.scouts%}
+    
     {%for r in rank.requirement_set.all%}
-        <div class='req s{{scout.pk}} r{{r.pk}}'>{%if r.id in member_list|attribute:scout.pk%} X {%else%} O {%endif%}</div>
+        <div class='req s{{scout.pk}} r{{r.pk}} checkbox {%if forloop.parentloop.counter|divisibleby:2%}stripe{%endif%}'>
+        {%if r.id in member_list|attribute:scout.pk%}<img src='{{MEDIA_URL}}check.png'/>
+        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
+        </div>
     {%endfor%}    
     <div class="float_spacer">&nbsp;</div>
 {%endfor%}    

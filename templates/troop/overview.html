@@ -5,12 +5,15 @@
 table{
 
 }
+.stripe{
+    background-color:#d4eacc;
+}
 div.rank_header{
     float:left;
     width:14%;
     height:136px;
     text-align:center;
-    padding:10px 0;
+    padding:5px 0;
     
 }
 div.rank_header img{
@@ -22,20 +25,21 @@ div.rank_header img{
 div.scout_name{
     width:100%;
     text-align:right;
+    height:24px;
 }
 .current_rank{
     background-color:#efeacc;
-    box-shadow: 10px 10px 5px #32523b;
+    box-shadow: 5px 5px 3px #32523b;
     position:relative;
     z-index:0;
     border-top-left-radius:5px;
     border-top-right-radius:5px;
 }
 div#requirements{
-    width:922px;
+    width:902px;
     padding:10px;
     background-color:#efeacc;
-    box-shadow: 10px 10px 5px #32523b;
+    box-shadow: 5px 5px 3px #32523b;
     position:relative;
     z-index:1;
     border-bottom-left-radius:5px;
@@ -52,9 +56,21 @@ div#requirements .req{
     width:60px;
     text-align:center;
     float:left;
+
+    height:24px;
+}
+div#requirements .req.checkbox{
+    cursor:pointer;
+}
+div#requirements .req.checkbox:hover{
+    cursor:pointer;
+    border:1px outset #32523b;
 }
 div.current_req{
     background-color:#d3cfb6;
+}
+div.current_req.stripe{
+    background-color:#c3d6bc;
 }
 div#requirement_info{
     margin-top:30px;
@@ -131,7 +147,7 @@ function get_req(rid){
         </td>
     </tr>
     <tr>
-        <td valign="top" style="padding-top:40px;padding-right:10px;">
+        <td valign="top" style="padding-top:46px;padding-right:10px;">
         {%for scout in troop.scouts%}              
             <div class="scout_name" id='scout_{{scout.pk}}'><a href="/user/{{scout.pk}}/">{{scout}}</a>:</div>
         {%endfor%}   
