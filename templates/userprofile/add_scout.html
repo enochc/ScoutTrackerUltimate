@@ -3,6 +3,9 @@
 {%block head%}
 <LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
 <style>
+body{
+    background-color:#efeacc;
+}
 #added_message{
 width:100%;
 text-align:center;
@@ -39,7 +42,7 @@ function submitForm(){
 {%endblock%}
 
 {%block body%}
-<form class="blue" method="POST" name='add_scout_form'>
+<form method="POST" name='add_scout_form'>
 {% csrf_token %}
 <h1>Add member for Troop {{user.profile.troop}}</h1>
 <input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>

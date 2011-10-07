@@ -12,21 +12,38 @@ from rank.models import Rank
 
 @render_to_html
 @login_required
-def req_set(request, req_id, user_id):
-    try:
+def req_set(request, req_id, user_id, completed = True):
+    if request.method == 'GET':
+         
         req = Requirement.objects.get(pk=req_id)
         profile = Userprofile.objects.get(pk=user_id)
-    except Exception, e:
-        return HttpJsonFailure(sttr(e))
-    
-    if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
-    
-        ur = UserRequirement(user=profile.user, requirement=req, completed=True, signed_by=request.user)
-        ur.save()
+        ur = None
+        try:
+            ur = UserRequirement.objects.get(user=profile.user, requirement=req)
+        except UserRequirement.DoesNotExist:
+            pass
+              
+        return 'requirement/set_requirement.html', {'req': req, 'scout': profile, 'ur':ur}
         
-        return HttpJsonSuccess()
-    else:
-        return HttpJsonFailure('You are not authorized to perform this action')
+    elif request.method == 'POST':
+        try:
+            req = Requirement.objects.get(pk=req_id)
+            profile = Userprofile.objects.get(pk=user_id)
+        except Exception, e:
+            return HttpJsonFailure(sttr(e))
+        
+        if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
+            try:
+                ur = UserRequirement.objects.get(user=profile.user, requirement=req)
+            except UserRequirement.DoesNotExist:
+                ur = UserRequirement(user=profile.user, requirement=req)
+            ur.completed = completed
+            ur.signed_by = request.user
+            ur.save()
+            
+            return HttpJsonSuccess()
+        else:
+            return HttpJsonFailure('You are not authorized to perform this action')
 
 @render_to_html
 def req_info(request, req_id):

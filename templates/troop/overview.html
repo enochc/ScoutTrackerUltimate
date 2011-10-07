@@ -61,10 +61,12 @@ div#requirements .req{
 }
 div#requirements .req.checkbox{
     cursor:pointer;
+    
+    font-size:xx-large;
 }
 div#requirements .req.checkbox:hover{
-    cursor:pointer;
-    border:1px outset #32523b;
+    font-weight:bold;
+    
 }
 div.current_req{
     background-color:#d3cfb6;
@@ -75,6 +77,26 @@ div.current_req.stripe{
 div#requirement_info{
     margin-top:30px;
     
+}
+#set_req_form{
+    background-color:#005e9c;
+    padding:10px;
+    display:none;
+    position:absolute;
+    z-index:3;
+    box-shadow: 5px 5px 3px #32523b;
+    text-align:left;
+    border-radius:5px;
+    color:#fff;
+}
+#set_req_form textarea{
+    width:240px;
+    height:70px;
+    margin:5px 0;
+}
+#set_req_form .button{
+    float:left;
+    width:80px;
 }
 </style>
 
@@ -89,34 +111,46 @@ $(function(){
 		rank = this.id.split('rank_head_')[1]
 		get_rank(rank)
 	})
-	
-	
-	/*
-	$(".r1").addClass('current')
-	$('#requirement_info').load("/requirement/info/1/")
-	
-	$('td.user_requirement').click(function(e){
-		t = $(this)
-		c = t.attr('class')
-		arr = c.split(' ')
-		r = arr[1].split('r')[1]
-		m = arr[2].split('m')[1]
-		api = '/requirement/set/'+r+'/'+m+'/'
-		$.get(api,function(data){
-			doSuccess(data, function(){alert('success')})
-		})
-		
-	})*/
+
 })
-function post_load(){
-	req = $("div.req_header")[0].id.split('r')[1]
-	get_req(req)
-	$("div.req_header").click(function(){
-        req = this.id.split('r')[1]
-        get_req(req)
+function set_scout_requiremnt(r, s, b){
+	api = '/requirement/set/'+req+'/'+scout+'/'
+	$.post(api,function(data){
+        doSuccess(data, function(){
+        	b.html("<img src='{{MEDIA_URL}}check.png'/>")
+        	$('#set_req_form').hide()
+        })
     })
 }
+function post_load(){
+	req = $("div.req_header")[0].id.split('r_')[1]
+	get_req(req)
+	$("div.req_header").click(function(){
+        req = this.id.split('r_')[1]
+        get_req(req)
+    })
+    $('.req.checkbox').click(function(){
+    	var box = $(this)
+    	req = box.attr('class').split('r_')[1].split(' ')[0]
+    	get_req(req)
+    	scout = box.attr('class').split('s_')[1].split(' ')[0]
+    	
+    	$('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){
+    		$('#set_req_form').css({
+    			'top':box.offset().top,
+    			'left':box.offset().left
+    		}).find('.cancel').click(function(){
+    			$('#set_req_form').hide()
+    		}).end().find('.send').click(function(){
+    			set_scout_requiremnt(req, scout, box)
+    		}).end().show()
+    	})
+    })
+    $('div#requirements').unblock()
+}
 function get_rank(rid){
+	$('#set_req_form').hide()
+	$('div#requirements').block()
 	$(".current_rank").removeClass("current_rank")
 	$("#rank_head_"+rid).parent('div').addClass('current_rank')
 	$('div#requirements').load('/requirement/rank_requirements/'+rid+"/", post_load)
@@ -124,8 +158,8 @@ function get_rank(rid){
 }
 function get_req(rid){
 	$('.current_req').removeClass('current_req')
-    $('div.req.r'+req).addClass('current_req')
-    $('div#r'+req).addClass('current_req')
+    $('div.req.r_'+req).addClass('current_req')
+    $('div#r_'+req).addClass('current_req')
     $('#requirement_info').load("/requirement/info/"+req+"/")
 }
 </script>
@@ -166,7 +200,10 @@ function get_req(rid){
 </div>  
 
            
-    
+<div id="set_req_form">
+
+
+</div>    
    
     
 {%endblock%}

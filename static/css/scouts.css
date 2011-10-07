@@ -30,10 +30,16 @@ hr{
 	border-color:#005a9a;
 }
 h1{
-	margin:5px 0;
-	padding:0;
+	margin:0;
+	padding:5px 0;
 	color:#b31f36;
 	font-size:1.6em;
+}
+h2{
+    margin:0;
+    padding:3px 0px;
+    color:#efeacc;
+    font-size:1.2em;
 }
 ul.errorlist{
 	color:red;

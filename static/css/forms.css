@@ -1,10 +1,12 @@
 body{
-	background-color:#a3d5f7;
+	
 }
 
 form{
 	text-align:center;
-	color:#fff;
+	color:#32523b;
+	margin:0;
+	padding:0;
 }
 
 form label{
@@ -13,15 +15,16 @@ form label{
     text-align:right;
     display:inline-block;	
 }
+
 form input, form select{
 	width:150px;
 	padding:1px;
 	margin:2px;
+	
 }
 form h1{
 	color:#b31f36;
-	margin:5px 0;
-	padding:0 10px;
+	padding:5px 10px;
 	font-size: 1.25em;
 }
 form .button{
