@@ -33,6 +33,8 @@ def render_to_html(func):
                 template_name, context_processors = response
             elif len_tuple == 3:
                 template_name, context_processors, mimetype = response
+        else:
+            print response
         return _render_html(request, template_name, context_processors)
 
     return innerf

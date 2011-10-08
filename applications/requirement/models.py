@@ -22,10 +22,11 @@ class Requirement(models.Model):
     def __unicode__(self):
         return '%s #%s'% (self.rank, self.order)
     
+    """
     def has_completed(self, user):
         try:
             ur = UserRequirement.objects.get(requirement=self, user=User)
             return ur.completed
         except UserRequirement.DoesNotExist:
             return False
-    
+    """

@@ -1,7 +1,14 @@
 {%extends 'page_template.html'%}
 
 {%block content%}
-{{scout.profile.fullname}}
-{{scout.rank}}
+
+{%if scout.position%}
+    <img src="{{scout.position.patch.url}}"/>
+    
+{%else%}
+    <img src="{{scout_patch}}"/>
+{%endif%}
+<br/>
+{{scout.fullname}}
 
 {%endblock%}

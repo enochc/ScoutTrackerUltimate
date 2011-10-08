@@ -32,18 +32,29 @@ def req_set(request, req_id, user_id, completed = True):
         except Exception, e:
             return HttpJsonFailure(sttr(e))
         
-        if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
+        if request.POST.get('action', 'add') == 'remove':
             try:
-                ur = UserRequirement.objects.get(user=profile.user, requirement=req)
+                 ur = UserRequirement.objects.filter(user=profile.user, requirement=req)
+                 ur.delete()
             except UserRequirement.DoesNotExist:
-                ur = UserRequirement(user=profile.user, requirement=req)
-            ur.completed = completed
-            ur.signed_by = request.user
-            ur.save()
-            
-            return HttpJsonSuccess()
+                pass
+            return HttpJsonSuccess({'removed':True})
         else:
-            return HttpJsonFailure('You are not authorized to perform this action')
+        
+            if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
+                try:
+                    ur = UserRequirement.objects.get(user=profile.user, requirement=req)
+                except UserRequirement.DoesNotExist:
+                    ur = UserRequirement(user=profile.user, requirement=req)
+                ur.completed = completed
+                ur.signed_by = request.user
+                notes = request.POST.get('notes',None)
+                ur.notes = notes
+                ur.save()
+                
+                return HttpJsonSuccess()
+            else:
+                return HttpJsonFailure('You are not authorized to perform this action')
 
 @render_to_html
 def req_info(request, req_id):

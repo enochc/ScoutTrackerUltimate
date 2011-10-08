@@ -105,6 +105,10 @@ var rank = 1
 var req = 1
 
 $(function(){
+	$(document).click(function(e){
+        $('#set_req_form').hide()
+    })
+    
 	get_rank(rank)
 	
 	$("img.rank_head").click(function(){
@@ -113,11 +117,16 @@ $(function(){
 	})
 
 })
-function set_scout_requiremnt(r, s, b){
-	api = '/requirement/set/'+req+'/'+scout+'/'
-	$.post(api,function(data){
+function set_scout_requiremnt(r, s, b, a){
+	var api = '/requirement/set/'+req+'/'+scout+'/'
+	var notes = $('#req_notes').val()
+	$.post(api,{notes:notes, action:a},function(data){
         doSuccess(data, function(){
-        	b.html("<img src='{{MEDIA_URL}}check.png'/>")
+        	if(data.removed){
+        		   b.html("<span class='empty red'>&mdash;</span>")
+        	}else{
+        		   b.html("<img src='{{MEDIA_URL}}check.png'/>")
+        	}
         	$('#set_req_form').hide()
         })
     })
@@ -129,6 +138,8 @@ function post_load(){
         req = this.id.split('r_')[1]
         get_req(req)
     })
+    
+    // Open check dialogue on click
     $('.req.checkbox').click(function(){
     	var box = $(this)
     	req = box.attr('class').split('r_')[1].split(' ')[0]
@@ -136,6 +147,7 @@ function post_load(){
     	scout = box.attr('class').split('s_')[1].split(' ')[0]
     	
     	$('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){
+    		
     		$('#set_req_form').css({
     			'top':box.offset().top,
     			'left':box.offset().left
@@ -143,7 +155,11 @@ function post_load(){
     			$('#set_req_form').hide()
     		}).end().find('.send').click(function(){
     			set_scout_requiremnt(req, scout, box)
-    		}).end().show()
+    		}).end().find('.remove').click(function(){
+                set_scout_requiremnt(req, scout, box, 'remove')
+            }).end().show()
+    	}).one('click',function(e){
+    		e.stopPropagation()
     	})
     })
     $('div#requirements').unblock()
@@ -183,7 +199,7 @@ function get_req(rid){
     <tr>
         <td valign="top" style="padding-top:46px;padding-right:10px;">
         {%for scout in troop.scouts%}              
-            <div class="scout_name" id='scout_{{scout.pk}}'><a href="/user/{{scout.pk}}/">{{scout}}</a>:</div>
+            <div class="scout_name" id='scout_{{scout.user.pk}}'><a href="/user/{{scout.user.pk}}/">{{scout}}</a>:</div>
         {%endfor%}   
         </td>
         <td valign="top">
