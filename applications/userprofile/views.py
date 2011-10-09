@@ -8,11 +8,10 @@ from utils.decorators import render_to_html, login_required
 from utils.response import HttpJsonSuccess, HttpJsonFailure, HttpJsonFormError
 
 from userprofile.forms import NewScoutForm
+from userprofile.models import Userprofile
 from position.models import Position
 from userrequirement.models import UserRequirement
 from rank.models import Rank
-
-@permission_required('polls.can_vote')
 
 
 @render_to_html
@@ -44,17 +43,32 @@ def userhome(request, user_id=None):
 
 @render_to_html
 @permission_required('userprofile.add_scout')
-def add_scout(request):  
+def add_scout(request, scout_id = None):  
     if request.method == 'GET':
         boyscout = Position.objects.get(name='Boy Scout')
-        form = NewScoutForm()
-        return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout}
+        scout = None
+        if scout_id is not None:
+            scout = Userprofile.objects.get(pk=scout_id)
+            form = NewScoutForm(instance=scout, initial={'first_name':scout.user.first_name,
+                                                         'last_name':scout.user.last_name,
+                                                         'login_name':scout.user.username.split("_")[0]})
+        else:
+            form = NewScoutForm()
+        form.first_name = 'test'
+        return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout}
     
     else:
         scout = NewScoutForm(request.POST)
-        if scout.is_valid():
-            scout.save()
+        if request.POST.get('scout_id',False):
+            scoutid = request.POST.get('scout_id')
+            scout = Userprofile.objects.get(pk=scoutid)
+            scoutform = NewScoutForm(request.POST, instance=scout)
         else:
-            return HttpJsonFormError(scout.errors)
+            scoutform = NewScoutForm(request.POST)
+            
+        if scoutform.is_valid():
+            scoutform.save()
+        else:
+            return HttpJsonFormError(scoutform.errors)
         return HttpJsonSuccess()
         

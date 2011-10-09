@@ -44,7 +44,12 @@ function submitForm(){
 {%block body%}
 <form method="POST" name='add_scout_form'>
 {% csrf_token %}
-<h1>Add member for Troop {{user.profile.troop}}</h1>
+{%if scout %}
+    <h1>Edit {{scout.fullname}}</h1>
+    <input type="hidden" id="scout_id" name="scout_id" value='{{scout.id}}'/>
+{%else%}
+    <h1>Add member for Troop {{user.profile.troop}}</h1>
+{%endif%}
 <input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>
 <input type="hidden" id="position" name="position" value='{{boyscout.id}}'/>
 
@@ -72,8 +77,11 @@ function submitForm(){
 {{form.position.errors}}
 
 <div class='red' id='added_message'>&nbsp;</div>
-
-<div class="button" onclick='submitForm()'>Add</button>
+{%if scout %}
+    <div class="button" onclick='submitForm()'>Edit</button>
+{%else%}
+     <div class="button" onclick='submitForm()'>Add</button>
+{%endif%}
 </form>
 
 {%endblock%}

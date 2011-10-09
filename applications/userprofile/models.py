@@ -15,6 +15,8 @@ class Userprofile(models.Model):
 		permissions = (
             ("add_leaders", "Can add other leaders who can add other scouts"),
             ("add_scouts", "Can add scouts"),
+            ("edit_scouts", "Can edit scouts"),
+            ("mark_requirements", "Can sign off requirements"),
         )
 		
 	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)

@@ -83,12 +83,20 @@ $(function(){
 			div.find("span.toggle").html(html)
 		})
 	})
+	
+	{%if perms.userprofile.mark_requirements%}
+	
 	$('.req.checkbox').click(function(){
 		var box = $(this)
         openRecForm(box, {postfunc:function(data){
         	afterSet(box, data)
         }})
     })
+    {%endif%}
+    
+    $("#edit_user").click(function(){
+		window.open('/user/add_scout/{{scout.id}}/', 'edit_scout', 'width=400, height=400')
+	})
 	
 })
 
@@ -116,11 +124,17 @@ function afterSet(box, data){
 
 {%block content%}
 <br/>
-<h1>{{scout.fullname}}</h1>
-{%if scout.rank.patch%}<img src='{{scout.rank.patch.url}}'/>{%endif%}
-{%if scout.position.patch%}<img src='{{scout.position.patch.url}}'/>{%endif%}
-
-{%if scout.position.youth%}
+<div style="float:left;">
+{%if perms.userprofile.edit_scouts%}
+    <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
+{%endif%}
+    <h1>{{scout.fullname}} </h1>
+    
+    {%if scout.rank.patch%}<img src='{{scout.rank.patch.url}}'/>{%endif%}
+    {%if scout.position.patch%}<img src='{{scout.position.patch.url}}'/>{%endif%}
+    
+    {%if scout.position.youth%}
+</div>
 <div id="requirements"/>
    
         {%for r in ranks%}
