@@ -6,16 +6,19 @@ For: {{scout.fullname}}<br/>
 
 On: {{ur.completed_date|date:"M d Y"}}<br/>
 Signed by: {{ur.signed_by.profile.fullname}}<br/>
+<label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
 <textarea id="req_notes" placeholder="notes" tabindex="1">{{ur.notes|default:""}}</textarea><br/>
+
 <div style="width:100%;text-align:center;positoin:relative;overflow:auto;">
-    <div class="button remove" tabindex="2">REMOVE</div>
+    <div class="button send" tabindex="2">SAVE</div>
     <div class="button cancel" tabindex="3">CLOSE</div>
 </div>
 
 {%else%}
 On: {%now "M d Y"%}<br/>
 Signed by: {{user.profile.fullname}}<br/>
-<textarea id="req_notes" placeholder="notes" tabindex="1"/><br/>
+<label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
+<textarea id="req_notes" placeholder="notes" tabindex="1"></textarea><br/>
 <div style="width:100%;text-align:center;positoin:relative;overflow:auto;">
     <div class="button send" tabindex="2">SAVE</div>
     <div class="button cancel" tabindex="3">CLOSE</div>

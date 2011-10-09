@@ -14,7 +14,7 @@ class Requirement(models.Model):
         unique_together = (("rank", "order", "type"),)
         
     order = models.IntegerField()
-    rank = models.ForeignKey('rank.Rank')
+    rank = models.ForeignKey('rank.Rank', related_name='requirements')
     desc = models.TextField()
     short_desc = models.CharField(max_length=255, null=True, blank=True)
     type = models.IntegerField(choices=REQUIREMENT_TYPES, default=0)

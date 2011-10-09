@@ -84,4 +84,53 @@ $(function(){
 	$("#add_scout_btn").click(function(){
 		window.open('/user/add_scout/', 'add_scout', 'width=400, height=400')
 	})
+	
+	$(document).click(function(e){
+		$('#set_req_form').hide()
+	})
+	$('#set_req_form').click(function(e){
+    	e.stopPropagation()
+    })
+
 })
+
+function set_scout_requiremnt(r, s, b, options){
+	var api = '/requirement/set/'+r+'/'+s+'/'
+	var notes = $('#req_notes').val()
+	var comp = $('#req_completed').is(':checked')
+	$.post(api,{notes:notes, completed:comp},function(data){
+        doSuccess(data, function(){
+        	if(!data.completed){
+        		   b.html("<span class='empty red'>&mdash;</span>")
+        	}else{
+        		   b.html("<img src='/images/check.png'/>")
+        	}
+        	if(options && typeof options.postfunc == 'function'){
+        		data.req_id=r
+        		options.postfunc(data)
+        	}
+        	$('#set_req_form').hide()
+        })
+    })
+}
+
+function openRecForm(box, opt){
+	
+	var req = box.attr('class').split('r_')[1].split(' ')[0]
+
+	if(opt && typeof opt.prefunc == 'function'){
+		opt.prefunc(req)
+	}
+
+    var scout = box.attr('class').split('s_')[1].split(' ')[0]
+    $('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){        
+        $('#set_req_form').css({
+            'top':box.offset().top,
+            'left':box.offset().left
+        }).find('.cancel').click(function(){
+            $('#set_req_form').hide()
+        }).end().find('.send').click(function(){
+            set_scout_requiremnt(req, scout, box, opt)
+        }).end().show()
+    })
+}

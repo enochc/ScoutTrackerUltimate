@@ -1,6 +1,9 @@
+import datetime
+
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import date as _date
 
 from utils.decorators import render_to_html, login_required
 from utils.response import HttpJsonSuccess, HttpJsonFailure
@@ -31,30 +34,31 @@ def req_set(request, req_id, user_id, completed = True):
             profile = Userprofile.objects.get(pk=user_id)
         except Exception, e:
             return HttpJsonFailure(sttr(e))
-        
-        if request.POST.get('action', 'add') == 'remove':
+
+        if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
             try:
-                 ur = UserRequirement.objects.filter(user=profile.user, requirement=req)
-                 ur.delete()
+                ur = UserRequirement.objects.get(user=profile.user, requirement=req)
             except UserRequirement.DoesNotExist:
-                pass
-            return HttpJsonSuccess({'removed':True})
+                ur = UserRequirement(user=profile.user, requirement=req)
+            completed = request.POST.get('completed') in (True, 'true', 'True', 1)
+            
+            if not ur.completed and completed:
+                ur.completed_date = datetime.datetime.now()
+            elif not completed:
+                ur.completed_date = None
+            ur.completed = completed
+            ur.signed_by = request.user
+            notes = request.POST.get('notes',None)
+            if notes == '':
+                notes = None
+            print 'notes ',notes
+            notes = notes
+            ur.notes = notes
+            ur.save()
+            
+            return HttpJsonSuccess({'completed':completed, 'notes':notes, 'date':_date(ur.completed_date)})
         else:
-        
-            if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
-                try:
-                    ur = UserRequirement.objects.get(user=profile.user, requirement=req)
-                except UserRequirement.DoesNotExist:
-                    ur = UserRequirement(user=profile.user, requirement=req)
-                ur.completed = completed
-                ur.signed_by = request.user
-                notes = request.POST.get('notes',None)
-                ur.notes = notes
-                ur.save()
-                
-                return HttpJsonSuccess()
-            else:
-                return HttpJsonFailure('You are not authorized to perform this action')
+            return HttpJsonFailure('You are not authorized to perform this action')
 
 @render_to_html
 def req_info(request, req_id):

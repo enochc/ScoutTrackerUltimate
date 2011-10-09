@@ -1,0 +1,3 @@
+DATE_FORMAT = 'N j, Y'
+DATETIME_FORMAT = 'N j, Y'
+TIME_FORMAT = 'P'

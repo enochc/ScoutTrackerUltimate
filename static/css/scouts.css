@@ -145,3 +145,48 @@ ul.errorlist li{
 	float:none;
 	clear:both;
 }
+
+/* ========== set requirement popup ==============*/
+#set_req_form{
+    background-color:#005e9c;
+    padding:10px;
+    display:none;
+    position:absolute;
+    z-index:3;
+    box-shadow: 5px 5px 3px #32523b;
+    text-align:left;
+    border-radius:5px;
+    color:#fff;
+}
+#set_req_form h2{
+	color:#f6bc56;
+}
+#set_req_form textarea{
+    width:240px;
+    height:70px;
+    margin:5px 0;
+    display:block;
+}
+#set_req_form .button{
+    float:left;
+    width:80px;
+}
+
+
+div#requirements .req{
+    width:60px;
+    text-align:center;
+    float:left;
+    height:24px;
+}
+.req.checkbox{
+    cursor:pointer;    
+    font-size:x-large;
+    line-height:25px;
+
+}
+.req.checkbox:hover{
+	cursor:pointer;
+    font-weight:bold;
+    
+}

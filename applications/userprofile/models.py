@@ -44,8 +44,15 @@ class Userprofile(models.Model):
 	def name(self):
 		return self.__unicode__()
 	
+	def user_requirement(self, req):
+		try:
+			r = UserRequirement.objects.get(user=self.user, requirement=req)
+			return r
+		except UserRequirementDoesNotExist:
+			return None
+	
 	def completed_list(self, rank=None):
-		urs = UserRequirement.objects.filter(user=self.user)
+		urs = UserRequirement.objects.filter(user=self.user, completed=True)
 		if rank is not None:
 			urs = urs.filter(requirement__rank=rank)
 		return [int(ur.requirement.id) for ur in urs]

@@ -17,7 +17,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
+FORMAT_MODULE_PATH = 'locales'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.

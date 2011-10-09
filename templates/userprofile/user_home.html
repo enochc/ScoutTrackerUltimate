@@ -1,14 +1,165 @@
 {%extends 'page_template.html'%}
+{% load scouttags%}
+{%block head%}
+<style>
+div#requirements{
+    width:700px;
+    float:right;
+}
+.rank_img{
+    width:80px;
+    float:right;
+    
+}
+.rank_div{
+    width:680px;
+    margin-bottom:10px;
+    
+    background-color:#efeacc;
+    box-shadow: 5px 5px 3px #32523b;
+    border-radius:5px;
+    padding:10px;
+}
+.slide_container{
+    display:none;
+    position:relative;
+    overflow:auto;
+}
+.rank_table{
+    float:left;
+    width:600px;
+
+ 
+}
+.rank_table tr{
+    height:30px;
+}
+h2{
+    color:#005e9c;
+    cursor:pointer;
+    margin:0;
+}
+h2 span{
+    margin-right:10px;
+    color:#f6bc56;
+    font-size:larger;
+}
+span.notes{
+    color:#888;
+}
+span.date{
+    color:#b31f36;
+}
+tr.tr_notes{
+    display:none;
+}
+tr.tr_notes.full{
+    display:table-row;
+}
+
+
+{%if scout.rank%}
+#sc{{scout.rank.order|add:1}}{
+    display:block;
+}
+{%else%}
+#sc1{
+    display:block;
+}
+{%endif%}
+
+</style>
+<script>
+$(function(){
+	$(".rank_div h2").click(function(){
+		var div = $(this).parents(".rank_div")
+		var table = div.find(".slide_container")
+		var html = "+"
+		table.slideToggle('fast', function(){
+			
+			if(table.is(':visible')){
+				html = "-"
+			}
+			div.find("span.toggle").html(html)
+		})
+	})
+	$('.req.checkbox').click(function(){
+		var box = $(this)
+        openRecForm(box, {postfunc:function(data){
+        	afterSet(box, data)
+        }})
+    })
+	
+})
+
+function afterSet(box, data){
+    console.log(JSON.stringify(data))
+	var row = box.parents("tr")
+	if(data.date.length > 0){
+		row.find(".date").html(data.date)
+	}else{
+		row.find(".date").html('')
+	}
+    var note_row = row.next("tr")
+	if(data.notes != null){
+		note_row.find(".notes").html(data.notes).end().addClass('full')
+	}else{
+		note_row.find(".notes").html('').end().removeClass('full')
+	}
+	
+}
+
+
+</script>
+{%endblock%}
+
 
 {%block content%}
-
-{%if scout.position%}
-    <img src="{{scout.position.patch.url}}"/>
-    
-{%else%}
-    <img src="{{scout_patch}}"/>
-{%endif%}
 <br/>
-{{scout.fullname}}
+<h1>{{scout.fullname}}</h1>
+{%if scout.rank.patch%}<img src='{{scout.rank.patch.url}}'/>{%endif%}
+{%if scout.position.patch%}<img src='{{scout.position.patch.url}}'/>{%endif%}
+
+{%if scout.position.youth%}
+<div id="requirements"/>
+   
+        {%for r in ranks%}
+             <div class="rank_div">
+                 <h2><span class='toggle'>+</span>{{r.name}}</h2>
+                 <div class="slide_container" id="sc{{r.id}}">
+                     <table class="rank_table" id="rank_{{r.id}}"> 
+                        {%for req in r.requirements.all%}
+                            {%user_requirement%}
+                            
+                            <tr>
+                                <td valign="middle">
+                                    <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
+                                        {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
+                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
+                                    </div>
+                                </td>
+                                <td>{{req.short_desc}}
+                                    <span class='date'>{{user_requirement.completed_date|default:''}}</span>
+                                </td>
+                                
+                            </tr>
+                            <tr class='r_{{req.id}} tr_notes {%if user_requirement.notes%}full{%endif%}'>
+                                <td>&nbsp;</td>
+                                <td ><span class='notes'>{{user_requirement.notes|default:''|safe}}</span></td>
+                            </tr>
+                           
+                        {%endfor%}
+                    </table>
+                    <img class="rank_img" src='{{r.patch.url}}'/>
+                </div>
+            </div>
+        {%endfor%}
+
+    
+</div>
+
+<div id="set_req_form">
+</div> 
+{%endif%}
 
 {%endblock%}
