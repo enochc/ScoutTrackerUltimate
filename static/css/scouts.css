@@ -52,8 +52,13 @@ ul.errorlist li{
     font-size:smaller;
 }
 #outer{
+	width:100%;
+	height:100%;
+}
+#frame{
 	width:1000px;
-	margin:0 auto;
+    margin:0 auto;
+    height:100%;
 }
 #banner{
 	margin-top:10px;

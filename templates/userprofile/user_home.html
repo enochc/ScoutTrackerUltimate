@@ -3,7 +3,7 @@
 {%block head%}
 <style>
 div#requirements{
-    width:700px;
+    width:600px;
     float:right;
 }
 .rank_img{
@@ -12,7 +12,7 @@ div#requirements{
     
 }
 .rank_div{
-    width:680px;
+    width:570px;
     margin-bottom:10px;
     
     background-color:#efeacc;
@@ -27,7 +27,7 @@ div#requirements{
 }
 .rank_table{
     float:left;
-    width:600px;
+    width:490px;
 
  
 }
@@ -101,7 +101,7 @@ $(function(){
 })
 
 function afterSet(box, data){
-    console.log(JSON.stringify(data))
+	console.log(data)
 	var row = box.parents("tr")
 	if(data.date.length > 0){
 		row.find(".date").html(data.date)

@@ -1,5 +1,5 @@
 {%extends 'base_template.html'%}
-
+{% load l10n %}
 {%block head%}
 <LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
 <style>
@@ -15,9 +15,10 @@ padding:5px 0;
 }
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
 <script>
 $(function(){
+	
 	$("#id_birthday").datepicker({
 		changeYear:true,
 		yearRange:'-100:+0',
@@ -33,7 +34,11 @@ function submitForm(){
 	$.post(url,values,function(data){
 		data.form = form
 		doSuccess(data, function(){
-			$("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+			{%if scout%}
+			 $("#added_message").html(values['first_name']+" Saved")
+			{%else%}
+			 $("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+			{%endif%}
 		},$.unblockUI())
 	})
 }
@@ -61,7 +66,12 @@ function submitForm(){
 {{form.nickname.errors}}
 <label for='id_login_name'>Login:</label>{{form.login_name}}<br/>
 {{form.login_name.errors}}
-<label for='id_birthday'>Birthday:</label>{{form.birthday}}<br/>
+<label for='id_birthday'>Birthday:</label>
+
+ 
+<input type="text" name="birthday" value="{{scout.birthday|date:'Y-m-d'}}" id="id_birthday">
+
+<br/>
 {{form.birthday.errors}}
 <label for='id_phone_number'>Phone Number:</label>{{form.phone_number}}<br/>
 {{form.phone_number.errors}}
@@ -78,7 +88,7 @@ function submitForm(){
 
 <div class='red' id='added_message'>&nbsp;</div>
 {%if scout %}
-    <div class="button" onclick='submitForm()'>Edit</button>
+    <div class="button" onclick='submitForm()'>Update</button>
 {%else%}
      <div class="button" onclick='submitForm()'>Add</button>
 {%endif%}

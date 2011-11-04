@@ -85,11 +85,15 @@ $(function(){
 		window.open('/user/add_scout/', 'add_scout', 'width=400, height=400')
 	})
 	
-	$(document).click(function(e){
+	$("#outer").click(function(e){
 		$('#set_req_form').hide()
 	})
 	$('#set_req_form').click(function(e){
     	e.stopPropagation()
+    })
+    $("#ui-datepicker-div").live('click',function(e){
+    	e.stopPropagation()
+    	return false
     })
 
 })
@@ -113,6 +117,8 @@ function set_scout_requiremnt(r, s, b, options){
         })
     })
 }
+now = new Date()
+var last_date = now.getFullYear()+"-"+now.getMonth()+"-"+now.getDate()
 
 function openRecForm(box, opt){
 	
@@ -131,6 +137,10 @@ function openRecForm(box, opt){
             $('#set_req_form').hide()
         }).end().find('.send').click(function(){
             set_scout_requiremnt(req, scout, box, opt)
-        }).end().show()
+        }).end().find("input.date").datepicker({
+            changeYear:true,
+            yearRange:'-100:+0',
+            dateFormat:'yy-mm-dd'
+        }).end().find('input.date.blank').val(last_date).end().show()
     })
 }
