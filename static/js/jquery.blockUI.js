@@ -1,6 +1,5 @@
 ﻿/*!
- * jQuery blockUI plugin
- * Version 2.39 (23-MAY-2011)
+ * jQuery blockUI plugin * Version 2.39 (23-MAY-2011)
  * @requires jQuery v1.2.3 or later
  *
  * Examples at: http://malsup.com/jquery/block/
@@ -12,7 +11,7 @@
  * Thanks to Amir-Hossein Sobhi for some excellent contributions!
  */
 
-;(function($) {
+(function($) {
 
 if (/1\.(0|1|2)\.(0|1|2)/.test($.fn.jquery) || /^1.1/.test($.fn.jquery)) {
 	alert('blockUI requires jQuery v1.2.3 or later!  You are using v' + $.fn.jquery);
@@ -497,3 +496,4 @@ function sz(el, p) {
 };
 
 })(jQuery);
+

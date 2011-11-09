@@ -3,7 +3,7 @@
 For: {{scout.fullname}}<br/>
 {%if ur%}
 
-On: <input class="date" value="{{ur.completed_date|date:"M d Y"}}"/><br/>
+On: <input class="date" value="{{ur.completed_date|date:"M d, Y"}}"/><br/>
 Signed by: {{ur.signed_by.profile.fullname}}<br/>
 <label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
 <textarea id="req_notes" placeholder="notes" tabindex="1">{{ur.notes|default:""}}</textarea><br/>
@@ -14,7 +14,7 @@ Signed by: {{ur.signed_by.profile.fullname}}<br/>
 </div>
 
 {%else%}
-On: <input class="date blank" value="{%now "M d Y"%}"/><br/>
+On: <input class="date blank" value="{%now "M d, Y"%}"/><br/>
 Signed by: {{user.profile.fullname}}<br/>
 <label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
 <textarea id="req_notes" placeholder="notes" tabindex="1"></textarea><br/>

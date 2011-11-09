@@ -95,7 +95,17 @@ $(function(){
     {%endif%}
     
     $("#edit_user").click(function(){
-		window.open('/user/add_scout/{{scout.id}}/', 'edit_scout', 'width=400, height=400')
+    	$.blockUI({
+    		message:'<div id="block_message"></div>',
+    		onBlock:function(){
+    			$('#block_message').load('/user/add_scout/{{scout.id}}/', function(data){
+    				$('div.blockMsg').css({
+    					'top':$(window).height()/2 - $('#block_message').height()/2
+    				})
+    			})
+    		}
+    	})
+		//window.open('/user/add_scout/{{scout.id}}/', 'edit_scout', 'width=400, height=400')
 	})
 	
 })

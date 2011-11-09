@@ -1,5 +1,4 @@
 {%extends 'base_template.html'%}
-{% load l10n %}
 {%block head%}
 <LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
 <style>
@@ -88,7 +87,8 @@ function submitForm(){
 
 <div class='red' id='added_message'>&nbsp;</div>
 {%if scout %}
-    <div class="button" onclick='submitForm()'>Update</button>
+    <div class="button" onclick='submitForm()'>Update</div>
+    <div class="button" onclick='unblock()'>Cancel</div>
 {%else%}
      <div class="button" onclick='submitForm()'>Add</button>
 {%endif%}

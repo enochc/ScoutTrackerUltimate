@@ -1,4 +1,9 @@
 var csrf_token
+
+function unblock(){
+	$.unblockUI()
+}
+
 $(document).ajaxSend(function(event, xhr, settings) {
 	try{
 		csrf_token = $.cookie('csrftoken')
@@ -11,7 +16,8 @@ $(document).ajaxSend(function(event, xhr, settings) {
 });
 $.blockUI.defaults = $.extend($.blockUI.defaults,{
 	message:'',
-	overlayCSS:  { 
+	css: $.extend($.blockUI.defaults.css,{'backgroundColor':'#EFEACC'}),
+	overlayCSS: { 
         backgroundColor: '#0c5994',
         opacity:         0.7,
         cursor:         'wait' 
@@ -102,7 +108,8 @@ function set_scout_requiremnt(r, s, b, options){
 	var api = '/requirement/set/'+r+'/'+s+'/'
 	var notes = $('#req_notes').val()
 	var comp = $('#req_completed').is(':checked')
-	$.post(api,{notes:notes, completed:comp},function(data){
+	var date = $('input.date').val()
+	$.post(api,{notes:notes, completed:comp, date:date},function(data){
         doSuccess(data, function(){
         	if(!data.completed){
         		   b.html("<span class='empty red'>&mdash;</span>")
@@ -140,7 +147,7 @@ function openRecForm(box, opt){
         }).end().find("input.date").datepicker({
             changeYear:true,
             yearRange:'-100:+0',
-            dateFormat:'yy-mm-dd'
+            dateFormat:'M dd, yy'
         }).end().find('input.date.blank').val(last_date).end().show()
     })
 }

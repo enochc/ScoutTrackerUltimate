@@ -8,7 +8,9 @@
 div.ui-datepicker{
  font-size:.7em;
 }
-
+#block_message{
+	cursor:default;
+}
 html, body, table, tr, td, th{
 	margin:0;
 	padding:0;

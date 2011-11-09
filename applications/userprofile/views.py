@@ -65,10 +65,12 @@ def add_scout(request, scout_id = None):
             scoutform = NewScoutForm(request.POST, instance=scout)
         else:
             scoutform = NewScoutForm(request.POST)
-            
-        if scoutform.is_valid():
-            scoutform.save()
-        else:
-            return HttpJsonFormError(scoutform.errors)
-        return HttpJsonSuccess()
+        try:    
+            if scoutform.is_valid():
+                scoutform.save()
+            else:
+                return HttpJsonFormError(scoutform.errors)
+            return HttpJsonSuccess()
+        except Exception, e:
+            print e
         

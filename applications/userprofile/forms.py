@@ -20,11 +20,13 @@ class NewScoutForm(forms.ModelForm):
         troop = self.cleaned_data['troop']
         username='%s_%s' % (username, troop)
         try:
+            print username
             u = User.objects.get(username=username)
-            print u, self.instance.user
             if u != self.instance.user:
-            #if u.profile != self.instance:
+                #if u.profile != self.instance:
                 raise forms.ValidationError('A user with that login already exists.')
+            else:
+                return username
         except User.DoesNotExist:
             return username
 
@@ -33,7 +35,7 @@ class NewScoutForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         cd = self.cleaned_data
         username='%s' % (cd.get('login_name'))
-        
+        print 'save: %s'%username
         if not self.instance.pk:
             try:
                 user = User.objects.create_user(username, '', password='password')
