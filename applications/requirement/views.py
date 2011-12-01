@@ -36,7 +36,10 @@ def req_set(request, req_id, user_id, completed = True):
             return HttpJsonFailure(str(e))
 
         if request.user.has_perm('userprofile.signoff') or request.user.profile == profile:
-            ur, created = UserRequirement.objects.get_or_create(user=profile.user, requirement=req)
+            try:
+                ur = UserRequirement.objects.get(user=profile.user, requirement=req)
+            except UserRequirement.DoesNotExist:
+                ur = UserRequirement(user=profile.user, requirement=req, signed_by=request.user)
 
             completed = request.POST.get('completed') in (True, 'true', 'True', 1)
             
@@ -49,6 +52,7 @@ def req_set(request, req_id, user_id, completed = True):
                 ur.completed_date = None
             ur.completed = completed
             ur.signed_by = request.user
+
             notes = request.POST.get('notes',None)
             if notes == '':
                 notes = None

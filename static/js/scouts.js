@@ -1,9 +1,5 @@
 var csrf_token
 
-function unblock(){
-	$.unblockUI()
-}
-
 $(document).ajaxSend(function(event, xhr, settings) {
 	try{
 		csrf_token = $.cookie('csrftoken')
@@ -14,6 +10,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
 		console.error('could not include csrf token : '+settings.url)
 	}
 });
+
 $.blockUI.defaults = $.extend($.blockUI.defaults,{
 	message:'',
 	css: $.extend($.blockUI.defaults.css,{'backgroundColor':'#EFEACC'}),
@@ -26,7 +23,8 @@ $.blockUI.defaults = $.extend($.blockUI.defaults,{
     fadeOut:0
 	
 })
-function doSuccess(data, success_func, fail_func){
+
+function doSuccess(data, success_func, fail_func, dontClear){
 	if(data.success){
 		success_func(data)
 	}else{
@@ -49,8 +47,9 @@ function doSuccess(data, success_func, fail_func){
 		if(typeof(fail_func) == "function"){
 			fail_func()	
 		}
-		$.unblockUI()
-			
+		if(!dontClear){
+			$.unblockUI()
+		}
 	}
 }
 
@@ -125,7 +124,7 @@ function set_scout_requiremnt(r, s, b, options){
     })
 }
 now = new Date()
-var last_date = now.getFullYear()+"-"+now.getMonth()+"-"+now.getDate()
+
 
 function openRecForm(box, opt){
 	
@@ -134,20 +133,22 @@ function openRecForm(box, opt){
 	if(opt && typeof opt.prefunc == 'function'){
 		opt.prefunc(req)
 	}
-
+	//$.blockUI()
     var scout = box.attr('class').split('s_')[1].split(' ')[0]
     $('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){        
         $('#set_req_form').css({
             'top':box.offset().top,
             'left':box.offset().left
+           // 'zIndex':10000
         }).find('.cancel').click(function(){
             $('#set_req_form').hide()
         }).end().find('.send').click(function(){
             set_scout_requiremnt(req, scout, box, opt)
         }).end().find("input.date").datepicker({
             changeYear:true,
+            changeMonth:true,
             yearRange:'-100:+0',
             dateFormat:'M dd, yy'
-        }).end().find('input.date.blank').val(last_date).end().show()
+        }).end().show()
     })
 }

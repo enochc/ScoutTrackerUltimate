@@ -144,7 +144,7 @@ ul.errorlist li{
 }
 
 .error{
-	background-color:yellow;
+	background-color:yellow !important;
 }
 .float_spacer{
 	width:0;

@@ -1,5 +1,6 @@
 <html>
-    <head>
+    <head class="{{edit}}">
+    {%if not edit%}
     <LINK REL=StyleSheet HREF="/css/scouts.css" TYPE="text/css"/>
     <LINK REL=StyleSheet HREF="/css/jquery-ui.css" TYPE="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -8,6 +9,7 @@
     <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript" src="/js/myscript.js"></script>
     <script type="text/javascript" src="/js/scouts.js"></script>
+    {%endif%}
     {%block head%}
     {%endblock%}
     {%csrf_token%}

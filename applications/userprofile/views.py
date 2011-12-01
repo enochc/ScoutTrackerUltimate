@@ -45,6 +45,7 @@ def userhome(request, user_id=None):
 @permission_required('userprofile.add_scout')
 def add_scout(request, scout_id = None):  
     if request.method == 'GET':
+        edit = int(request.GET.get('edit','0')) == 1
         boyscout = Position.objects.get(name='Boy Scout')
         scout = None
         if scout_id is not None:
@@ -54,8 +55,7 @@ def add_scout(request, scout_id = None):
                                                          'login_name':scout.user.username.split("_")[0]})
         else:
             form = NewScoutForm()
-        form.first_name = 'test'
-        return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout}
+        return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout, 'edit':edit}
     
     else:
         scout = NewScoutForm(request.POST)

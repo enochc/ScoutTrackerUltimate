@@ -6,48 +6,78 @@ body{
     background-color:#efeacc;
 }
 #added_message{
-width:100%;
-text-align:center;
-font-weight:bold';
-font-size:larger;
-padding:5px 0;
+    width:100%;
+    text-align:center;
+    font-weight:bold';
+    font-size:larger;
+    padding:5px 0;
 }
-
+span.req{
+    color:#b31f36;
+    font-size:1.3em;
+    line-height:1em;
+    margin-right:4px;
+}
 </style>
 
 <script>
 $(function(){
 	
-	$("#id_birthday").datepicker({
+	var req_fields = ['first_name', 'last_name', 'login_name', 'state', 'position']
+	for(field in req_fields){
+		f = $("label[for='id_"+req_fields[field]+"']").prepend("<span class='req'>*</span>")
+	}
+	
+	
+	$("#id_bd_string").datepicker({
 		changeYear:true,
+		changeMonth:true,
 		yearRange:'-100:+0',
-		dateFormat:'yy-mm-dd'
+		dateFormat:'M dd, yy',
+		beforeShow: function(){ $('#ui-datepicker-div').css('z-index', 9999); }
 	})
+	change_login = true
+	$("input#id_first_name").keyup(function(){
+		if(change_login){
+            $("input#id_login_name").val($(this).val())
+            $("input#id_login_name").blur(function(){change_login=false})
+        }
+	})
+		
+	
 })
 
 function submitForm(){
+	{%if scout%}
+	$("div.blockMsg").block()
+	{%else%}
 	$.blockUI()
-	form = $("form[name='add_scout_form']")
+	{%endif%}
+	var form = $("form[name='add_scout_form']")
 	values = getJsonValues(form)
+
 	url = "/user/add_scout/"
 	$.post(url,values,function(data){
 		data.form = form
-		doSuccess(data, function(){
-			{%if scout%}
-			 $("#added_message").html(values['first_name']+" Saved")
-			{%else%}
-			 $("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
-			{%endif%}
-		},$.unblockUI())
+		{%if scout%}
+    		doSuccess(data, function(){
+                $("#added_message").html(values['first_name']+" Saved")
+                window.location = window.location
+            },function(){$("div.blockMsg").unblock()},true)
+		{%else%}
+    		doSuccess(data, function(){
+    			 $("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+    		})
+		{%endif%}
 	})
 }
+
 
 </script>
 {%endblock%}
 
 {%block body%}
 <form method="POST" name='add_scout_form'>
-{% csrf_token %}
 {%if scout %}
     <h1>Edit {{scout.fullname}}</h1>
     <input type="hidden" id="scout_id" name="scout_id" value='{{scout.id}}'/>
@@ -65,10 +95,10 @@ function submitForm(){
 {{form.nickname.errors}}
 <label for='id_login_name'>Login:</label>{{form.login_name}}<br/>
 {{form.login_name.errors}}
-<label for='id_birthday'>Birthday:</label>
+<label for='id_bd_string'>Birthday:</label>
 
  
-<input type="text" name="birthday" value="{{scout.birthday|date:'Y-m-d'}}" id="id_birthday">
+<input type="text" class="date" name="bd_string" value="{{scout.birthday|date:'M d, Y'}}" id="id_bd_string">
 
 <br/>
 {{form.birthday.errors}}
@@ -88,7 +118,7 @@ function submitForm(){
 <div class='red' id='added_message'>&nbsp;</div>
 {%if scout %}
     <div class="button" onclick='submitForm()'>Update</div>
-    <div class="button" onclick='unblock()'>Cancel</div>
+    <div class="button" onclick='$.unblockUI()'>Cancel</div>
 {%else%}
      <div class="button" onclick='submitForm()'>Add</button>
 {%endif%}
