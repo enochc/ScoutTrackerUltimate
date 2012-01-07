@@ -56,6 +56,9 @@ tr.tr_notes{
 tr.tr_notes.full{
     display:table-row;
 }
+div#info{display:none;}
+
+
 
 
 {%if scout.rank%}
@@ -107,7 +110,19 @@ $(function(){
     	})
 		//window.open('/user/add_scout/{{scout.id}}/', 'edit_scout', 'width=400, height=400')
 	})
-	
+	$('.info').click(function(){
+		var link = $(this).attr("ref")
+		var box = $(this)
+		var info = $("div#info")
+		info.css({ 
+			'top':box.offset().top,
+			'max-width':"800px"
+			})
+		.find("#info_content").load(link, function(){
+			info.css({'left':box.offset().left - info.width()/2})
+			.show()
+		})
+	})
 })
 
 function afterSet(box, data){
@@ -134,6 +149,11 @@ function afterSet(box, data){
 
 {%block content%}
 <br/>
+<div id="info" class="popup">
+    <span id="close_popup" onclick="close_popup()" title="close">X</span>
+    <span id="info_content"></span>
+</div>
+
 <div style="float:left;">
 {%if perms.userprofile.edit_scouts%}
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
@@ -162,7 +182,7 @@ function afterSet(box, data){
                                         {%else%}<span class='empty red'>&mdash;</span>{%endif%}
                                     </div>
                                 </td>
-                                <td>{{req.short_desc}}
+                                <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
                                     <span class='date'>{{user_requirement.completed_date|default:''}}</span>
                                 </td>
                                 
@@ -182,7 +202,7 @@ function afterSet(box, data){
     
 </div>
 
-<div id="set_req_form">
+<div id="set_req_form" class="popup">
 </div> 
 {%endif%}
 

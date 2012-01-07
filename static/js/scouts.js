@@ -91,9 +91,9 @@ $(function(){
 	})
 	
 	$("#outer").click(function(e){
-		$('#set_req_form').hide()
+		close_popup()
 	})
-	$('#set_req_form').click(function(e){
+	$('.popup').click(function(e){
     	e.stopPropagation()
     })
     $("#ui-datepicker-div").live('click',function(e){
@@ -102,6 +102,10 @@ $(function(){
     })
 
 })
+
+function close_popup(){
+	$('.popup').hide()
+}
 
 function set_scout_requiremnt(r, s, b, options){
 	var api = '/requirement/set/'+r+'/'+s+'/'
@@ -119,7 +123,7 @@ function set_scout_requiremnt(r, s, b, options){
         		data.req_id=r
         		options.postfunc(data)
         	}
-        	$('#set_req_form').hide()
+        	close_popup()
         })
     })
 }
@@ -141,7 +145,7 @@ function openRecForm(box, opt){
             'left':box.offset().left
            // 'zIndex':10000
         }).find('.cancel').click(function(){
-            $('#set_req_form').hide()
+        	close_popup()
         }).end().find('.send').click(function(){
             set_scout_requiremnt(req, scout, box, opt)
         }).end().find("input.date").datepicker({

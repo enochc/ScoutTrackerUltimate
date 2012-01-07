@@ -156,14 +156,7 @@ ul.errorlist li{
 /* ========== set requirement popup ==============*/
 #set_req_form{
     background-color:#005e9c;
-    padding:10px;
-    display:none;
-    position:absolute;
-    z-index:3;
-    box-shadow: 5px 5px 3px #32523b;
-    text-align:left;
-    border-radius:5px;
-    color:#fff;
+    
 }
 #set_req_form h2{
 	color:#f6bc56;
@@ -196,4 +189,42 @@ div#requirements .req{
 	cursor:pointer;
     font-weight:bold;
     
+}
+span.info{
+	font-weight:bold;
+	padding:0 5px;
+	color:#005e9c;
+	cursor:pointer;
+}
+span.info:hover{
+	text-decoration:underline;
+}
+.popup{
+	background-color:#005e9c;
+    padding:10px;
+    display:none;
+    position:absolute;
+    z-index:3;
+    box-shadow: 5px 5px 3px #32523b;
+    text-align:left;
+    border-radius:5px;
+    color:#fff;
+}
+.popup h1{
+	color:#f6bc56;
+}
+#close_popup{
+    float:right;
+    cursor:pointer;
+    margin:10px;
+    color:#b31f36;
+    font-weight:bold;
+    display:block;
+    border-radius:10px;
+    width:20px;
+    height:20px;
+    background-color:#fff;
+    line-height:20px;
+    padding:1px 0 0 1px;
+    text-align:center;
 }
