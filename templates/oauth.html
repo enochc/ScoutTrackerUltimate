@@ -1,0 +1,26 @@
+{%extends 'base_template.html'%}
+
+
+{%block body%}
+    {%if code == None%}
+        window.opener.got_profile()
+    
+    
+    {%else%}
+        <form name="get_token" action="https://accounts.google.com/o/oauth2/token" method="POST">
+            <input type="hidden" name="scope" 
+                value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"/>
+            <input type="hidden" name="code" value="{{code}}"/>
+            <input type="hidden" name="redirect_uri" value="http://ultimatescouttracker.com/oauth2callback"/>
+            <input type="hidden" name="client_secret" value="{{secret}}"/>
+            <input type="hidden" name="client_id" value="{{google_client_id}}"/>
+            <input type="hidden" name="grant_type" value="authorization_code"/>
+        </form>
+        <script>
+        document.get_token.submit()
+        </script>
+    {%endif%}
+
+{%endblock body%}
+
+
