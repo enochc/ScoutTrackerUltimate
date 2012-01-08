@@ -1,4 +1,5 @@
 from sorl.thumbnail import get_thumbnail, delete
+from django.conf import settings
 
 def get_sized_image(img, size_tuple=None):
 
@@ -7,3 +8,7 @@ def get_sized_image(img, size_tuple=None):
         
     else:
         return img
+    
+def baseProcessor(httprequest):
+    return {'google_client_id':settings.GOOGLE_CLIENT_ID,
+            }

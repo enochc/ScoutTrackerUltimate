@@ -9,16 +9,10 @@
     {%if perms.userprofile.add_scout%}
     <div class="button rt" id='add_scout_btn'>Add Member</div>
     {%endif%}
-{%else%}
-    <div class="button rt red" onclick="login()">login</div>
-    <span class='rt'>
-    Troop: <input type="text" id="login_troop" size="6"/>
-    Login: <input type="text" id="login_username"/>
-    Password: <input type="password" id="login_password"/>
-    </span>
+
     
 {%endif%}
-
+    {%if user.is_authenticated%}
 
     <ul>
         <li><a href="/user">Home</a></li>
@@ -27,5 +21,5 @@
         {%endif%}
         <li><a href="/troop/calendar/">Calendar</a></li>
     </ul>
-
+    {%endif%}
 </div>

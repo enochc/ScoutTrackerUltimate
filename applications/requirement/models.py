@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-from userrequirement.models import UserRequirement
-
 REQUIREMENT_TYPES = ((0, "Standard"),
-                     (1, "Dissabled"),
+                     (1, "Disabled"),
                      )
 
 class Requirement(models.Model):
@@ -21,6 +19,7 @@ class Requirement(models.Model):
     
     def __unicode__(self):
         return '%s #%s'% (self.rank, self.order)
+    
     
     """
     def has_completed(self, user):

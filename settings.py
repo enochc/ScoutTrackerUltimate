@@ -115,6 +115,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'django.contrib.auth.context_processors.auth',
+    'utils.funcs.baseProcessor'
+)
+
 ROOT_URLCONF = 'scouts.urls'
 
 TEMPLATE_DIRS = (
@@ -144,6 +149,7 @@ INSTALLED_APPS = (
 	'requirement',
 	'userrequirement',
 	'taglib',
+	'userrank',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -170,3 +176,7 @@ LOGGING = {
 }
 
 LOGIN_URL = '/'
+
+GOOGLE_CLIENT_ID = "448849120100.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET = "XZDzn3t_ajXgEqp-g-MZJKGZ"
+GOOGLE_API_KEY = "AIzaSyChYYhFzxdAJr8XReiymLBxAkzimu7etHk"

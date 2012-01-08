@@ -2,4 +2,5 @@ A django Web based application for tracking and monitoring boyscout advancement
 
 DEPENDANCIES:
 sorl-thumbnail
-
+google-api-python-client
+memcached

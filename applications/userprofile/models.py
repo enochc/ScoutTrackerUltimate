@@ -33,6 +33,9 @@ class Userprofile(models.Model):
 	street2 = models.CharField(max_length=100, help_text='Floor or room number.', null=True, blank=True)
 	lat = models.IntegerField(null=True, blank=True, help_text='latitude')
 	lng = models.IntegerField(null=True, blank=True, help_text='longitude')
+	google_oauth_token = models.CharField(max_length=255, null=True, blank=True)
+	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
+	google_code = models.CharField(max_length=255, null=True, blank=True)
 	
 
 	@property

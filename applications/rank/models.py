@@ -22,5 +22,5 @@ class Rank(models.Model):
     
     @property
     def num_requirements(self):
-        return self.requirement_set.count()
+        return self.requirements.filter(type=0).count()
     

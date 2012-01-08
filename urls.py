@@ -2,6 +2,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
 from django.conf import settings
 
+from utils.views import oauth_callback
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -30,4 +32,5 @@ urlpatterns = patterns('',
     url(r'^user/', include('userprofile.urls')),
     url(r'^troop/', include('troop.urls')),
     url(r'^requirement/', include('requirement.urls')),
+    url(r'^oauth2callback/', oauth_callback),
 )

@@ -1,10 +1,52 @@
 {%extends 'page_template.html'%}
 
+{%block head%}
+<style>
+   /* #google_login_div{
+        display:none;
+    }*/
+</style>
+<script>
+var google_client_id = "{{google_client_id}}"
 
-{%block content%}    
-    Welcome to the Ultimate Scout tracker. You can't do much here right now without logging in.
-    If you don't have a login then you'd better figure out how to get one, otherweise, this is 
-    as far as you get.
+function google_login(){
+	var gdiv = $("#google_login_div")
+	url = "https://accounts.google.com/o/oauth2/auth?"+
+			"scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&"+
+			"state=/profile&"+
+			"redirect_uri=http://ultimatescouttracker.com/oauth2callback&"+
+			"response_type=code&"+
+			"client_id={{google_client_id}}"
+	gwin = window.open(url, 'google_oauth', 'width=700, height=400, location=0')
+}
+function oauth_success(code){
+	gwin.clos()
+	alert(code)
+}
+</script> 
+{%endblock%}
+    
+{%block content%}   
+
+
+<table style="width:100%">
+<tr>
+    <td style="border-right:1px solid black;">
+        
+
+        Troop: <input type="text" id="login_troop" size="6"/><br/>
+        Login: <input type="text" id="login_username"/><br/>
+        Password: <input type="password" id="login_password"/><br/>
+        <div class="button " onclick="login()">login</div>
+    </td>
+    <td>
+        or 
+        <div class="button rt" onclick="google_login()">Google Login</div>
+        <div id="google_login_div">
+        </div>
+    </td>
+</tr>
+</table>
 
 
 {%endblock%}

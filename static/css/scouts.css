@@ -67,18 +67,20 @@ ul.errorlist li{
     padding:0;
 }
 #banner h1{
+	display:inline;
 	font-size:32px;
-	line-height:32px;
-	vertical-align:text-bottom;
+	line-height:20px;
+	vertical-align:baseline;
 	position:relative;
 	bottom:0px;
 	color:#000;
+	padding-bottom:0;
 }
 #banner .button{
 	margin-top:2px;
 }
 #banner span{
-	margin-top:10px;
+	/*margin-top:10px;*/
 	margin-right:20px;
 }
 .rt{
