@@ -1,6 +1,8 @@
 {%extends 'page_template.html'%}
 
 {% block content%}
+
+{%if user.profile.troop.calendar%}
 <br/>
 <center>
 
@@ -8,4 +10,13 @@
 style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 </center>
+{%else%}
+    {%if user.profile.troop%}
+    <p>Add a Calendar</p>
+    {%else%}
+    <p>
+    You must be a member of a troop to add a calendar.
+    </p>
+    {%endif%}
+{%endif%}
 {%endblock%}

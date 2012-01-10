@@ -55,13 +55,9 @@ def oauth_callback(request):
                 login(request, user)
                 return HttpResponseRedirect("/user")
         else:
-            form = NewScoutForm(initial={'first_name':'Enoch',
-                                             'last_name':'Carter',
-                                             'nickname':'Enoch',
-                                             'login_name':'Enoch',
-                                             'email':'mrenoch@gmail.com',
-                                             'position':7,
-                                             })
+            form = NewScoutForm(initial={
+                                         'position':7,#Guardian
+                                         })
             return 'oauth.html', {'form':form}  
         
     elif request.method == 'POST':

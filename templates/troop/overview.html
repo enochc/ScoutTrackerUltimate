@@ -1,4 +1,5 @@
 {%extends 'page_template.html'%}
+{% load custom_tags %}
 
 {%block head%}
 <style>
@@ -13,8 +14,15 @@ div.rank_header{
     width:14%;
     height:136px;
     text-align:center;
-    padding:5px 0;
+    padding:5px 1px;
     
+}
+div.rank_header:last-of-type{
+    float:right;
+    margin-right:5px;
+    height:146px;
+    margin-bottom:-10px;
+    padding:5px 0;
 }
 div.rank_header img{
     display:block;
@@ -26,6 +34,8 @@ div.scout_name{
     width:100%;
     text-align:right;
     height:24px;
+    white-space: nowrap;
+    font-size:smaller;
 }
 .current_rank{
     background-color:#efeacc;
@@ -36,7 +46,7 @@ div.scout_name{
     border-top-right-radius:5px;
 }
 div#requirements{
-    width:902px;
+    width:900px;
     padding:10px;
     background-color:#efeacc;
     box-shadow: 5px 5px 3px #32523b;
@@ -84,18 +94,21 @@ $(function(){
 function post_load(){
 	req = $("div.req_header")[0].id.split('r_')[1]
 	get_req(req)
+	
 	$("div.req_header").click(function(){
         req = this.id.split('r_')[1]
         get_req(req)
     })
     
-    // Open check dialogue on click
+    
+	{%if perms.userprofile.mark_requirements%}
     $('.req.checkbox').click(function(){
     	
     	openRecForm($(this),{prefunc:function(req){
     		get_req(req)
     	}})
     })
+    {%endif%}
     $('div#requirements').unblock()
 }
 function get_rank(rid){
@@ -127,14 +140,21 @@ function get_req(rid){
                 {{r.name}}
             </div>
             {%endfor%}
-            
         </td>
     </tr>
     <tr>
-        <td valign="top" style="padding-top:43px;padding-right:10px;">
-        {%for scout in troop.scouts%}              
-            <div class="scout_name" id='scout_{{scout.user.pk}}'><a href="/user/{{scout.user.pk}}/">{{scout}}</a>:</div>
-        {%endfor%}   
+        <td valign="top" style="padding-top:43px;padding-right:5px;width:70px">
+        {%if troop%}
+            {%for scout in troop.scouts%}              
+                <div class="scout_name" id='scout_{{scout.user.pk}}'>
+                <a href="/user/{{scout.user.pk}}/" title="{{scout.name}}">{{scout.name|truncate_chars:10}}</a>:</div>
+            {%endfor%} 
+        {%else%}
+            {%if user.profile.position.youth%}
+            <div class="scout_name" id='scout_{{user.pk}}'>
+            <a href="/user/{{user.pk}}/" title="{{user.profile.name}}">{{user.profile.name|truncate_chars:10}}</a>:</div>
+            {%endif%}
+        {%endif%}  
         </td>
         <td valign="top">
             <div id='requirements'>

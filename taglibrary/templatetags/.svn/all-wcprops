@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/4foods/!svn/ver/3338/trunk/taglibrary/templatetags
+END
+custom_tags.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/4foods/!svn/ver/3338/trunk/taglibrary/templatetags/custom_tags.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/4foods/!svn/ver/1969/trunk/taglibrary/templatetags/__init__.py
+END
+email_macros.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/4foods/!svn/ver/2628/trunk/taglibrary/templatetags/email_macros.py
+END

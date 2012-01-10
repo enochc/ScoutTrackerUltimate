@@ -160,8 +160,8 @@ function afterSet(box, data){
 
     <h1>{{scout.fullname}} </h1>
     
-    {%if scout.rank.patch%}<img src='{{scout.rank.patch.url}}'/>{%endif%}
-    {%if scout.position.patch%}<img src='{{scout.position.patch.url}}'/>{%endif%}
+    {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
+    {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
     
     {%if scout.position.youth%}
 </div>

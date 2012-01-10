@@ -4,6 +4,7 @@
         "model": "position.position", 
         "fields": {
             "youth": false, 
+            "patch": "position/committee.jpg", 
             "name": "Committee Member", 
             "description": "Does everything"
         }
@@ -13,6 +14,7 @@
         "model": "position.position", 
         "fields": {
             "youth": true, 
+            "patch": "", 
             "name": "Boy Scout", 
             "description": "A Member of a troop"
         }
@@ -22,6 +24,7 @@
         "model": "position.position", 
         "fields": {
             "youth": true, 
+            "patch": "position/SPL.jpg", 
             "name": "Senior Patrol Leader", 
             "description": "Leads the patrol"
         }
@@ -31,6 +34,7 @@
         "model": "position.position", 
         "fields": {
             "youth": true, 
+            "patch": "position/patrol_leader.jpg", 
             "name": "Patrol Leader", 
             "description": "leads a patrol"
         }
@@ -40,6 +44,7 @@
         "model": "position.position", 
         "fields": {
             "youth": false, 
+            "patch": "position/scoutmaster.jpg", 
             "name": "Scoutmaster", 
             "description": "watches over the troop"
         }
@@ -49,15 +54,17 @@
         "model": "position.position", 
         "fields": {
             "youth": false, 
+            "patch": "position/ASM.jpg", 
             "name": "Assistant Scoutmaster", 
             "description": "Assists the Scoutmaster "
         }
-    }
+    }, 
     {
         "pk": 7, 
         "model": "position.position", 
         "fields": {
             "youth": false, 
+            "patch": "", 
             "name": "Guardian", 
             "description": "A parent or guardian of a scout who can view that scouts progress and troop information"
         }

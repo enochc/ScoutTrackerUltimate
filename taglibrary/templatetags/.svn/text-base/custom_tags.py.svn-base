@@ -1,0 +1,263 @@
+import datetime
+import locale
+from re import *
+from decimal import Decimal,ROUND_FLOOR
+from django.utils.dateformat import DateFormat
+from datetime import timedelta
+from dateutil import parser
+from django import template
+from django.template import FilterExpression
+from django.template.loader import get_template
+#from sorl.thumbnail.main import DjangoThumbnail
+from fourfood.util.funcs import get_sized_image
+
+#from sorl.thumbnail.base import ThumbnailException
+from fourfood.util.funcs import flatten
+from BeautifulSoup import BeautifulSoup
+
+import logging
+log = logging.getLogger('fourfood.applications.taglibrary.templatetags')
+
+import re
+import time
+
+register = template.Library()
+
+@register.filter
+def date_tuple(value,format):
+    try:
+        d = datetime.datetime(*value[:6])
+        df = DateFormat(d)
+        return df.format(format)
+    except Exception,e:
+        print("date_tuple error: %s"%e)
+        return value
+    
+@register.filter
+def strip_styles(value):
+    soup = BeautifulSoup(value)
+    style = soup.style
+    if style is not None:
+        style.extract()
+    return soup.prettify
+    
+@register.filter
+def date_string(value,format):
+    try:
+        d = parser.parse(value)
+        df = DateFormat(d)
+        return df.format(format)
+    except Exception,e:
+        print("date_string error: %s"%e)
+        return value
+   
+@register.filter
+def set_used(messages):
+    messages.used = False
+    return ""  
+
+@register.filter("flatten")
+def flatten_tag(x):
+    return flatten(x)   
+ 
+@register.filter
+def exists(var):  
+     return var is None  
+ 
+@register.filter
+def format_phone(phone):  
+     try:  
+         FormattedPhone=phone[:-10]+'('+phone[-10:-7]+')'+phone[-7:-4]+'-'+phone[-4:];
+     except:
+         return phone
+     return FormattedPhone  
+ 
+@register.filter
+def truncate(value, max_length):  
+    if len(value) <= max_length:  
+        return value  
+  
+    truncd_val = value[:max_length]  
+    if value[max_length] != " ":  
+        rightmost_space = truncd_val.rfind(" ")  
+        if rightmost_space != -1:  
+            truncd_val = truncd_val[:rightmost_space]  
+  
+    return truncd_val + "..."   
+
+@register.filter
+def decodeHTML(string):
+    import re
+    entity_re = re.compile("&(#?)(\d{1,5}|\w{1,8});")
+
+    def substitute_entity(match):
+        from htmlentitydefs import name2codepoint as n2cp
+        ent = match.group(2)
+        if match.group(1) == "#":
+            return unichr(int(ent))
+        else:
+            cp = n2cp.get(ent)
+
+            if cp:
+                return unichr(cp)
+            else:
+                return match.group()
+
+    return entity_re.subn(substitute_entity, string)[0]
+    
+@register.filter
+def currency(value,nosign = False):
+    try:
+        temp = "%.2f" % float(value)
+        profile = compile(r"(\d)(\d\d\d[.,])")
+        while 1:
+            temp, count = subn(profile,r"\1,\2",temp)
+            if not count: break
+        return "%s"%temp if nosign else "$%s"%temp
+    except Exception,e:
+        return value
+
+@register.filter        
+def multiply(value, arg):
+    "Multiplies the arg and the value"
+    try:
+        #return value * arg
+        return Decimal("%s"%(value * arg)).quantize(Decimal('.01'),rounding=ROUND_FLOOR)
+    except:
+        return value
+    
+@register.filter        
+def divide(value, arg):
+    "Multiplies the arg and the value"
+    try:
+        #return value * arg
+        return int(value/arg)
+    except:
+        return value
+
+@register.filter        
+def subtract(value, arg):
+    try: 
+        return Decimal(str(value - arg))
+    except:
+        return value
+    
+@register.filter  
+def add_decimal(value, arg):
+    try:
+        return Decimal(str(value + arg))
+    except:
+        return value
+    
+@register.filter        
+def mod(value, arg):
+    "Multiplies the arg and the value"
+    return int(value) % int(arg)
+
+@register.filter("replace")
+def do_replace( string, arg ): 
+    args = arg.split("|")
+    newstring = str(string).replace(args[0],args[1])
+    return newstring
+do_replace.is_safe = True
+
+@register.filter("range")
+def get_range( value ):
+    return range(0,int(value) )
+
+@register.filter("range1")
+def get_range1( value ):
+    return range(1,int(value)+1 )
+
+@register.filter
+def padzeros(v1,arg=2):
+    return ("%s"%v1).zfill(arg)
+
+@register.filter("attribute")
+def get_attribute( value,arg ):
+    try:
+        return get_attribute(value, arg)
+    except:
+        try:
+            return value[arg]
+        except:
+            pass
+        return ''  
+    
+@register.filter("get")
+def get_dict(value,arg):
+    try:
+        return value[arg]
+    except:
+        return None     
+
+@register.filter("timedelta")
+def calc_timedelta( value,arg ):
+    """
+    So far only used in the ordercommand list_orders to get minutes until now
+    """
+    try:
+        return (value-arg).seconds/60
+    except:
+        return value
+
+@register.filter
+def sized_image(v1,v2):
+    #try:
+        args = v2.split(",")
+        dim = (args[0],args[1])
+        dj = get_sized_image(v1,dim)
+        return str(dj)
+    #except Exception,e:
+        #print("Image Exception: %s"%e)
+        #return v1
+
+@register.filter
+def extract_array(v1,v2):
+    try:
+        if isinstance(v1,list):
+            ret = [getattr(item,v2) for item in v1]
+            if len(ret) == 1:
+                ret = ret[0]
+        else:
+            return getattr(v1,v2)
+        return ret
+    except:
+        return v1
+
+
+class SetVariableNode(template.Node):
+    def __init__(self,name,value):
+        self.my_name = name
+        self.my_value = template.Variable(value)
+
+    def render(self, context):
+        context[self.my_name] = self.my_value.resolve(context)
+
+        return ''
+
+@register.tag(name="set")
+def set_template_var (parser,token):
+    tagname,var_name,var_value = token.split_contents()
+    return SetVariableNode(var_name,var_value)
+
+
+@register.inclusion_tag('macros/messages.html',takes_context=True)
+def show_messages(context):
+    return {'messages':context.get('messages',None)}
+
+
+@register.inclusion_tag('macros/redirect.html')
+def redirect(request, other=None):
+    redirect = request.session.get('redirect',None)
+    if redirect is not None:
+        return {'url':redirect}      
+    else:
+        return {'url':other}  
+    
+@register.inclusion_tag('macros/product_icons.html')
+def product_icons(product, media_url, show_premium):
+    return {'product':product,
+            'MEDIA_URL':media_url,
+            'show_premium':show_premium}      
+    

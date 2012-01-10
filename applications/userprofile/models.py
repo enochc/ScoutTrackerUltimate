@@ -38,6 +38,8 @@ class Userprofile(models.Model):
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
 	
+	def has_google_login(self):
+		return self.google_id is not None and len(self.google_id)>0 and self.google_id != 'None'
 
 	@property
 	def fullname(self):

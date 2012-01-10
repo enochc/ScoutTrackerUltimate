@@ -154,6 +154,7 @@ INSTALLED_APPS = (
     'django_extensions', 
     'sorl.thumbnail',
     
+    'scouts.taglibrary',
     'position',
 	'userprofile',
 	'troop',

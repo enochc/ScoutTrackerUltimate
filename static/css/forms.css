@@ -8,6 +8,16 @@ form{
 	margin:0;
 	padding:0;
 }
+form img{
+	height:20px;
+	
+}
+form span.input{
+	display:inline-block;
+	width:150px;
+	margin:2px;
+	padding:1px;
+}
 
 form label{
     width:120px;
