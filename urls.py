@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.simple import direct_to_template
 from django.conf import settings
 
-from utils.views import oauth_callback
+from utils.views import oauth_callback, anon_home
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -28,9 +28,10 @@ urlpatterns = patterns('',
     (r'^images/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.STATIC_ROOT +'/images'}),
 
-    url(r'^$', direct_to_template, {'template':'home.html'}),
+    url(r'^$', anon_home),
     url(r'^user/', include('userprofile.urls')),
     url(r'^troop/', include('troop.urls')),
     url(r'^requirement/', include('requirement.urls')),
     url(r'^oauth2callback/', oauth_callback),
+    url(r'^register/', oauth_callback),
 )

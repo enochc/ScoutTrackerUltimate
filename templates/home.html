@@ -1,15 +1,38 @@
 {%extends 'page_template.html'%}
 
 {%block head%}
+<LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
 <style>
-   /* #google_login_div{
-        display:none;
-    }*/
+   div#login{       
+    width:800px;
+    margin:30px auto;
+    overflow:hidden;       
+   }
+   div#login td{
+     color:#b31f36;      
+   }
+   #oquth_login{
+    width:40%;
+    padding:0 5%;
+    float:left;
+   }
+   #local_login{
+    width:40%;
+    padding:0 4%;
+    float:right;
+    border-left:1px solid black;
+   }
+
+   #local_login input{
+     margin-left:5px;
+   }
 </style>
 <script>
 var google_client_id = "{{google_client_id}}"
 
+
 function google_login(){
+	$.blockUI()
 	var gdiv = $("#google_login_div")
 	url = "https://accounts.google.com/o/oauth2/auth?"+
 			"scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&"+
@@ -17,36 +40,32 @@ function google_login(){
 			"redirect_uri=http://ultimatescouttracker.com/oauth2callback&"+
 			"response_type=code&"+
 			"client_id={{google_client_id}}"
-	gwin = window.open(url, 'google_oauth', 'width=700, height=400, location=0')
+	window.location = url
+	//gwin = window.open(url, 'google_oauth', 'width=700, height=400, location=0')
 }
-function oauth_success(code){
-	gwin.clos()
-	alert(code)
-}
+
 </script> 
 {%endblock%}
     
 {%block content%}   
 
-
-<table style="width:100%">
-<tr>
-    <td style="border-right:1px solid black;">
-        
-
-        Troop: <input type="text" id="login_troop" size="6"/><br/>
-        Login: <input type="text" id="login_username"/><br/>
-        Password: <input type="password" id="login_password"/><br/>
-        <div class="button " onclick="login()">login</div>
-    </td>
-    <td>
-        or 
-        <div class="button rt" onclick="google_login()">Google Login</div>
-        <div id="google_login_div">
-        </div>
-    </td>
-</tr>
-</table>
-
+<div id="login" class="float_panel">
+    <div id="oquth_login">
+        <h2>Login with an existing social media account</h2><hr/>
+        <p class="red">*Use the same login method every time you visit the site to prevent creating multiple accounts.</p>
+        <a href="javascript:google_login()"><img src="{{MEDIA_URL}}/google.png"/></a>
+    </div>
+    <div id="local_login">      
+        <h2>Don't use or like social websites? Login locally</h2><hr/>
+            <form>
+               <label>Troop:</label><input type="text" id="login_troop" size="6"/>
+               <label>Login:</label><input type="text" id="login_username"/>
+               <label>Password:</label><input type="password" id="login_password"/>
+               <div class="button " onclick="login()">login</div>
+               <a href="/register">register for a new account</a>
+            </form>
+           
+    </div>  
+</div>
 
 {%endblock%}

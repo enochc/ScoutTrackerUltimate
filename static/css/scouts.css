@@ -40,7 +40,7 @@ h1{
 h2{
     margin:0;
     padding:3px 0px;
-    color:#efeacc;
+    color:#005e9c;
     font-size:1.2em;
 }
 ul.errorlist{
@@ -52,6 +52,9 @@ ul.errorlist li{
     margin:0;
     padding:0;
     font-size:smaller;
+}
+a{
+	color:#32523b;
 }
 #outer{
 	width:100%;
@@ -200,6 +203,12 @@ span.info{
 }
 span.info:hover{
 	text-decoration:underline;
+}
+.float_panel{     
+    box-shadow: 5px 5px 3px #32523b;
+    border-radius:10px;
+    background-color:#efeacc;       
+    padding:10px;
 }
 .popup{
 	background-color:#005e9c;

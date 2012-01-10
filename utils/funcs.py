@@ -1,5 +1,10 @@
 from sorl.thumbnail import get_thumbnail, delete
 from django.conf import settings
+from utils.google_funcs import get_google_profile, validate_token
+
+from django.contrib.auth.models import User
+from userprofile.models import Userprofile
+
 
 def get_sized_image(img, size_tuple=None):
 
@@ -12,3 +17,46 @@ def get_sized_image(img, size_tuple=None):
 def baseProcessor(httprequest):
     return {'google_client_id':settings.GOOGLE_CLIENT_ID,
             }
+
+
+class CaseInsensitiveBackend(object):
+    """
+    Authenticates against django.contrib.auth.models.User.
+    """
+    supports_object_permissions = False
+    supports_anonymous_user = True
+    supports_inactive_user = True
+
+    def authenticate(self, username=None, password=None):
+        try:
+            user = User.objects.get(username__iexact=username, is_active=True)
+            if user.check_password(password):
+                return user
+        except User.DoesNotExist:
+            return None   
+    
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None 
+   
+class GoogleOauthModelBackend(object):
+    supports_object_permissions = False
+    supports_anonymous_user = False
+    def authenticate(self, token=None, google_id=None):
+        print 'google_auth: %s, %s'% (token, google_id)
+        try:
+            if google_id is not None and validate_token(token, google_id):
+                return User.objects.get(profile__google_id=google_id)
+            profile = get_google_profile(token)
+            google_id = profile['id']
+            return User.objects.get(profile__google_id=google_id)
+        except User.DoesNotExist:
+            return None
+ 
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None

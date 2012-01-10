@@ -3,7 +3,7 @@
         "pk": 1, 
         "model": "position.position", 
         "fields": {
-            "youth": true, 
+            "youth": false, 
             "name": "Committee Member", 
             "description": "Does everything"
         }
@@ -39,7 +39,7 @@
         "pk": 5, 
         "model": "position.position", 
         "fields": {
-            "youth": true, 
+            "youth": false, 
             "name": "Scoutmaster", 
             "description": "watches over the troop"
         }
@@ -48,9 +48,18 @@
         "pk": 6, 
         "model": "position.position", 
         "fields": {
-            "youth": true, 
+            "youth": false, 
             "name": "Assistant Scoutmaster", 
             "description": "Assists the Scoutmaster "
+        }
+    }
+    {
+        "pk": 7, 
+        "model": "position.position", 
+        "fields": {
+            "youth": false, 
+            "name": "Guardian", 
+            "description": "A parent or guardian of a scout who can view that scouts progress and troop information"
         }
     }
 ]

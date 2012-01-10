@@ -1,26 +1,142 @@
-{%extends 'base_template.html'%}
+{%extends 'page_template.html'%}
 
+{%block head%}
+<LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
+<style>
+form label{
+    width:150px;
+}
+#added_message{
+    width:100%;
+    text-align:center;
+    font-weight:bold';
+    font-size:larger;
+    padding:5px 0;
+}
+span.req{
+    color:#b31f36;
+    font-size:1.3em;
+    line-height:1em;
+    margin-right:4px;
+}
+#reg_panel{
+    width:400px;
+    margin:30px auto;
+    
+}
+</style>
 
-{%block body%}
-    {%if code == None%}
-        window.opener.got_profile()
-    
-    
-    {%else%}
-        <form name="get_token" action="https://accounts.google.com/o/oauth2/token" method="POST">
-            <input type="hidden" name="scope" 
-                value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"/>
-            <input type="hidden" name="code" value="{{code}}"/>
-            <input type="hidden" name="redirect_uri" value="http://ultimatescouttracker.com/oauth2callback"/>
-            <input type="hidden" name="client_secret" value="{{secret}}"/>
-            <input type="hidden" name="client_id" value="{{google_client_id}}"/>
-            <input type="hidden" name="grant_type" value="authorization_code"/>
-        </form>
-        <script>
-        document.get_token.submit()
-        </script>
+<script>
+$(function(){
+    {%if profile%}
+    $("input").attr('readonly', 'true');
     {%endif%}
+    var req_fields = ['first_name', 'last_name', 'login_name', 'password', 'confirm_password']
+    for(field in req_fields){
+        f = $("label[for='id_"+req_fields[field]+"']").prepend("<span class='req'>*</span>")
+    }    
+    
+    $("#id_bd_string").datepicker({
+        changeYear:true,
+        changeMonth:true,
+        yearRange:'-100:+0',
+        dateFormat:'M dd, yy',
+        beforeShow: function(){ $('#ui-datepicker-div').css('z-index', 9999); }
+    })
+    change_login = true
+    $("input#id_first_name").keyup(function(){
+        if(change_login){
+            $("input#id_login_name").val($(this).val())
+            $("input#id_login_name").blur(function(){change_login=false})
+        }
+    })
+        
+    
+})
 
-{%endblock body%}
+function submitForm(){
+    $.blockUI()
+    passwd = $("input#id_password").val()
+    cpass = $("input#confirm_password").val()
+    if(passwd && passwd.length < 5){
+        alert('password must be at least 5 characters long')
+        $.unblockUI()
+        return false
+    }
+    if(passwd && passwd != cpass){
+    	alert("password and confirm password do not patch")
+    	$.unblockUI()
+    	return false
+    }
+    document.forms.reg_panel.submit()
+}
 
+
+</script>
+{%endblock%}
+
+{%block content%} 
+
+
+
+<form id="reg_panel" method="post" action="/register/" class='float_panel'>
+{% csrf_token %}
+{%if profile %}
+    <h2>Confirm Create new account for</h2>
+{%else%}
+    <h2>Create new Profile</h2>    
+{%endif%}
+
+    {%if profile%}
+    <input type="hidden" id="google_id" name="google_id" value='{{form.google_id.value}}'/>
+    {%endif%}
+    <input type="hidden" id="position" name="position" value='{{form.position.value}}'/>
+    
+    <label for='id_first_name'>First name:</label>{{form.first_name}}<br/>
+    {{form.first_name.errors}}
+    <label for='id_last_name'>Last name:</label>{{form.last_name}}<br/>
+    {{form.last_name.errors}}
+    <!--
+    <label for='id_nickname'>Nickname:</label>{{form.nickname}}<br/>
+    {{form.nickname.errors}}
+    -->
+    <label for='id_nickname'>Email:</label>{{form.email}}<br/>
+    {{form.email.errors}}
+    
+    <br/>
+    {% if profile %}
+    <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
+    {% else %}   
+    <label for='id_login_name'>Login:</label>{{form.login_name}}<br/>
+    {{form.login_name.errors}}
+    <label for='id_password'>Password:</label>{{form.password}}<br/>
+    {{form.password.errors}}
+    <label for='id_confirm_password'>Confirm Password:</label><input id="confirm_password" name="confirm_password" type="password" value=""/><br/>
+    {% endif %}
+    
+    <!-- 
+    <label for='id_bd_string'>Birthday:</label>
+    <input type="text" class="date" name="bd_string" value="{{scout.birthday|date:'M d, Y'}}" id="id_bd_string">   
+    {{form.birthday.errors}}
+    
+    <label for='id_phone_number'>Phone Number:</label>{{form.phone_number}}<br/>
+    {{form.phone_number.errors}}
+    
+    <label for='id_state'>State:</label>{{form.state}}<br/>
+    {{form.state.errors}}
+    
+    <label for='id_city'>City:</label>{{form.city}}<br/>
+    {{form.city.errors}}
+    <label for='id_street1'>Street1:</label>{{form.street1}}<br/>
+    {{form.street1.errors}}
+    <label for='id_street2'>Street2:</label>{{form.street2}}<br/>
+    {{form.street2.errors}}
+    -->
+    <div style="float:left;margin-left:40px;" class="button" onclick='submitForm()'>Add</div>
+    <div style="float:rigth;margin-right:40px;" class="button" onclick='javascript:window.location="/"'>Cancel</div>
+
+</form>
+
+
+{%endblock%}
 

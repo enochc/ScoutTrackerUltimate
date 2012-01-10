@@ -9,6 +9,7 @@ from utils.response import HttpJsonResponse, HttpJsonSuccess, HttpJsonFailure
 def login_view(request):
     username = request.POST['login']
     password = request.POST['password']
+    print 'authenticate: %s, %s'%(username, password)
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
@@ -18,7 +19,7 @@ def login_view(request):
         else:
             return HttpJsonFailure(_("The provided accout is not yet active."))
     else:
-        return HttpJsonFailure(_("Invalid email or password"))
+        return HttpJsonFailure(_("Invalid login or password"))
     
 
 def logout_view(request):

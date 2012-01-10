@@ -42,7 +42,6 @@ def userhome(request, user_id=None):
                                           'ranks':ranks}
 
 @render_to_html
-@permission_required('userprofile.add_scout')
 def add_scout(request, scout_id = None):  
     if request.method == 'GET':
         edit = int(request.GET.get('edit','0')) == 1

@@ -23,6 +23,7 @@ def render_to_html(func):
         
         if isinstance(response, HttpResponse):
             return response
+
         
         elif isinstance(response, basestring):
             template_name = response

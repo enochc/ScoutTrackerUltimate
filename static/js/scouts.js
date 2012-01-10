@@ -29,7 +29,9 @@ function doSuccess(data, success_func, fail_func, dontClear){
 		success_func(data)
 	}else{
 		message = ''
-		data.form.find('.error').removeClass('error')
+		if(data.form){
+			data.form.find('.error').removeClass('error')
+		}
 		message = data['message']
 		for(d in data){
 			
@@ -59,6 +61,7 @@ function login(e){
 	username = $("#login_username").val().trim()
 	pass = $("#login_password").val().trim()
 	troop = $("#login_troop").val().trim()
+	if(troop.length <1)troop = "100000"
 	username = username+"_"+troop
 	$.post("/login/",{login: username, password: pass},function(data){
 		doSuccess(data, function(){window.location = '/user'})

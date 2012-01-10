@@ -28,3 +28,13 @@ def get_google_profile(token):
 
     data = json.loads(the_page)
     return data
+
+def validate_token(token, google_id):
+    print 'validate token'
+    url = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s"%token
+    req = urllib2.Request(url)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    print 'token response: %s'%the_page
+    data = json.loads(the_page)
+    return data['user_id'] == google_id

@@ -23,11 +23,11 @@ class Userprofile(models.Model):
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
 	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members', default=1)
-	position = models.ForeignKey('position.Position', default=2)
+	position = models.ForeignKey('position.Position', default=7)
 	birthday = models.DateTimeField(null=True, blank=True)
 	phone_number = models.CharField(max_length=20, null=True, blank=True)
 	
-	state = models.CharField(max_length=2, choices=reverse_states(), default='UT')
+	state = models.CharField(max_length=2, choices=reverse_states(), default='UT', null=True, blank=True)
 	city = models.CharField(max_length=100, null=True, blank=True)
 	street1 = models.CharField(max_length=255, help_text='Street name and house number.', null=True, blank=True)
 	street2 = models.CharField(max_length=100, help_text='Floor or room number.', null=True, blank=True)
@@ -36,6 +36,7 @@ class Userprofile(models.Model):
 	google_oauth_token = models.CharField(max_length=255, null=True, blank=True)
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
+	google_id = models.CharField(max_length=25, null=True, blank=True)
 	
 
 	@property

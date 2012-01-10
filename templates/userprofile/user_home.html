@@ -155,9 +155,9 @@ function afterSet(box, data){
 </div>
 
 <div style="float:left;">
-{%if perms.userprofile.edit_scouts%}
+
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
-{%endif%}
+
     <h1>{{scout.fullname}} </h1>
     
     {%if scout.rank.patch%}<img src='{{scout.rank.patch.url}}'/>{%endif%}
