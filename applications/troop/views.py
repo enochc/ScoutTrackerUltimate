@@ -5,6 +5,7 @@ from utils.decorators import render_to_html, login_required
 from requirement.models import Requirement
 from rank.models import Rank
 from troop.forms import TroopForm
+from position.models import Position
 
 @render_to_html
 @login_required
@@ -17,7 +18,8 @@ def troopHome(request):
 def NewTroop(request):
     if request.method == "GET":
         form = TroopForm()
-        return 'troop/new_troop.html', {'form':form}
+        roles = Position.objects.filter(youth=False)
+        return 'troop/new_troop.html', {'form':form, 'roles':roles}
     else:
         pass
         return HttpResponse('troop form, not get')

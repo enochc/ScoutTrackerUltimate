@@ -23,19 +23,24 @@ body{
 	margin:0;
 	padding:0;
 }
-a{
-	color:#000;
+a, .link{
+	color:#32523b;
 	text-decoration:underline;
+	cursor:pointer;
 }
+
 hr{
 	background-color:#005a9a;
 	border-color:#005a9a;
 }
-h1{
+h1, legend{
 	margin:0;
 	padding:5px 0;
 	color:#b31f36;
 	font-size:1.6em;
+}
+legend{
+	padding:0;
 }
 h2{
     margin:0;
@@ -53,9 +58,7 @@ ul.errorlist li{
     padding:0;
     font-size:smaller;
 }
-a{
-	color:#32523b;
-}
+
 p{
 	margin:5px 10px;	
 }
@@ -102,6 +105,7 @@ p{
 	cursor:pointer;
     color:#b31f36;
 	border:1px outset yellow;
+	font-weight:bold;
 
 }
 .button:hover{
@@ -210,10 +214,12 @@ span.info:hover{
 }
 .float_panel{     
     box-shadow: 5px 5px 3px #32523b;
+    border:none;
     border-radius:10px;
     background-color:#efeacc;       
     padding:10px;
 }
+
 .popup{
 	background-color:#005e9c;
     padding:10px;

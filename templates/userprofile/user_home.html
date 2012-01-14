@@ -80,6 +80,11 @@ div#user_help{
 </style>
 <script>
 $(function(){
+	$("#troop_button").click(function(){
+		$("#troop_div").load('/troop/new/', function(){
+			$("troop_div").slideDown()
+		})
+	})
 	$(".rank_div h2").click(function(){
 		var div = $(this).parents(".rank_div")
 		var table = div.find(".slide_container")
@@ -215,13 +220,23 @@ function afterSet(box, data){
 	<!-- Is a parent or guardian or scout leader-->
 	<div id="user_help">
 		{% if user.troop = None%}
-			<p>To use scout tracker you must fist join a troop.</p><p>  You can search for a nearby troop here
-			 <a href="#">Find Troop</a> and request to be invited to that troop. If your troop isn't in 
-			 Scout tracker then you can request to have your troop added.  Click <a style="cursor:pointer;" id="new_troop_button">here</a> 
-			 to request a new troop.</p>
-			 <div id="troop_form">
+			
+			<fieldset class="float_panel"><legend>Join a Troop</legend>
+			For security purposes you can only join a troop via an invitation. Eventually I'll have a search option here where you can 
+			search for local troops and request to be invited. Until that happens you must contact one of your local Scout Representatives
+			and ask them to add you to there troop.
+			</fieldset>
+			<br/>
+			<fieldset class="float_panel"><legend>Create a Troop</legend>
+			If you are a scout leader or a committee member and would like to start using Ultimate scout Tracker then click 
+			<span class="link" id="troop_button">here</span> to request a new troop.
+			
+			<div id="troop_div">
 			 
 			 </div>
+			</fieldset>
+			
+			 
 		{%else%}
 	
 			<p>your troop</p>
