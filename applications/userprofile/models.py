@@ -2,12 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from applications.troop.models import Troop
-from utils.values import states
+from utils.values import reverse_states
 from position.models import Position
 from userrequirement.models import UserRequirement
-
-def reverse_states():
-	return [[s[1], s[0]] for s in states]
 
 
 class Userprofile(models.Model):
@@ -27,7 +24,7 @@ class Userprofile(models.Model):
 	birthday = models.DateTimeField(null=True, blank=True)
 	phone_number = models.CharField(max_length=20, null=True, blank=True)
 	
-	state = models.CharField(max_length=2, choices=reverse_states(), default='UT', null=True, blank=True)
+	state = models.CharField(max_length=2, choices=reverse_states, default='UT', null=True, blank=True)
 	city = models.CharField(max_length=100, null=True, blank=True)
 	street1 = models.CharField(max_length=255, help_text='Street name and house number.', null=True, blank=True)
 	street2 = models.CharField(max_length=100, help_text='Floor or room number.', null=True, blank=True)

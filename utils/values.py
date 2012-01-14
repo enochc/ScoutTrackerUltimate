@@ -52,3 +52,5 @@ states = (
           ['Wisconsin','WI'],
           ['Wyoming','WY']
           )
+
+reverse_states = ([s[1], s[0]] for s in states)

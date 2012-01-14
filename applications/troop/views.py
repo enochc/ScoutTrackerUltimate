@@ -4,12 +4,23 @@ from django.http import HttpResponse
 from utils.decorators import render_to_html, login_required
 from requirement.models import Requirement
 from rank.models import Rank
+from troop.forms import TroopForm
 
 @render_to_html
 @login_required
 def troopHome(request):
     return 'troop/troop_home.html'
 
+
+@render_to_html
+@login_required
+def NewTroop(request):
+    if request.method == "GET":
+        form = TroopForm()
+        return 'troop/new_troop.html', {'form':form}
+    else:
+        pass
+        return HttpResponse('troop form, not get')
 
 @render_to_html
 @login_required

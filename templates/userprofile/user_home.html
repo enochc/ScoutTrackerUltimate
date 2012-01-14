@@ -57,7 +57,13 @@ tr.tr_notes.full{
     display:table-row;
 }
 div#info{display:none;}
-
+div#user_help{
+	float:right;
+	width:70%;
+}
+#troop_form{
+	display:block;
+}
 
 
 
@@ -148,7 +154,7 @@ function afterSet(box, data){
 
 
 {%block content%}
-<br/>
+
 <div id="info" class="popup">
     <span id="close_popup" onclick="close_popup()" title="close">X</span>
     <span id="info_content"></span>
@@ -162,9 +168,9 @@ function afterSet(box, data){
     
     {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
     {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
-    
+</div>    
     {%if scout.position.youth%}
-</div>
+
 <div id="requirements"/>
    
         {%for r in ranks%}
@@ -204,6 +210,23 @@ function afterSet(box, data){
 
 <div id="set_req_form" class="popup">
 </div> 
+
+{% else %}
+	<!-- Is a parent or guardian or scout leader-->
+	<div id="user_help">
+		{% if user.troop = None%}
+			<p>To use scout tracker you must fist join a troop.</p><p>  You can search for a nearby troop here
+			 <a href="#">Find Troop</a> and request to be invited to that troop. If your troop isn't in 
+			 Scout tracker then you can request to have your troop added.  Click <a style="cursor:pointer;" id="new_troop_button">here</a> 
+			 to request a new troop.</p>
+			 <div id="troop_form">
+			 
+			 </div>
+		{%else%}
+	
+			<p>your troop</p>
+		{%endif%}
+	</div>
 {%endif%}
 
 {%endblock%}

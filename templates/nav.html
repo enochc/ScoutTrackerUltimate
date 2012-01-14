@@ -1,5 +1,5 @@
 <div id="banner">
-    <span class='rt'>{{user.first_name}} {{user.last_name}} {%if user.profile.troop%}: user.profile.troop {%endif%}</span>
+    <span class='rt'>{{user.first_name}} {{user.last_name}} {%if user.profile.troop%}: {{user.profile.troop.number}} {%endif%}</span>
     <h1>Ultimate Scout Tracker</h1>
 </div>
 <div id='nav' class='grade'>
@@ -7,7 +7,8 @@
     
 {% if user.is_authenticated %}
     <div class="button rt red" onclick="logout()">logout</div>
-    {%if perms.userprofile.add_scout%}
+
+    {%if perms.userprofile.add_scouts%}
     <div class="button rt" id='add_scout_btn'>Add Member</div>
     {%endif%}
 
@@ -19,7 +20,7 @@
     
        
     
-            <li id="troop_stats"><a href="/troop/overview/">Troop</a></li>
+            <li id="troop_stats"><a href="/troop/overview/">Overview</a></li>
     
             <li><a href="/troop/calendar/">Calendar</a></li>
         

@@ -2,6 +2,7 @@ from sorl.thumbnail import get_thumbnail, delete
 from django.conf import settings
 from utils.google_funcs import get_google_profile, validate_token
 
+from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 from userprofile.models import Userprofile
 
@@ -19,7 +20,7 @@ def baseProcessor(httprequest):
             }
 
 
-class CaseInsensitiveBackend(object):
+class CaseInsensitiveBackend(ModelBackend):
     """
     Authenticates against django.contrib.auth.models.User.
     """
@@ -34,14 +35,9 @@ class CaseInsensitiveBackend(object):
                 return user
         except User.DoesNotExist:
             return None   
-    
-    def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            return None 
+
    
-class GoogleOauthModelBackend(object):
+class GoogleOauthModelBackend(ModelBackend):
     supports_object_permissions = False
     supports_anonymous_user = False
     def authenticate(self, token=None, google_id=None):
@@ -52,11 +48,5 @@ class GoogleOauthModelBackend(object):
             profile = get_google_profile(token)
             google_id = profile['id']
             return User.objects.get(profile__google_id=google_id)
-        except User.DoesNotExist:
-            return None
- 
-    def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
