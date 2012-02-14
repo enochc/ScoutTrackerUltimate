@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from applications.troop.models import Troop
 from utils.values import reverse_states
@@ -21,6 +21,7 @@ class Userprofile(models.Model):
 	
 	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members', default=1)
 	position = models.ForeignKey('position.Position', default=7)
+	__original_position = None;
 	birthday = models.DateTimeField(null=True, blank=True)
 	phone_number = models.CharField(max_length=20, null=True, blank=True)
 	
@@ -34,6 +35,10 @@ class Userprofile(models.Model):
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
+	
+	def __init__(self, *args, **kwargs):
+	    super(Userprofile, self).__init__(*args, **kwargs)
+	    self.__original_position = self.position
 	
 	def has_google_login(self):
 		return self.google_id is not None and len(self.google_id)>0 and self.google_id != 'None'
@@ -62,4 +67,19 @@ class Userprofile(models.Model):
 			urs = urs.filter(requirement__rank=rank)
 		return [int(ur.requirement.id) for ur in urs]
 	
+	def save(self, *args, **kwargs):
+		if self.position != self.__original_position:
+			"""update user group and update permissions
+			"""
+			group, created = Group.objects.get_or_create(name=self.position.name)
+			self.user.groups.clear()
+			group.user_set.add(self.user)
+			self.__original_position = self.position
+			
+		super(Userprofile, self).save(args, kwargs)
+    	
+    	
+    	
+    	
+    	
 	

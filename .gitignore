@@ -2,3 +2,4 @@
 .project
 static/imgaes/cache
 static/images/cache/*
+local_settings.py

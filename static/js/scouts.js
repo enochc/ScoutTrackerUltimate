@@ -11,6 +11,15 @@ $(document).ajaxSend(function(event, xhr, settings) {
 	}
 });
 
+function request_troop(){
+	var form = $("#troop_form");
+	var values = $("#troop_form").getForm();
+	$.post('/troop/new/',values, function(data){
+		data.form = form;
+		doSuccess(data, function(){window.location = window.location;});
+	})
+}
+
 $.blockUI.defaults = $.extend($.blockUI.defaults,{
 	message:'',
 	css: $.extend($.blockUI.defaults.css,{'backgroundColor':'#EFEACC'}),

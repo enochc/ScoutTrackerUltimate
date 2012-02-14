@@ -434,6 +434,7 @@ function getJsonValues(object){
 	});
 	return param;		
 }
+
 if($.fn){
 	$.fn.onEnter = function(func){
 		this.each(function(){
@@ -445,6 +446,9 @@ if($.fn){
 			})	
 		});
 		return this;
+	}
+	$.fn.getForm = function(){
+		return getJsonValues(this);
 	}
 }
 function formatCurrency(num,nosign) {

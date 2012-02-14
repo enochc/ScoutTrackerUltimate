@@ -3,19 +3,20 @@
  	<p class="red">You must be a committee member or scout leader to request a troop.
  		Once the troop has been approved you will be solely responsible for inviting
  		other users to your troop.  All requests will be approved through you.  You
- 		can delicate this responsibility to others after you've invited them to your troop
- 		and allowed them the proper permissions.</p>
+ 		can delicate this responsibility to other committee members or scout leaders 
+ 		once you've invited them to your troop
+ 		</p>
  		
  	<form id="troop_form">
  		<label>Council Name:</label>{{form.council_name}}<br/>
  		<label>Troop Number:</label>{{form.number}}<br/>
  		<label>My Role:</label><select name="user_role">
  		{%for role in roles%}
- 			<option valoue="{{role.id}}">{{role}}</option>
+ 			<option value="{{role.id}}">{{role}}</option>
  		{%endfor%}
  		</select><br/>
  		<label>Notes:</label>{{form.description}}
- 		<div class="button" onclick="request_troop()" style="width:150px;">Send Request</div>
+ 		<div class="button" onclick="request_troop()" style="width:150px;">Create</div>
  	</form>	
  	{{form.from_table}}
  

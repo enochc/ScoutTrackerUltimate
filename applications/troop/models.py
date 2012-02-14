@@ -3,10 +3,10 @@ from utils.values import reverse_states
 
 class Troop(models.Model):
     number = models.IntegerField()
-    description = models.TextField()
+    description = models.TextField(blank=True)
     council = models.ForeignKey('council.Council', null=True, blank=True)
-    state = models.CharField(max_length="2", choices=reverse_states)
-    city = models.CharField(max_length="255")
+    state = models.CharField(max_length="2", choices=reverse_states, blank=True)
+    city = models.CharField(max_length="255", blank=True)
     calendar = models.CharField(max_length=255, blank=True, null=True)
     
     def scouts(self):

@@ -176,50 +176,50 @@ function afterSet(box, data){
 </div>    
     {%if scout.position.youth%}
 
-<div id="requirements"/>
-   
-        {%for r in ranks%}
-             <div class="rank_div">
-                 <h2><span class='toggle'>+</span>{{r.name}}</h2>
-                 <div class="slide_container" id="sc{{r.id}}">
-                     <table class="rank_table" id="rank_{{r.id}}"> 
-                        {%for req in r.requirements.all%}
-                            {%user_requirement%}
-                            
-                            <tr>
-                                <td valign="middle">
-                                    <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
-                                        {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
-                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
-                                    </div>
-                                </td>
-                                <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
-                                    <span class='date'>{{user_requirement.completed_date|default:''}}</span>
-                                </td>
-                                
-                            </tr>
-                            <tr class='r_{{req.id}} tr_notes {%if user_requirement.notes%}full{%endif%}'>
-                                <td>&nbsp;</td>
-                                <td ><span class='notes'>{{user_requirement.notes|default:''|safe}}</span></td>
-                            </tr>
-                           
-                        {%endfor%}
-                    </table>
-                    <img class="rank_img" src='{{r.patch.url}}'/>
-                </div>
-            </div>
-        {%endfor%}
+	<div id="requirements"/>
+	   
+	        {%for r in ranks%}
+	             <div class="rank_div">
+	                 <h2><span class='toggle'>+</span>{{r.name}}</h2>
+	                 <div class="slide_container" id="sc{{r.id}}">
+	                     <table class="rank_table" id="rank_{{r.id}}"> 
+	                        {%for req in r.requirements.all%}
+	                            {%user_requirement%}
+	                            
+	                            <tr>
+	                                <td valign="middle">
+	                                    <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
+	                                        {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
+	                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
+	                                    </div>
+	                                </td>
+	                                <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
+	                                    <span class='date'>{{user_requirement.completed_date|default:''}}</span>
+	                                </td>
+	                                
+	                            </tr>
+	                            <tr class='r_{{req.id}} tr_notes {%if user_requirement.notes%}full{%endif%}'>
+	                                <td>&nbsp;</td>
+	                                <td ><span class='notes'>{{user_requirement.notes|default:''|safe}}</span></td>
+	                            </tr>
+	                           
+	                        {%endfor%}
+	                    </table>
+	                    <img class="rank_img" src='{{r.patch.url}}'/>
+	                </div>
+	            </div>
+	        {%endfor%}
+	
+	    
+	</div>
+	
+	<div id="set_req_form" class="popup">
+	</div> 
 
-    
-</div>
-
-<div id="set_req_form" class="popup">
-</div> 
-
-{% else %}
+	{% else %}
 	<!-- Is a parent or guardian or scout leader-->
 	<div id="user_help">
-		{% if user.troop = None%}
+		{% if user.profile.troop = None%}
 			
 			<fieldset class="float_panel"><legend>Join a Troop</legend>
 			For security purposes you can only join a troop via an invitation. Eventually I'll have a search option here where you can 
@@ -229,7 +229,7 @@ function afterSet(box, data){
 			<br/>
 			<fieldset class="float_panel"><legend>Create a Troop</legend>
 			If you are a scout leader or a committee member and would like to start using Ultimate scout Tracker then click 
-			<span class="link" id="troop_button">here</span> to request a new troop.
+			<span class="link" id="troop_button">here</span> to create a new troop.
 			
 			<div id="troop_div">
 			 
@@ -238,7 +238,11 @@ function afterSet(box, data){
 			
 			 
 		{%else%}
-	
+		{{perms.userprofile.add_scouts}}
+		{%for g in user.groups.all%}
+		{{g.name}}
+		{%endfor%}
+					
 			<p>your troop</p>
 		{%endif%}
 	</div>

@@ -41,7 +41,6 @@ class GoogleOauthModelBackend(ModelBackend):
     supports_object_permissions = False
     supports_anonymous_user = False
     def authenticate(self, token=None, google_id=None):
-        print 'google_auth: %s, %s'% (token, google_id)
         try:
             if google_id is not None and validate_token(token, google_id):
                 return User.objects.get(profile__google_id=google_id)
