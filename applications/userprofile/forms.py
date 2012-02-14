@@ -30,6 +30,14 @@ class NewScoutForm(forms.ModelForm):
             return bd_string   
         else:
             return None 
+        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = User.objects.filter(email__iexact=email)
+        if user.count() > 0:
+            raise forms.ValidationError('A user with that email already exists.')
+        else:
+            return email
     
     def clean_login_name(self):
         username = self.cleaned_data['login_name']

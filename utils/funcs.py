@@ -38,8 +38,10 @@ class CaseInsensitiveBackend(ModelBackend):
 
    
 class GoogleOauthModelBackend(ModelBackend):
-    supports_object_permissions = False
-    supports_anonymous_user = False
+    #supports_object_permissions = False
+    #supports_anonymous_user = True
+    supports_inactive_user = True
+    
     def authenticate(self, token=None, google_id=None):
         try:
             if google_id is not None and validate_token(token, google_id):
@@ -49,3 +51,6 @@ class GoogleOauthModelBackend(ModelBackend):
             return User.objects.get(profile__google_id=google_id)
         except User.DoesNotExist:
             return None
+
+    def has_perm(self, user_obj, perm):
+        return perm in self.get_all_permissions(user_obj)
