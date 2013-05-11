@@ -151,7 +151,8 @@ function openRecForm(box, opt){
 	}
 	//$.blockUI()
     var scout = box.attr('class').split('s_')[1].split(' ')[0]
-    $('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){        
+    
+    var form = $('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){        
         $('#set_req_form').css({
             'top':box.offset().top,
             'left':box.offset().left
@@ -165,6 +166,7 @@ function openRecForm(box, opt){
             changeMonth:true,
             yearRange:'-100:+0',
             dateFormat:'M dd, yy'
-        }).end().show()
+        })
+        form.show()
     })
 }

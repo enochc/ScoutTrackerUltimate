@@ -1,12 +1,15 @@
+No local settings file
+No local settings file
 [
     {
         "pk": 1, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Age requirement", 
-            "order": 1, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Meet age requirements: Be a boy who is 11 years old, or one who has completed the fifth grade or earned the Arrow of Light Award and is at least 10 years old, but is not yet 18 years old."
         }
     }, 
@@ -14,10 +17,11 @@
         "pk": 2, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Boy Scout application", 
-            "order": 2, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Complete a Boy Scout application and health history signed by your parent or guardian."
         }
     }, 
@@ -25,10 +29,11 @@
         "pk": 3, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Find a troop", 
-            "order": 3, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "Find a Scout troop near your home. (To find a troop, contact your local Boy Scout Council.  The Council name, address and phone number can be found on BSA's Council Locator Page.)"
         }
     }, 
@@ -36,10 +41,11 @@
         "pk": 4, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Pledge of Allegiance.", 
-            "order": 4, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "Repeat the Pledge of Allegiance."
         }
     }, 
@@ -47,10 +53,11 @@
         "pk": 5, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout sign, salute, and handshake.", 
-            "order": 5, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "Demonstrate the Scout sign, salute, and handshake."
         }
     }, 
@@ -58,10 +65,11 @@
         "pk": 6, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": " Square knot", 
-            "order": 6, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Demonstrate tying the square knot (a joining knot)."
         }
     }, 
@@ -69,10 +77,11 @@
         "pk": 7, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout Oath, Law and Motto", 
-            "order": 7, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 7, 
             "desc": "Understand and agree to live by the Scout Oath or Promise, Law, motto, and slogan, and the Outdoor Code."
         }
     }, 
@@ -80,10 +89,11 @@
         "pk": 8, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Describe the Scout badge.", 
-            "order": 8, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 8, 
             "desc": "Describe the Scout badge."
         }
     }, 
@@ -91,10 +101,11 @@
         "pk": 9, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Pamphlet Exercises", 
-            "order": 9, 
             "rank": 1, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 9, 
             "desc": "Complete the Pamphlet Exercises. With your parent or guardian, complete the exercises in the pamphlet \"How to Protect Your Children from Child Abuse: A Parent's Guide\"."
         }
     }, 
@@ -102,10 +113,11 @@
         "pk": 10, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 10, 
             "rank": 1, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 10, 
             "desc": "Participate in a Scoutmaster conference. Turn in your Boy Scout application and health history form signed by your parent or guardian, then participate in a Scoutmaster conference."
         }
     }, 
@@ -113,10 +125,11 @@
         "pk": 11, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Present yourself for camp", 
-            "order": 1, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Present yourself to your leader, properly dressed, before going on an overnight camping trip. Show the camping gear you will use. Show the right way to pack and carry it."
         }
     }, 
@@ -124,10 +137,11 @@
         "pk": 12, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "One campout", 
-            "order": 2, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Spend at least one night on a patrol or troop campout. Sleep in a tent you have helped pitch."
         }
     }, 
@@ -135,10 +149,11 @@
         "pk": 13, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Cook patrol meal", 
-            "order": 3, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "On the campout, assist in preparing and cooking one of your patrol's meals.  Tell why it is important for each patrol member to share in meal preparation and cleanup, and explain the importance of eating together."
         }
     }, 
@@ -146,10 +161,11 @@
         "pk": 14, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Whipe and fuse, EDGE", 
-            "order": 4, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "<ol>\r\n<li>Demonstrate how to whip and fuse the ends of a rope.</li>\r\n<li>Demonstrate that you know how to tie the following knots and tell what their uses are: two half hitches and the taut-line hitch.</li>\r\n<li>Using the EDGE method teach another person how to tie the square knot.</li>\r\n</ol>"
         }
     }, 
@@ -157,10 +173,11 @@
         "pk": 15, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Safe Hiking", 
-            "order": 5, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "Explain the rules of safe hiking, both on the highway and cross-country, during the day and at night. Explain what to do if you are lost."
         }
     }, 
@@ -168,10 +185,11 @@
         "pk": 16, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Display, raise, lower, American flag", 
-            "order": 6, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Demonstrate how to display, raise, lower, and fold the American flag."
         }
     }, 
@@ -179,10 +197,11 @@
         "pk": 17, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout Oath, Law and Motto", 
-            "order": 7, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 7, 
             "desc": "Repeat from memory and explain in your own words the Scout Oath, Law, motto, and slogan."
         }
     }, 
@@ -190,10 +209,11 @@
         "pk": 18, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Patrol name", 
-            "order": 8, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 8, 
             "desc": "Know your patrol name, give the patrol yell, and describe your patrol flag."
         }
     }, 
@@ -201,10 +221,11 @@
         "pk": 19, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Buddy System", 
-            "order": 9, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 9, 
             "desc": "Explain the importance of the buddy system as it relates to your personal safety on outings and in your neighborhood. Describe what a bully is and how you should respond to one."
         }
     }, 
@@ -212,10 +233,11 @@
         "pk": 20, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Fitness Test", 
-            "order": 10, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 10, 
             "desc": "<ol><li>Record your best in the following tests:</li>\r\n<ul><li>Push-ups</li>\r\n<li>Pull-ups</li>\r\n<li>Sit-ups</li>\r\n<li>Standing long jump</li>\r\n<li>1/4 mile walk/run</li></ul>\r\n<li>Show improvement in the activities listed in requirement 10a after practicing for 30 days.</li></ol>"
         }
     }, 
@@ -223,10 +245,11 @@
         "pk": 21, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Local poisonous plants", 
-            "order": 11, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 11, 
             "desc": "Identify local poisonous plants; tell how to treat for exposure to them."
         }
     }, 
@@ -234,10 +257,11 @@
         "pk": 22, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "First aid", 
-            "order": 12, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 12, 
             "desc": "Demonstrate how to care for someone who is choking.\r\nShow first aid for the following:\r\nSimple cuts and scrapes\r\nBlisters on the hand and foot\r\nMinor (thermal/heat) burns or scalds (superficial, or first degree)\r\nBites and stings of insects and ticks\r\nVenomous snakebite\r\nNosebleed\r\nFrostbite and sunburn"
         }
     }, 
@@ -245,10 +269,11 @@
         "pk": 24, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout spirit", 
-            "order": 13, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 13, 
             "desc": "Demonstrate scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life.\r\nDiscuss four specific examples of how you have lived the points of the Scout Law in your daily life."
         }
     }, 
@@ -256,10 +281,11 @@
         "pk": 25, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 14, 
             "rank": 2, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 14, 
             "desc": "Participate in a Scoutmaster conference."
         }
     }, 
@@ -267,10 +293,11 @@
         "pk": 26, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 15, 
             "rank": 2, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 15, 
             "desc": "Complete your board of review"
         }
     }, 
@@ -278,10 +305,11 @@
         "pk": 27, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Map and Compass", 
-            "order": 1, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "<ol><li>Demonstrate how a compass works and how to orient a map. Explain what map symbols mean.</li>\r\n<li>Using a compass and a map together, take a 5-mile hike (or 10 miles by bike) approved by your adult leader and your parent or guardian.*</li></ol>"
         }
     }, 
@@ -289,10 +317,11 @@
         "pk": 28, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Leave No Trace", 
-            "order": 2, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Discuss the principles of \"Leave No Trace\""
         }
     }, 
@@ -300,10 +329,11 @@
         "pk": 29, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Five separate troop/patrol activities", 
-            "order": 3, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "<ol><li>Since joining, have participated in five separate troop/patrol activities (other than troop/patrol meetings), two of which included camping overnight.</li>\r\n<li>On one of these campouts, select your patrol site and sleep in a tent that you pitched. Explain what factors you should consider when choosing a patrol site and where to pitch a tent.</li>\r\n<li>Demonstrate proper care, sharpening, and use of the knife, saw, and ax, and describe when they should be used.</li>\r\n<li>Use the tools listed in requirement 3c to prepare tinder, kindling, and fuel for a cooking fire.</li>\r\n<li>Discuss when it is appropriate to use a cooking fire and a lightweight stove. Discuss the safety procedures for using both..</li>\r\n<li>In an approved place and at an approved time, demonstrate how to build a fire and set up a lightweight stove. Note: Lighting the fire is not required.</li>\r\n<li>On one campout, plan and cook one hot breakfast or lunch, selecting foods from the food pyramid. Explain the importance of good nutrition. Tell how to transport, store, and prepare the foods you selected.</li></ol>"
         }
     }, 
@@ -311,10 +341,11 @@
         "pk": 30, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Flag ceremony", 
-            "order": 4, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "Participate in a flag ceremony for your school, religious institution, chartered organization, community, or troop activity. Explain to your leader what respect is due the flag of the United States."
         }
     }, 
@@ -322,10 +353,11 @@
         "pk": 31, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "1hr service project", 
-            "order": 5, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "Participate in an approved (minimum of one hour) service project."
         }
     }, 
@@ -333,10 +365,11 @@
         "pk": 32, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "10 Animals", 
-            "order": 6, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Identify or show evidence of at least ten kinds of wild animals (birds, mammals, reptiles, fish, mollusks) found in your community."
         }
     }, 
@@ -344,10 +377,11 @@
         "pk": 33, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "First aid, hurry cases", 
-            "order": 7, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 7, 
             "desc": "<ol><li>Show what to do for \"hurry\" cases of stopped breathing, serious bleeding, and ingested poisoning.</li>\r\n<li>Prepare a personal first aid kit to take with you on a hike.</li>\r\n<li>Demonstrate first aid for the following:</li>\r\n<ul><li>Object in the eye</li>\r\n<li>Bite of a suspected rabid animal</li>\r\n<li>Puncture wounds from a splinter, nail, and fishhook</li>\r\n<li>Serious burns (partial thickness, or second degree)</li>\r\n<li>Heat exhaustion</li>\r\n<li>Shock</li>\r\n<li>Heatstroke, dehydration, hypothermia, and hyperventilation</li></ul></ol>"
         }
     }, 
@@ -355,10 +389,11 @@
         "pk": 34, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Safe swim", 
-            "order": 8, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 8, 
             "desc": "<ol><li>Tell what precautions must be taken for a safe swim.</li>\r\n<li>Demonstrate your ability to jump feetfirst into water over your head in depth, level off and swim 25 feet on the surface, stop, turn sharply, resume swimming, then return to your starting place.</li>\r\n<li>Demonstrate water rescue methods by reaching with your arm or leg, by reaching with a suitable object, and by throwing lines and objects. Explain why swimming rescues should not be attempted when a reaching or throwing rescue is possible, and explain why and how a rescue swimmer should avoid contact with the victim.</li></ol>"
         }
     }, 
@@ -366,10 +401,11 @@
         "pk": 35, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Dangers of drugs", 
-            "order": 9, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 9, 
             "desc": "<ol><li>Participate in a school, community, or troop program on the dangers of using drugs, alcohol, and tobacco, and other practices that could be harmful to your health. Discuss your participation in the program with your family, and explain the dangers of substance addictions.</li>\r\n<li>Explain the three R's of personal safety and protection.</li>\r\n</ol>"
         }
     }, 
@@ -377,10 +413,11 @@
         "pk": 36, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Save money", 
-            "order": 10, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 10, 
             "desc": "Earn an amount of money agreed upon by you and your parent, then save at least 50 percent of that money."
         }
     }, 
@@ -388,10 +425,11 @@
         "pk": 37, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout spirit", 
-            "order": 11, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 11, 
             "desc": "Demonstrate scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life. Discuss four specific examples (different from those used for Tenderfoot requirement 13) of how you have lived the points of the Scout Law in your daily life."
         }
     }, 
@@ -399,10 +437,11 @@
         "pk": 38, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 12, 
             "rank": 3, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 12, 
             "desc": "Participate in a Scoutmaster conference."
         }
     }, 
@@ -410,10 +449,11 @@
         "pk": 39, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 13, 
             "rank": 3, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 13, 
             "desc": "Complete your board of review."
         }
     }, 
@@ -421,10 +461,11 @@
         "pk": 40, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Direction sense", 
-            "order": 1, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Demonstrate how to find directions during the day and at night without using a compass."
         }
     }, 
@@ -432,10 +473,11 @@
         "pk": 41, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Orienteering course", 
-            "order": 2, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Using a map and compass, complete an orienteering course that covers at least one mile and requires measuring the height and/or width of designated items (tree, tower, canyon, ditch, etc.)"
         }
     }, 
@@ -443,10 +485,11 @@
         "pk": 42, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "10 troop activities", 
-            "order": 3, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "Since joining, have participated in ten separate troop/patrol activities (other than troop/patrol meetings), three of which included camping overnight. Demonstrate the principles of Leave No Trace on these outings."
         }
     }, 
@@ -454,10 +497,11 @@
         "pk": 43, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Plan patrol Menu", 
-            "order": 4, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "<ol><li>Help plan a patrol menu for one campout that includes at least one breakfast, one lunch, and one dinner and that requires cooking at least two of the meals. Tell how the menu includes the foods from the food pyramid and meets nutritional needs.</li>\r\n<li>Using the menu planned in requirement 4a, make a list showing the cost and food amounts needed to feed three or more boys and secure the ingredients.</li>\r\n<li>Tell which pans, utensils, and other gear will be needed to cook and serve these meals.</li>\r\n<li>Explain the procedures to follow in the safe handling and storage of fresh meats, dairy products, eggs, vegetables, and other perishable food products. Tell how to properly dispose of camp garbage, cans, plastic containers, and other rubbish.</li>\r\n<li>On one campout, serve as your patrol's cook. Supervise your assistant(s) in using a stove or building a cooking fire. Prepare the breakfast, lunch, and dinner planned in requirement 4a. Lead your patrol in saying grace at the meals and supervise cleanup.</li></ol>"
         }
     }, 
@@ -465,10 +509,11 @@
         "pk": 44, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Constitutional rights", 
-            "order": 5, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "Visit and discuss with a selected individual approved by your leader (elected official, judge, attorney, civil servant, principal, teacher) your constitutional rights and obligations as a U.S. citizen."
         }
     }, 
@@ -476,10 +521,11 @@
         "pk": 45, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "10 plants", 
-            "order": 6, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Identify or show evidence of at least ten kinds of native plants found in your community."
         }
     }, 
@@ -487,10 +533,11 @@
         "pk": 46, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Lashings", 
-            "order": 7, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 7, 
             "desc": "<ol><li>Discuss when you should and should not use lashings. Then demonstrate tying the timber hitch and clove hitch and their use in square, shear, and diagonal lashings by joining two or more poles or staves together.</li>\r\n<li>Use lashing to make a useful camp gadget.</li></ol>"
         }
     }, 
@@ -498,10 +545,11 @@
         "pk": 47, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Bowline, Bandages, First Aid", 
-            "order": 8, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 8, 
             "desc": "<ol><li>Demonstrate tying the bowline knot and describe several ways it can be used.</li>\r\n<li>Demonstrate bandages for a sprained ankle. and for injuries on the head, the upper arm, and the collarbone.</li>\r\n<li>Show how to transport by yourself, and with one other person, a person:\r\n<ul><li>from a smoke-filled room</li>\r\n<li>with a sprained ankle, for at least 25 yards.</li></ul></li>\r\n<li>Tell the five most common signals of a heart attack. Explain the steps (procedures) in cardiopulmonary resuscitation (CPR).</li></ol>"
         }
     }, 
@@ -509,10 +557,11 @@
         "pk": 48, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Safe trip afloat", 
-            "order": 9, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 9, 
             "desc": "<ol><li>Tell what precautions must be taken for a safe trip afloat.</li>\r\n<li>Successfully complete the BSA swimmer test.</li>\r\n<li>With a helper and a practice victim, show a line rescue both as tender and rescuer. (The practice victim should be approximately 30 feet from shore in deep water.)</li></ol>"
         }
     }, 
@@ -520,10 +569,11 @@
         "pk": 49, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Invite a friend", 
-            "order": 10, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 10, 
             "desc": "Tell someone who is eligible to join Boy Scouts, or an inactive Boy Scout, about your troop's activities. Invite him to a troop outing, activity, service project or meeting. Tell him how to join, or encourage the inactive Boy Scout to become active."
         }
     }, 
@@ -531,10 +581,11 @@
         "pk": 50, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Internet safety", 
-            "order": 11, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 11, 
             "desc": "Describe the three things you should avoid doing related to use of the Internet. Describe a cyberbully and how you should respond to one."
         }
     }, 
@@ -542,10 +593,11 @@
         "pk": 51, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout spirit", 
-            "order": 12, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 12, 
             "desc": "Demonstrate scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life. Discuss four specific examples (different from those used for Tenderfoot requirement 13 and Second Class requirement 11) of how you have lived the points of the Scout Law in your daily life."
         }
     }, 
@@ -553,10 +605,11 @@
         "pk": 52, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 13, 
             "rank": 4, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 13, 
             "desc": "Participate in a Scoutmaster conference."
         }
     }, 
@@ -564,10 +617,11 @@
         "pk": 53, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 14, 
             "rank": 4, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 14, 
             "desc": "Complete your board of review."
         }
     }, 
@@ -575,10 +629,11 @@
         "pk": 54, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "4 months as first class", 
-            "order": 1, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Be active in your troop and patrol for at least 4 months as a First Class Scout."
         }
     }, 
@@ -586,10 +641,11 @@
         "pk": 55, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout Spirit", 
-            "order": 2, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Demonstrate scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life."
         }
     }, 
@@ -597,10 +653,11 @@
         "pk": 56, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 merit badges 4 required", 
-            "order": 3, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "Earn 6 merit badges, including 4 from the required list for Eagle."
         }
     }, 
@@ -608,10 +665,11 @@
         "pk": 57, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 hours service", 
-            "order": 4, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "While a First Class Scout, take part in service projects totaling at least 6 hours of work. These projects must be approved by your Scoutmaster."
         }
     }, 
@@ -619,10 +677,11 @@
         "pk": 58, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "4 months leadership position", 
-            "order": 5, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "While a First Class Scout, serve actively 4 months in one or more of the following positions of responsibility (or carry out a Scoutmaster-assigned leadership project to help the troop)"
         }
     }, 
@@ -630,10 +689,11 @@
         "pk": 59, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 6, 
             "rank": 5, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Take part in a Scoutmaster conference."
         }
     }, 
@@ -641,10 +701,11 @@
         "pk": 60, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 7, 
             "rank": 5, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 7, 
             "desc": "Complete your board of review."
         }
     }, 
@@ -652,10 +713,11 @@
         "pk": 61, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 months as Star", 
-            "order": 1, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Be active in your troop and patrol for at least 6 months as a Star Scout."
         }
     }, 
@@ -663,10 +725,11 @@
         "pk": 62, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout spirit", 
-            "order": 2, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Demonstrate Scout spirit by living the Scout Oath (Promise) and Scout Law in your everyday life."
         }
     }, 
@@ -674,10 +737,11 @@
         "pk": 63, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "5 merit badges 3 required", 
-            "order": 3, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "Earn 5 more merit badges (so that you have 11 in all), including any 3 more from the required list for Eagle. "
         }
     }, 
@@ -685,10 +749,11 @@
         "pk": 64, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 hours service", 
-            "order": 4, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "While a Star Scout, take part in service projects totaling at least 6 hours of work. These projects must be approved by your Scoutmaster."
         }
     }, 
@@ -696,10 +761,11 @@
         "pk": 65, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 months leadership", 
-            "order": 5, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "While a Star Scout, serve actively 6 months in one or more positions of responsibility (or carry out a Scoutmaster-assigned leadership project to help the troop)."
         }
     }, 
@@ -707,10 +773,11 @@
         "pk": 66, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "User EDGE method", 
-            "order": 6, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "While a Star Scout, use the EDGE method to teach a younger Scout the skills from ONE of the following seven choices, so that he is prepared to pass those requirements to his unit leader's satisfaction.\r\n<ol><li>Second Class - 7a and 7c (first aid)</li>\r\n<li>Second Class - 1a (outdoor skills)</li>\r\n<li>Second Class - 3c, 3d, 3e, and 3f (cooking/camping)</li>\r\n<li>First Class - 8a, 8b, 8c, and 8d (first aid)</li>\r\n<li>First Class - 1, 7a, and 7b (outdoor skills)</li>\r\n<li>First Class - 4a, 4b, and 4d (cooking/camping)</li>\r\n<li>Three requirements from one of the Eagle-required merit badges, as approved by your unit leader.</li></ol>"
         }
     }, 
@@ -718,10 +785,11 @@
         "pk": 67, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 7, 
             "rank": 6, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 7, 
             "desc": "Take part in a Scoutmaster conference."
         }
     }, 
@@ -729,10 +797,11 @@
         "pk": 68, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 8, 
             "rank": 6, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 8, 
             "desc": "Complete your board of review."
         }
     }, 
@@ -740,10 +809,11 @@
         "pk": 69, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 months Life scout", 
-            "order": 1, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 1, 
             "desc": "Be active in your troop, team, crew, or ship for a period of at least 6 months after you have achieved the rank of Life Scout."
         }
     }, 
@@ -751,10 +821,11 @@
         "pk": 70, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scout spirit, list recommendations", 
-            "order": 2, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 2, 
             "desc": "Demonstrate that you live by the principles of the Scout Oath and Law in your daily life. List the names of individuals who know you personally and would be willing to provide a recommendation on your behalf, including parents/guardians, religious, educational, and employer references."
         }
     }, 
@@ -762,10 +833,11 @@
         "pk": 71, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "21 + required merit badges", 
-            "order": 3, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 3, 
             "desc": "Earn a total of 21 merit badges (10 more than you already have), including  all the required merit badges."
         }
     }, 
@@ -773,10 +845,11 @@
         "pk": 72, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "6 months responsibility", 
-            "order": 4, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 4, 
             "desc": "While a Life Scout, serve actively for a period of 6 months in a position of responsibility."
         }
     }, 
@@ -784,10 +857,11 @@
         "pk": 73, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Eagle Project", 
-            "order": 5, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 5, 
             "desc": "While a Life Scout, plan, develop, and give leadership to others in a service project helpful to any religious institution, any school, or your community. (The project should benefit an organization other than Boy Scouting.) The project plan must be approved by the organization benefiting from the effort, your Scoutmaster and troop committee and the council or district before you start. You must use the Eagle Scout Leadership Service Project Workbook, No. 521-927, in meeting this requirement."
         }
     }, 
@@ -795,10 +869,11 @@
         "pk": 74, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Scoutmaster conference", 
-            "order": 6, 
             "rank": 7, 
+            "is_last": null, 
+            "type": 0, 
+            "order": 6, 
             "desc": "Take part in a Scoutmaster conference."
         }
     }, 
@@ -806,10 +881,11 @@
         "pk": 75, 
         "model": "requirement.requirement", 
         "fields": {
-            "type": 0, 
             "short_desc": "Board of review", 
-            "order": 7, 
             "rank": 7, 
+            "is_last": true, 
+            "type": 0, 
+            "order": 7, 
             "desc": "Successfully complete an Eagle Scout board of review."
         }
     }

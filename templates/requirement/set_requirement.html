@@ -1,25 +1,29 @@
 
 <h2>{{req.short_desc}}</h2>
-For: {{scout.fullname}}<br/>
+<label>For:</label> {{scout.fullname}}<br/>
 {%if ur%}
+	
+	<label>On:</label> <input class="date" value="{%if ur.completed_date%}{{ur.completed_date|date:"M d, Y"}}{%else%}{%now "M d Y"%}{%endif%}"/><br/>
+	<label>Signed by:</label> {{ur.signed_by.profile.fullname}}<br/>
+	
+{%else%}
+	<label>On:</label> <input class="date blank" value="{%now "M d, Y"%}"/><br/>
+	<label>Signed by:</label> {{user.profile.fullname}}<br/>
 
-On: <input class="date" value="{%if ur.completed_date%}{{ur.completed_date|date:"M d, Y"}}{%else%}{%now "M d Y"%}{%endif%}"/><br/>
-Signed by: {{ur.signed_by.profile.fullname}}<br/>
+{%endif%}
+
 <label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
 <textarea id="req_notes" placeholder="notes" tabindex="1">{{ur.notes|default:""}}</textarea><br/>
 
-<div style="width:100%;text-align:center;positoin:relative;overflow:auto;">
-    <div class="button send" tabindex="2">SAVE</div>
-    <div class="button cancel" tabindex="3">CLOSE</div>
-</div>
-
-{%else%}
-On: <input class="date blank" value="{%now "M d, Y"%}"/><br/>
-Signed by: {{user.profile.fullname}}<br/>
-<label><input type="checkbox" id="req_completed" checked="checked"/> Completed</label><br/>
-<textarea id="req_notes" placeholder="notes" tabindex="1"></textarea><br/>
-<div style="width:100%;text-align:center;positoin:relative;overflow:auto;">
-    <div class="button send" tabindex="2">SAVE</div>
-    <div class="button cancel" tabindex="3">CLOSE</div>
+{%if req.is_last%}
+<div style="margin-bottom:5px;">
+	*Completing this task indicates that <u>{{scout.fullname}}</u> has <br/>  fulfilled all the requirements to receive
+	the rank of "{{req.rank}}"
 </div>
 {%endif%}
+
+
+<div style="width:100%;text-align:center;positoin:relative;overflow:auto;">
+    <div class="button send" tabindex="2">SAVE</div>
+    <div class="button cancel" tabindex="3">CLOSE</div>
+</div>

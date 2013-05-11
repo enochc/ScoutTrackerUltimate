@@ -170,7 +170,6 @@ function afterSet(box, data){
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
 
     <h1>{{scout.fullname}} </h1>
-    
     {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
     {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
 </div>    
@@ -238,12 +237,8 @@ function afterSet(box, data){
 			
 			 
 		{%else%}
-		{{perms.userprofile.add_scouts}}
-		{%for g in user.groups.all%}
-		{{g.name}}
-		{%endfor%}
-					
-			<p>your troop</p>
+			
+			<p>Your Troop</p>
 		{%endif%}
 	</div>
 {%endif%}

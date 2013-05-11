@@ -24,3 +24,9 @@ class Rank(models.Model):
     def num_requirements(self):
         return self.requirements.filter(type=0).count()
     
+    def next(self):
+        try:
+            return Rank.objects.get(order=self.order+1)
+        except Rank.DoesNotExist:
+            return None
+    

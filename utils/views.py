@@ -41,6 +41,7 @@ def oauth_callback(request):
             user = authenticate(token=request.session['google_access_token'])
             if user is None:
                 profile = get_google_profile(request.session['google_access_token'])
+                print profile
 
                 form = NewScoutForm(initial={'first_name':profile["given_name"],
                                              'last_name':profile["family_name"],

@@ -16,7 +16,9 @@ def get_sized_image(img, size_tuple=None):
         return img
     
 def baseProcessor(httprequest):
-    return {'google_client_id':settings.GOOGLE_CLIENT_ID,
+    return {
+            #'host':'%s:%s'%(httprequest.META.get('REMOTE_ADDR'),httprequest.META.get('SERVER_PORT')),
+            'google_client_id':settings.GOOGLE_CLIENT_ID,
             }
 
 

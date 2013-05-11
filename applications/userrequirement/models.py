@@ -14,16 +14,7 @@ class UserRequirement(models.Model):
     signed_by = models.ForeignKey(User, related_name='signed')
     completed = models.BooleanField(default=False)
     
-    def save(self, *args, **kwargs):
-        super(UserRequirement, self).save(*args, **kwargs)
-        num_reqs = self.requirement.rank.num_requirements
-        completed_reqs = len(self.user.profile.completed_list(self.requirement.rank))      
         
-        if self.completed:
-            if num_reqs == completed_reqs:
-                return True
-            else:
-                return False
-        return False
+        
         
         

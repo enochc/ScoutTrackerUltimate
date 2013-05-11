@@ -165,7 +165,7 @@ INSTALLED_APPS = (
 	'userrank',
 	'council',
 )
-"""
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
@@ -214,7 +214,7 @@ LOGGING = {
         },
     }
 }
-"""
+
 LOGIN_URL = '/'
     
 GOOGLE_CLIENT_ID = "448849120100.apps.googleusercontent.com"

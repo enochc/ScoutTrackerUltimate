@@ -7,6 +7,7 @@ from position.models import Position
 from userrequirement.models import UserRequirement
 
 
+
 class Userprofile(models.Model):
 	class Meta:
 		permissions = (
@@ -67,8 +68,14 @@ class Userprofile(models.Model):
 			urs = urs.filter(requirement__rank=rank)
 		return [int(ur.requirement.id) for ur in urs]
 	
+	def rank(self):
+		from rank.models import Rank
+		ranks = Rank.objects.filter(userranks__user=self.user).order_by('-order')
+		if ranks.count() > 0:
+			return ranks[0]
+	
 	def save(self, *args, **kwargs):
-		if self.position != self.__original_position:
+		if self.position != self.__original_position and self.pk:
 			"""update user group and update permissions
 			"""
 			group, created = Group.objects.get_or_create(name=self.position.name)

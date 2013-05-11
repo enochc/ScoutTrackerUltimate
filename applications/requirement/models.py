@@ -16,6 +16,7 @@ class Requirement(models.Model):
     desc = models.TextField()
     short_desc = models.CharField(max_length=255, null=True, blank=True)
     type = models.IntegerField(choices=REQUIREMENT_TYPES, default=0)
+    is_last = models.BooleanField(default=False)
     
     def __unicode__(self):
         return '%s #%s'% (self.rank, self.order)
