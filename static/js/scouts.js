@@ -108,7 +108,7 @@ $(function(){
 	$('.popup').click(function(e){
     	e.stopPropagation()
     })
-    $("#ui-datepicker-div").live('click',function(e){
+    $("#ui-datepicker-div").on('click',function(e){
     	e.stopPropagation()
     	return false
     })

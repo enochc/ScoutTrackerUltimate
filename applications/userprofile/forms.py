@@ -34,7 +34,7 @@ class NewScoutForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         user = User.objects.filter(email__iexact=email)
-        if user.count() > 0:
+        if user.count() > 0 and len(email)>0:
             raise forms.ValidationError('A user with that email already exists.')
         else:
             return email

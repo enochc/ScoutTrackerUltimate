@@ -20,7 +20,7 @@ class Userprofile(models.Model):
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
 	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members', default=1)
-	position = models.ForeignKey('position.Position', default=7)
+	position = models.ForeignKey('position.Position', default=2)
 	__original_position = None;
 	birthday = models.DateTimeField(null=True, blank=True)
 	phone_number = models.CharField(max_length=20, null=True, blank=True)

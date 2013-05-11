@@ -67,6 +67,8 @@ function submitForm(){
 		{%else%}
     		doSuccess(data, function(){
     			 $("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+    			 $("input").val("").removeClass("error")
+    			 $.unblockUI()
     		})
 		{%endif%}
 	})

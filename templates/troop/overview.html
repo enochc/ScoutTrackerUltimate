@@ -84,7 +84,7 @@ var req = 1
 $(function(){
 	get_rank(rank)
 	
-	$("img.rank_head").click(function(){
+	$("img.rank_head").on('click',function(){
 		rank = this.id.split('rank_head_')[1]
 		get_rank(rank)
 	})
@@ -95,14 +95,14 @@ function post_load(){
 	req = $("div.req_header")[0].id.split('r_')[1]
 	get_req(req)
 	
-	$("div.req_header").click(function(){
+	$("div.req_header").on('click',function(){
         req = this.id.split('r_')[1]
         get_req(req)
     })
     
     
 	{%if perms.userprofile.mark_requirements%}
-    $('.req.checkbox').click(function(){
+    $('.req.checkbox').on('click',function(){
     	
     	openRecForm($(this),{prefunc:function(req){
     		get_req(req)

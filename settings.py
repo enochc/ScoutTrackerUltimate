@@ -22,8 +22,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'scouts',                      # Or path to database file if using sqlite3.
-        'USER': 'dbuser',                      # Not used with sqlite3.
-        'PASSWORD': 'hampst3r#',                  # Not used with sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -37,8 +37,8 @@ CACHES = {
 
 AUTHENTICATION_BACKENDS = (
     #'django.contrib.auth.backends.ModelBackend',
-    'scouts.utils.funcs.CaseInsensitiveBackend',    
-    'scouts.utils.funcs.GoogleOauthModelBackend',            
+    'utils.funcs.CaseInsensitiveBackend',    
+    'utils.funcs.GoogleOauthModelBackend',            
 )
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -132,7 +132,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'utils.funcs.baseProcessor'
 )
 
-ROOT_URLCONF = 'scouts.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
 	BASE_DIR + '/templates'
@@ -154,7 +154,7 @@ INSTALLED_APPS = (
     'django_extensions', 
     'sorl.thumbnail',
     
-    'scouts.taglibrary',
+    'taglibrary',
     'position',
 	'userprofile',
 	'troop',
@@ -165,7 +165,7 @@ INSTALLED_APPS = (
 	'userrank',
 	'council',
 )
-
+"""
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
@@ -174,21 +174,47 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s  %(message)s'
+        },
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d --- %(message)s'
+        },
+        'more_verbose':{
+            'format':'[%(asctime)s] %(levelname)-5s %(name)s @ %(module)s:%(funcName)s(), line %(lineno)d --- %(message)s'
+        }
+    },
     'handlers': {
+		'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+		'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
     },
+		
     'loggers': {
+		'django': {
+            'handlers': ['console', 'null'],
+            'propagate': True,
+            'level': 'ERROR',
+        },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
         },
     }
 }
-
+"""
 LOGIN_URL = '/'
     
 GOOGLE_CLIENT_ID = "448849120100.apps.googleusercontent.com"
