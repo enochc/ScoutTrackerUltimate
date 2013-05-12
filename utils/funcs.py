@@ -1,10 +1,10 @@
+import datetime
 from sorl.thumbnail import get_thumbnail, delete
 from django.conf import settings
 from utils.google_funcs import get_google_profile, validate_token
 
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
-from userprofile.models import Userprofile
 
 
 def get_sized_image(img, size_tuple=None):
@@ -21,6 +21,20 @@ def baseProcessor(httprequest):
             'google_client_id':settings.GOOGLE_CLIENT_ID,
             }
 
+def add_months(months, date):
+    m=0
+    month = date.month
+    day = date.day
+    mod = -1 if months<0 else 1
+    while m < abs(months):
+        date = date+datetime.timedelta(days=mod)
+        if month != date.month:
+            m+=1
+            month = date.month
+    
+    while date.day != day:
+        date = date+datetime.timedelta(days=mod)          
+    return date
 
 class CaseInsensitiveBackend(ModelBackend):
     """

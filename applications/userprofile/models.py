@@ -1,12 +1,23 @@
+import datetime
+from datetime import timedelta
+
 from django.db import models
 from django.contrib.auth.models import User, Group
 
 from applications.troop.models import Troop
 from utils.values import reverse_states
+from utils.funcs import add_months
 from position.models import Position
 from userrequirement.models import UserRequirement
 
 
+class UserGoal(models.Model):
+	date_due = models.DateTimeField()
+	name = models.CharField(max_length=200)
+	notes = models.TextField(null=True, blank=True)
+	
+	
+			
 
 class Userprofile(models.Model):
 	class Meta:
@@ -37,19 +48,47 @@ class Userprofile(models.Model):
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
 	
+	goals = models.ManyToManyField(UserGoal, null=True, blank=True)
+	
+	def is_scout(self):
+		return self.position.youth
+	
 	def __init__(self, *args, **kwargs):
 	    super(Userprofile, self).__init__(*args, **kwargs)
 	    self.__original_position = self.position
 	
 	def has_google_login(self):
 		return self.google_id is not None and len(self.google_id)>0 and self.google_id != 'None'
+	
+	def set_goals(self):
+		if self.goals.all().count()==0:
+			from rank.models import Rank
+		
+			eagle = self.birthday.replace(year=(self.birthday.year+18))
+			life = add_months(-6, eagle)
+			star = add_months(-6, life)
+			frstcls = add_months(-4, star)
+
+			goal_data = [('Receive Eagle',eagle),
+				('Receive Life',life),
+				('Receive Star',star),
+				('Receive First Class',frstcls)]
+			for data in goal_data:
+				try:
+					goal = UserGoal.objects.get(name=data[0])
+					goal.date_due = data[1]
+					
+				except UserGoal.DoesNotExist:
+					goal = UserGoal(name=data[0],date_due=data[1])
+				goal.save()
+				self.goals.add(goal)
 
 	@property
 	def fullname(self):
 		return '%s %s' % (self.user.first_name, self.user.last_name)
-	
+
 	def __unicode__(self):
-		return self.nickname or self.user.first_name or self.username
+		return self.nickname or (self.user.first_name if self.user else "unknown")
 	
 	@property
 	def name(self):
@@ -75,6 +114,7 @@ class Userprofile(models.Model):
 			return ranks[0]
 	
 	def save(self, *args, **kwargs):
+
 		if self.position != self.__original_position and self.pk:
 			"""update user group and update permissions
 			"""
@@ -84,9 +124,12 @@ class Userprofile(models.Model):
 			self.__original_position = self.position
 			
 		super(Userprofile, self).save(args, kwargs)
+		
+		if self.birthday and self.is_scout():
+			self.set_goals()
     	
     	
-    	
+   
     	
     	
 	

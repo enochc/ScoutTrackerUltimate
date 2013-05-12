@@ -14,6 +14,7 @@ from userrequirement.models import UserRequirement
 from rank.models import Rank
 
 
+
 @render_to_html
 @login_required
 def userhome(request, user_id=None):

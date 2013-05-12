@@ -1,6 +1,7 @@
 
+
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from utils.decorators import render_to_html, login_required
@@ -22,9 +23,15 @@ from userprofile.views import userhome
 
 @render_to_html
 def anon_home(request):
-    if request.user.is_authenticated():
-        return userhome(request, request.user.pk)
-    return 'home.html', {}
+    try:
+        if request.user.is_authenticated():
+            return userhome(request, request.user.pk)
+        return 'home.html', {}
+    except:
+        logout(request)
+        #request.user.logout()
+        return HttpResponseRedirect("/") 
+    
 
 
 @render_to_html

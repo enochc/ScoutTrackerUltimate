@@ -139,7 +139,7 @@ function set_scout_requiremnt(r, s, b, options){
         })
     })
 }
-now = new Date()
+
 
 
 function openRecForm(box, opt){
@@ -149,14 +149,12 @@ function openRecForm(box, opt){
 	if(opt && typeof opt.prefunc == 'function'){
 		opt.prefunc(req)
 	}
-	//$.blockUI()
     var scout = box.attr('class').split('s_')[1].split(' ')[0]
-    
+    var top = box.offset().top
     var form = $('#set_req_form').load('/requirement/set/'+req+'/'+scout+'/',function(data){        
         $('#set_req_form').css({
-            'top':box.offset().top,
+            'top':top,
             'left':box.offset().left
-           // 'zIndex':10000
         }).find('.cancel').click(function(){
         	close_popup()
         }).end().find('.send').click(function(){
@@ -167,6 +165,17 @@ function openRecForm(box, opt){
             yearRange:'-100:+0',
             dateFormat:'M dd, yy'
         })
+
         form.show()
+        
+        bottom = form.offset().top + form.height()
+        screen_bottom = document.body.scrollTop + $(document.body).height()
+        offset = (screen_bottom - bottom) -25
+        if(offset < 0){
+        	form.offset({"top":top +offset})
+        }
+        	
+        
     })
+
 }

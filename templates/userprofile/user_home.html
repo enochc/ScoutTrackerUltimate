@@ -61,31 +61,19 @@ div#user_help{
 	float:right;
 	width:70%;
 }
-#troop_form{
-	display:block;
-}
 
-
-
-{%if scout.rank%}
-#sc{{scout.rank.order|add:1}}{
-    display:block;
-}
-{%else%}
-#sc1{
-    display:block;
-}
-{%endif%}
 
 </style>
 <script>
 $(function(){
-	$("#troop_button").click(function(){
+
+	$("#troop_button").on('click', function(){
 		$("#troop_div").load('/troop/new/', function(){
 			$("troop_div").slideDown()
 		})
 	})
-	$(".rank_div h2").click(function(){
+	
+	$(".rank_div h2").on('click', function(){
 		var div = $(this).parents(".rank_div")
 		var table = div.find(".slide_container")
 		var html = "+"
@@ -100,7 +88,7 @@ $(function(){
 	
 	{%if perms.userprofile.mark_requirements%}
 	
-	$('.req.checkbox').click(function(){
+	$('.req.checkbox').on('click', function(){
 		var box = $(this)
         openRecForm(box, {postfunc:function(data){
         	afterSet(box, data)
@@ -108,7 +96,7 @@ $(function(){
     })
     {%endif%}
     
-    $("#edit_user").click(function(){
+    $("#edit_user").on('click', function(){
     	$.blockUI({
     		message:'<div id="block_message"></div>',
     		onBlock:function(){
@@ -134,10 +122,20 @@ $(function(){
 			.show()
 		})
 	})
+	
+	
+	
+	
+	{%if scout.rank.next%}
+	$("#sc{{scout.rank.next.order|add:1}}").prev(".rank_div h2").click()
+
+	{%else%}
+	$("#sc1").prev(".rank_div h2").click()
+	{%endif%}
 })
 
 function afterSet(box, data){
-	console.log(data)
+
 	var row = box.parents("tr")
 	if(data.date.length > 0){
 		row.find(".date").html(data.date)
@@ -164,8 +162,12 @@ function afterSet(box, data){
     <span id="close_popup" onclick="close_popup()" title="close">X</span>
     <span id="info_content"></span>
 </div>
+{%if scout.position.youth%}
+	{%include "userprofile/timeline.html"%}
+{%endif%}
 
 <div style="float:left;">
+
 
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
 
@@ -173,41 +175,41 @@ function afterSet(box, data){
     {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
     {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
 </div>    
-    {%if scout.position.youth%}
+{%if scout.position.youth%}
 
 	<div id="requirements"/>
 	   
-	        {%for r in ranks%}
-	             <div class="rank_div">
-	                 <h2><span class='toggle'>+</span>{{r.name}}</h2>
-	                 <div class="slide_container" id="sc{{r.id}}">
-	                     <table class="rank_table" id="rank_{{r.id}}"> 
-	                        {%for req in r.requirements.all%}
-	                            {%user_requirement%}
-	                            
-	                            <tr>
-	                                <td valign="middle">
-	                                    <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
-	                                        {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
-	                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
-	                                    </div>
-	                                </td>
-	                                <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
-	                                    <span class='date'>{{user_requirement.completed_date|default:''}}</span>
-	                                </td>
-	                                
-	                            </tr>
-	                            <tr class='r_{{req.id}} tr_notes {%if user_requirement.notes%}full{%endif%}'>
-	                                <td>&nbsp;</td>
-	                                <td ><span class='notes'>{{user_requirement.notes|default:''|safe}}</span></td>
-	                            </tr>
-	                           
-	                        {%endfor%}
-	                    </table>
-	                    <img class="rank_img" src='{{r.patch.url}}'/>
-	                </div>
-	            </div>
-	        {%endfor%}
+        {%for r in ranks%}
+             <div class="rank_div">
+                 <h2><span class='toggle'>+</span>{{r.name}}</h2>
+                 <div class="slide_container" id="sc{{r.id}}">
+                     <table class="rank_table" id="rank_{{r.id}}"> 
+                        {%for req in r.requirements.all%}
+                            {%user_requirement%}
+                            
+                            <tr>
+                                <td valign="middle">
+                                    <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
+                                        {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
+                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
+                                    </div>
+                                </td>
+                                <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
+                                    <span class='date'>{{user_requirement.completed_date|default:''}}</span>
+                                </td>
+                                
+                            </tr>
+                            <tr class='r_{{req.id}} tr_notes {%if user_requirement.notes%}full{%endif%}'>
+                                <td>&nbsp;</td>
+                                <td ><span class='notes'>{{user_requirement.notes|default:''|safe}}</span></td>
+                            </tr>
+                           
+                        {%endfor%}
+                    </table>
+                    <img class="rank_img" src='{{r.patch.url}}'/>
+                </div>
+            </div>
+        {%endfor%}
 	
 	    
 	</div>
@@ -215,7 +217,7 @@ function afterSet(box, data){
 	<div id="set_req_form" class="popup">
 	</div> 
 
-	{% else %}
+{% else %}
 	<!-- Is a parent or guardian or scout leader-->
 	<div id="user_help">
 		{% if user.profile.troop = None%}

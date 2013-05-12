@@ -1,0 +1,121 @@
+<style>
+#timeline{
+	
+	width:100%;
+	height:40px;
+	margin-bottom:10px;
+}
+#timeline #bar{
+	background-color:#f6bc56;
+	box-shadow: 5px 5px 3px #32523b;
+	border-radius:5px;
+	width:100%;
+	height:5px;
+	position:relative;
+	top:20px;
+	
+	background: #aa8001; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2FhODAwMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ4JSIgc3RvcC1jb2xvcj0iI2ZlYmYwMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiYzhkMDEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #aa8001 0%, #febf01 48%, #bc8d01 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aa8001), color-stop(48%,#febf01), color-stop(100%,#bc8d01)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #aa8001 0%,#febf01 48%,#bc8d01 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #aa8001 0%,#febf01 48%,#bc8d01 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #aa8001 0%,#febf01 48%,#bc8d01 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #aa8001 0%,#febf01 48%,#bc8d01 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa8001', endColorstr='#bc8d01',GradientType=0 ); /* IE6-8 */
+}
+div.goal{
+	width:4px;
+	margin-right:-4px;
+	cursor:pointer;
+	height:40px;
+	position:relative;
+	float:left;
+	background-color:black;
+	z-index:1;
+}
+div.goal.bday{
+	height:20px;
+	margin-top:10px;
+	background-color:#f6bc56;
+	z-index: 2;
+}
+
+div.goal.today{
+	height:30px;
+	margin-top:5px;
+	background-color:red;
+	z-index: 2;
+}
+	
+
+</style>
+
+<script type="text/javascript">
+{%if scout.birthday%}
+var bday = new Date("{{scout.birthday|date:"F d, Y"}}")
+var goals = {}
+var tstart = new Date(bday.getTime())
+var tend = new Date(bday.getTime())
+tstart.setFullYear(bday.getFullYear()+12)
+tend.setFullYear(bday.getFullYear()+18)
+var ttot = tend.getTime() - tstart.getTime()
+var tline, ttop
+
+function getPlace(date){
+	var postot = tline.width()
+	console.log(postot)
+	var place = date.getTime()-tstart.getTime()
+	var percentage = place/ttot
+	console.log(percentage)
+	var left = postot*percentage
+	return left
+}
+
+var today = new Date()
+
+var goals
+{%for g in scout.goals.all%}
+	goals["{{g.name}}"] = new Date("{{g.date_due|date:"F d, Y"}}")
+{%endfor%}
+	
+function placeGoal(name, date, klass){
+	var left = getPlace(date)-4
+	var goal = $("<div title=\""+name+"\" class=\"goal "+klass+"\"></div>").css({
+		//"top":ttop,
+		"left":left
+		})
+	tline.append(goal)
+}
+	
+
+$(function(){
+	tline = $("#timeline")
+	ttop = tline.offset().top
+	
+	placeGoal('today', new Date, 'today')
+	
+	bdays = new Date(tstart.getTime())
+	while(bdays<=tend){
+		bdays.setFullYear(bdays.getFullYear()+1)
+		placeGoal("Happy Birthday", bdays, 'bday')
+		
+	}
+	
+	
+	for(x in goals){
+		placeGoal(x, goals[x], null)
+	}
+	
+})
+
+
+
+{%endif%}
+
+</script>
+
+<div id="timeline">
+	<div id="bar"></div>
+</div>
