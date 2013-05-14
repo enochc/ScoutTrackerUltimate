@@ -15,7 +15,7 @@ class UserGoal(models.Model):
 	date_due = models.DateTimeField()
 	name = models.CharField(max_length=200)
 	notes = models.TextField(null=True, blank=True)
-	
+	user = models.ForeignKey("userprofile.Userprofile", related_name="goals")
 	
 			
 
@@ -47,8 +47,7 @@ class Userprofile(models.Model):
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
-	
-	goals = models.ManyToManyField(UserGoal, null=True, blank=True)
+
 	
 	def is_scout(self):
 		return self.position.youth
@@ -75,11 +74,11 @@ class Userprofile(models.Model):
 				('Receive First Class',frstcls)]
 			for data in goal_data:
 				try:
-					goal = UserGoal.objects.get(name=data[0])
+					goal = UserGoal.objects.get(name=data[0], user=self)
 					goal.date_due = data[1]
 					
 				except UserGoal.DoesNotExist:
-					goal = UserGoal(name=data[0],date_due=data[1])
+					goal = UserGoal(name=data[0],date_due=data[1], user=self)
 				goal.save()
 				self.goals.add(goal)
 

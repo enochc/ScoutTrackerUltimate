@@ -11,8 +11,10 @@
 	border-radius:5px;
 	width:100%;
 	height:5px;
+	margin-bottom:-5px;
 	position:relative;
-	top:20px;
+	top:15px;
+	z-index: 3;
 	
 	background: #aa8001; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -26,29 +28,77 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa8001', endColorstr='#bc8d01',GradientType=0 ); /* IE6-8 */
 }
 div.goal{
-	width:4px;
-	margin-right:-4px;
+	background:url(/images/mark.png) center center;
+	width:10px;
+	margin-right:-10px;
 	cursor:pointer;
 	height:40px;
 	position:relative;
 	float:left;
-	background-color:black;
+
 	z-index:1;
+	
 }
 div.goal.bday{
-	height:20px;
-	margin-top:10px;
-	background-color:#f6bc56;
+	background:url(/images/mark2.png) center center;
+	height:28px;
+	margin-top:6px;
 	z-index: 2;
-}
 
-div.goal.today{
-	height:30px;
-	margin-top:5px;
-	background-color:red;
-	z-index: 2;
+}
+#past{
+	background-color:#d8e3ff;
+	height:100%;
+	float:left;
 }
 	
+.ui-tooltip, .arrow:after {
+    background: black;
+    border: 2px solid white;
+  }
+  .ui-tooltip {
+  	max-width:200px;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
 
 </style>
 
@@ -66,9 +116,9 @@ var tline, ttop
 function getPlace(date){
 	var postot = tline.width()
 	console.log(postot)
+	console.log(date.getTime())
 	var place = date.getTime()-tstart.getTime()
 	var percentage = place/ttot
-	console.log(percentage)
 	var left = postot*percentage
 	return left
 }
@@ -77,15 +127,18 @@ var today = new Date()
 
 var goals
 {%for g in scout.goals.all%}
-	goals["{{g.name}}"] = new Date("{{g.date_due|date:"F d, Y"}}")
+	goals["{{g.name}}"] = {"date":new Date("{{g.date_due|date:"F d, Y"}}"),"id":{{g.id}} }
 {%endfor%}
 	
-function placeGoal(name, date, klass){
-	var left = getPlace(date)-4
-	var goal = $("<div title=\""+name+"\" class=\"goal "+klass+"\"></div>").css({
+function placeGoal(name, date, klass, gid){
+	var left = getPlace(date)-5
+	var goal = $("<div title=\""+date.toDateString()+" "+name+"\" class=\"goal "+klass+"\"></div>").css({
 		//"top":ttop,
 		"left":left
 		})
+	if(gid!=null){
+		goal.attr("data-id",gid)
+	}
 	tline.append(goal)
 }
 	
@@ -94,19 +147,37 @@ $(function(){
 	tline = $("#timeline")
 	ttop = tline.offset().top
 	
-	placeGoal('today', new Date, 'today')
+	var today_pos =getPlace(today)
+	$("#past").css({"width":today_pos,"marginRight":-today_pos})//placeGoal('today', new Date, 'today'
 	
 	bdays = new Date(tstart.getTime())
 	while(bdays<=tend){
 		bdays.setFullYear(bdays.getFullYear()+1)
-		placeGoal("Happy Birthday", bdays, 'bday')
+		placeGoal("Happy Birthday", bdays, 'bday', null)
 		
 	}
 	
 	
 	for(x in goals){
-		placeGoal(x, goals[x], null)
+		placeGoal(x, goals[x]['date'], null, goals[x]['id'])
 	}
+	
+	$("div.goal").tooltip({
+		  //hide:false,
+		  //show:false,
+	      position: {
+	          my: "center bottom-20",
+	          at: "center top",
+	          using: function( position, feedback ) {
+	            $( this ).css( position );
+	            $( "<div>" )
+	              .addClass( "arrow" )
+	              .addClass( feedback.vertical )
+	              .addClass( feedback.horizontal )
+	              .appendTo( this );
+	          }
+	        }
+	      })
 	
 })
 
@@ -117,5 +188,6 @@ $(function(){
 </script>
 
 <div id="timeline">
+	<div id="past"></div>
 	<div id="bar"></div>
 </div>
