@@ -3,7 +3,7 @@
 {%block head%}
 <style>
 div#requirements{
-    width:600px;
+    width:60%px;
     float:right;
 }
 .rank_img{
@@ -62,6 +62,15 @@ div#user_help{
 	width:70%;
 }
 
+
+/* Badges */
+#badges{
+
+	background:url({{MEDIA_URL}}sash.jpg) repeat-y;
+	width:100%;
+	min-height:400px;
+	margin-top:10px;
+}
 
 </style>
 <script>
@@ -166,7 +175,7 @@ function afterSet(box, data){
 	{%include "userprofile/timeline.html"%}
 {%endif%}
 
-<div style="float:left;">
+<div style="float:left;width:40%">
 
 
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
@@ -174,6 +183,11 @@ function afterSet(box, data){
     <h1>{{scout.fullname}} </h1>
     {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
     {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
+    
+    {%if scout.position.youth%}
+    {%include 'badges.html'%}
+    {%endif%}
+    
 </div>    
 {%if scout.position.youth%}
 

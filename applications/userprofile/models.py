@@ -16,6 +16,7 @@ class UserGoal(models.Model):
 	name = models.CharField(max_length=200)
 	notes = models.TextField(null=True, blank=True)
 	user = models.ForeignKey("userprofile.Userprofile", related_name="goals")
+	klass = models.CharField(max_length=50, null=True, blank=True)
 	
 			
 
@@ -31,7 +32,7 @@ class Userprofile(models.Model):
 	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
-	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members', default=1)
+	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members')
 	position = models.ForeignKey('position.Position', default=2)
 	__original_position = None;
 	birthday = models.DateTimeField(null=True, blank=True)

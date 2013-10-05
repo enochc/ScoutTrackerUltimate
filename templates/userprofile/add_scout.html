@@ -34,7 +34,7 @@ $(function(){
 		changeMonth:true,
 		yearRange:'-100:+0',
 		dateFormat:'M dd, yy',
-		beforeShow: function(){ $('#ui-datepicker-div').css('z-index', 9999); }
+		beforeShow: function(){ $('#ui-datepicker-div').css('z-index', 9999).addClass("blockMsg"); }
 	})
 	change_login = true
 	$("input#id_first_name").keyup(function(){

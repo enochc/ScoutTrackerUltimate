@@ -1,3 +1,4 @@
+
 <style>
 #timeline{
 	
@@ -39,6 +40,31 @@ div.goal{
 	z-index:1;
 	
 }
+div.goal.first_class{
+	background:url(/images/rank/1class_thumb.gif) no-repeat center center ;
+	width:20px;
+	margin-right:-20px;
+	z-index:100
+}
+div.goal.star{
+	background:url(/images/rank/star_thumb.gif) no-repeat center center ;
+	width:20px;
+	margin-right:-20px;
+	z-index:100
+}
+div.goal.life{
+	background:url(/images/rank/life_thumb.gif) no-repeat center center ;
+	width:20px;
+	margin-right:-20px;
+	z-index:100
+}
+div.goal.eagle{
+	background:url(/images/rank/eagle_thumb.gif) no-repeat center center ;
+	width:20px;
+	margin-right:-20px;
+	z-index:100
+}
+
 div.goal.bday{
 	background:url(/images/mark2.png) center center;
 	height:28px;
@@ -122,8 +148,6 @@ div.goal.bday{
 	
 	function getPlace(date){
 		var postot = tline.width()
-		console.log(postot)
-		console.log(date.getTime())
 		var place = date.getTime()-tstart.getTime()
 		var percentage = place/ttot
 		var left = postot*percentage
@@ -135,11 +159,12 @@ div.goal.bday{
 	var goals
 	
 	{%for g in scout.goals.all%}
-		goals["{{g.name}}"] = {"date":new Date("{{g.date_due|date:"F d, Y"}}"),"id":{{g.id}} }
+		goals["{{g.name}}"] = {"date":new Date("{{g.date_due|date:"F d, Y"}}"),"id":{{g.id}}, "klass":"{{g.klass}}" }
 	{%endfor%}
 		
-	function placeGoal(name, date, klass, gid){
-		var left = getPlace(date)-5
+	function placeGoal(name, date, klass, gid, offset){
+		var offset = offset || 5
+		var left = getPlace(date)-offset
 		var goal = $("<div title=\""+date.toDateString()+" "+name+"\" class=\"goal "+klass+"\"></div>").css({
 			//"top":ttop,
 			"left":left
@@ -156,7 +181,7 @@ div.goal.bday{
 		ttop = tline.offset().top
 		
 		var today_pos =getPlace(today)
-		//$("#past").css({"width":today_pos,"marginRight":-today_pos})//placeGoal('today', new Date, 'today'
+		$("#past").css({"width":today_pos,"marginRight":-today_pos})
 		
 		bdays = new Date(tstart.getTime())
 		while(bdays<=tend){
@@ -168,8 +193,10 @@ div.goal.bday{
 		
 		
 		for(x in goals){
-			placeGoal(x, goals[x]['date'], null, goals[x]['id'])
+			placeGoal(x, goals[x]['date'], goals[x]['klass'], goals[x]['id'], 10)
 		}
+		
+		//placeGoal("today", new Date(), 'today', null)
 		
 		$("div.goal").tooltip({
 			  //hide:false,
@@ -186,7 +213,7 @@ div.goal.bday{
 		              .appendTo( this );
 		          }
 		        }
-		      })
+		})
 		
 	})
 	
