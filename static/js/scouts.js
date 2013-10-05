@@ -69,9 +69,9 @@ function refresh(){window.location=window.location}
 function login(e){
 	username = $("#login_username").val().trim()
 	pass = $("#login_password").val().trim()
-	troop = $("#login_troop").val().trim()
-	if(troop.length <1)troop = "100000"
-	username = username+"_"+troop
+	//troop = $("#login_troop").val().trim()
+	//if(troop.length <1)troop = "100000"
+	//username = username+"_"+troop
 	$.post("/login/",{login: username, password: pass},function(data){
 		doSuccess(data, function(){window.location = '/user'})
 	})

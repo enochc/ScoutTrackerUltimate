@@ -122,7 +122,7 @@ class Userprofile(models.Model):
 			group.user_set.add(self.user)
 			self.__original_position = self.position
 			
-		super(Userprofile, self).save(args, kwargs)
+		super(Userprofile, self).save(*args, **kwargs)
 		
 		if self.birthday and self.is_scout():
 			self.set_goals()

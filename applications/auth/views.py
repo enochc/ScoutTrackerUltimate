@@ -14,10 +14,10 @@ def login_view(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            profile = Userprofile.objects.get_or_create(user=user)
+            profile, created = Userprofile.objects.get_or_create(user=user)
             return HttpJsonSuccess()
         else:
-            return HttpJsonFailure(_("The provided accout is not yet active."))
+            return HttpJsonFailure(_("The provided account is not yet active."))
     else:
         return HttpJsonFailure(_("Invalid login or password"))
     
