@@ -4,7 +4,7 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User, Group
 
-from applications.troop.models import Troop
+from applications.unit.models import Unit
 from utils.values import reverse_states
 from utils.funcs import add_months
 from position.models import Position
@@ -37,7 +37,7 @@ class Userprofile(models.Model):
 	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
-	troop = models.ForeignKey(Troop, blank=True, null=True, related_name='members')
+	unit = models.ForeignKey(Unit, blank=True, null=True, related_name='members')
 	position = models.ForeignKey('position.Position', default=2)
 	__original_position = None;
 	birthday = models.DateTimeField(null=True, blank=True)

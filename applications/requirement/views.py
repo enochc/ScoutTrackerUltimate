@@ -73,12 +73,12 @@ def req_info(request, req_id):
 @render_to_html
 def rank_requirements(request, rank_id):
     rank = Rank.objects.get(pk=rank_id)
-    troop = request.user.profile.troop
+    unit = request.user.profile.unit
     member_list = {}
-    if troop is not None:
-        for m in troop.members.all():
+    if unit is not None:
+        for m in unit.members.all():
             member_list[m.pk] = m.completed_list(rank)
     else:
         member_list[request.user.profile.pk] = request.user.profile.completed_list(rank)
     print member_list
-    return 'requirement/by_rank.html', {'rank':rank, 'troop':troop, 'member_list':member_list}
+    return 'requirement/by_rank.html', {'rank':rank, 'unit':unit, 'member_list':member_list}

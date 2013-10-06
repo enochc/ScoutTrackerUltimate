@@ -41,7 +41,7 @@ class NewScoutForm(forms.ModelForm):
     
     def clean_login_name(self):
         username = self.cleaned_data['login_name']
-        troop = self.cleaned_data['troop']
+        unit = self.cleaned_data['unit']
         gid = self.cleaned_data['google_id']
 
         try:

@@ -27,7 +27,7 @@ def userhome(request, user_id=None):
 
 
     if user_id is not None and request.user.has_perm('userprofile.add_scouts'):
-        scout = get_object_or_404(User, id=user_id, profile__troop=user.profile.troop)
+        scout = get_object_or_404(User, id=user_id, profile__unit=user.profile.unit)
     else:   
         scout = user  
     

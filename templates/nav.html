@@ -1,5 +1,5 @@
 <div id="banner">
-    <span class='rt'>{{user.profile.name}} {%if user.profile.troop%}: {{user.profile.troop.number}} {%endif%}</span>
+    <span class='rt'>{{user.profile.name}} {%if user.profile.unit%}: {{user.profile.unit.number}} {%endif%}</span>
     <h1>Ultimate Scout Tracker</h1>
 </div>
 <div id='nav' class='grade'>
@@ -20,9 +20,9 @@
     
        
     
-            <li id="troop_stats"><a href="/troop/overview/">Overview</a></li>
+            <li id="unit_stats"><a href="/unit/overview/">Overview</a></li>
     
-            <li><a href="/troop/calendar/">Calendar</a></li>
+            <li><a href="/unit/calendar/">Calendar</a></li>
         
         {%endif%}
     </ul>

@@ -52,10 +52,7 @@ function google_login(){
 {%endblock%}
     
 {%block content%}   
-<p>Welcome to the Ultimate Scout tracker.  This web applications is meant to be a 
-user friendly solution to tracking scout advancement for scouts, parents, and entire troops.</p>
-<p>All I ask is that you send me your comments and feedback to continue to make this the last scout tracking 
-software you'll ever need.  <a href="mailto:scoutmaster@ultimatescouttracker.com">contact me</a></p>
+<!-- <a href="mailto:scoutmaster@ultimatescouttracker.com">contact me</a> -->
 <div id="login" class="float_panel">
     <div id="oquth_login">
         <h2>Login with an existing social media account</h2><hr/>
@@ -65,8 +62,7 @@ software you'll ever need.  <a href="mailto:scoutmaster@ultimatescouttracker.com
     <div id="local_login">      
         <h2>Don't use or like social websites? Login locally</h2><hr/>
             <form>
-               <label>Troop:</label><input type="text" id="login_troop" size="6"/>
-               <label>Login:</label><input type="text" id="login_username"/>
+               <label>Username:</label><input type="text" id="login_username"/>
                <label>Password:</label><input type="password" id="login_password"/>
                <div class="button " onclick="login()">login</div>
                <a href="/register">register for a new account</a>

@@ -29,7 +29,7 @@ urlpatterns = patterns('',
 
     url(r'^$', anon_home),
     url(r'^user/', include('userprofile.urls')),
-    url(r'^troop/', include('troop.urls')),
+    url(r'^unit/', include('unit.urls')),
     url(r'^requirement/', include('requirement.urls')),
     url(r'^meritbadge/', include('meritbadge.urls')),
     url(r'^oauth2callback/', oauth_callback),

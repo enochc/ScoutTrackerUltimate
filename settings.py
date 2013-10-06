@@ -157,7 +157,7 @@ INSTALLED_APPS = (
     'taglibrary',
     'position',
 	'userprofile',
-	'troop',
+	'unit',
 	'rank',
 	'requirement',
 	'userrequirement',

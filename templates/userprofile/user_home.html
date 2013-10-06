@@ -76,9 +76,9 @@ div#user_help{
 <script>
 $(function(){
 
-	$("#troop_button").on('click', function(){
-		$("#troop_div").load('/troop/new/', function(){
-			$("troop_div").slideDown()
+	$("#unit_button").on('click', function(){
+		$("#unit_div").load('/unit/new/', function(){
+			$("unit_div").slideDown()
 		})
 	})
 	
@@ -234,19 +234,19 @@ function afterSet(box, data){
 {% else %}
 	<!-- Is a parent or guardian or scout leader-->
 	<div id="user_help">
-		{% if user.profile.troop = None%}
+		{% if user.profile.unit = None%}
 			
-			<fieldset class="float_panel"><legend>Join a Troop</legend>
-			For security purposes you can only join a troop via an invitation. Eventually I'll have a search option here where you can 
-			search for local troops and request to be invited. Until that happens you must contact one of your local Scout Representatives
-			and ask them to add you to there troop.
+			<fieldset class="float_panel"><legend>Join a Unit</legend>
+			For security purposes you can only join a unit via an invitation. Eventually I'll have a search option here where you can 
+			search for local unitss and request to be invited. Until that happens you must contact one of your local Scout Representatives
+			and ask them to add you to there units.
 			</fieldset>
 			<br/>
-			<fieldset class="float_panel"><legend>Create a Troop</legend>
+			<fieldset class="float_panel"><legend>Create a Unit</legend>
 			If you are a scout leader or a committee member and would like to start using Ultimate scout Tracker then click 
-			<span class="link" id="troop_button">here</span> to create a new troop.
+			<span class="link" id="unit_button">here</span> to create a new unit.
 			
-			<div id="troop_div">
+			<div id="unit_div">
 			 
 			 </div>
 			</fieldset>
@@ -254,7 +254,7 @@ function afterSet(box, data){
 			 
 		{%else%}
 			
-			<p>Your Troop</p>
+			<p>Your Unit</p>
 		{%endif%}
 	</div>
 {%endif%}

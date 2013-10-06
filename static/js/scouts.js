@@ -11,10 +11,10 @@ $(document).ajaxSend(function(event, xhr, settings) {
 	}
 });
 
-function request_troop(){
-	var form = $("#troop_form");
-	var values = $("#troop_form").getForm();
-	$.post('/troop/new/',values, function(data){
+function request_unit(){
+	var form = $("#unit_form");
+	var values = $("#unit_form").getForm();
+	$.post('/unit/new/',values, function(data){
 		data.form = form;
 		doSuccess(data, function(){window.location = window.location;});
 	})
@@ -69,9 +69,9 @@ function refresh(){window.location=window.location}
 function login(e){
 	username = $("#login_username").val().trim()
 	pass = $("#login_password").val().trim()
-	//troop = $("#login_troop").val().trim()
-	//if(troop.length <1)troop = "100000"
-	//username = username+"_"+troop
+	//unit = $("#login_unit").val().trim()
+	//if(unit.length <1)unit = "100000"
+	//username = username+"_"+unit
 	$.post("/login/",{login: username, password: pass},function(data){
 		doSuccess(data, function(){window.location = '/user'})
 	})

@@ -66,7 +66,7 @@ function submitForm(){
             },function(){$("div.blockMsg").unblock()},true)
 		{%else%}
     		doSuccess(data, function(){
-    			 $("#added_message").html(values['first_name']+" added to {{user.profile.troop}}")
+    			 $("#added_message").html(values['first_name']+" added to {{user.profile.unit}}")
     			 $("input").val("").removeClass("error")
     			 $.unblockUI()
     		})
@@ -84,9 +84,9 @@ function submitForm(){
     <h1>Edit {{scout.fullname}}</h1>
     <input type="hidden" id="scout_id" name="scout_id" value='{{scout.id}}'/>
 {%else%}
-    <h1>Add member for Troop {{user.profile.troop}}</h1>
+    <h1>Add member for Unit {{user.profile.unit}}</h1>
 {%endif%}
-<input type="hidden" id="troop" name="troop" value='{{user.profile.troop.id}}'/>
+<input type="hidden" id="unit" name="unit" value='{{user.profile.unit.id}}'/>
 <input type="hidden" id="position" name="position" value='{{boyscout.id}}'/>
 {%if scout.google_id.value|length > 0%}
 <input type="hidden" id="id_google_id" name="google_id" value='{{form.google_id.value}}'/>
