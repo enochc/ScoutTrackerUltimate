@@ -164,7 +164,7 @@ INSTALLED_APPS = (
 	'taglib',
 	'userrank',
 	'council',
-	'meritbadge',
+	'award',
 )
 
 # A sample logging configuration. The only tangible logging

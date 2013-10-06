@@ -19,11 +19,14 @@ class UserGoal(models.Model):
 	klass = models.CharField(max_length=50, null=True, blank=True)
 	
 
-class UserBadge(models.Model):
-	badge = models.ForeignKey('meritbadge.Badge')
-	dage_earned = models.DateField(blank=True, null=True)
+class UserAward(models.Model):
+	award = models.ForeignKey('award.Award')
+	date_earned = models.DateField(blank=True, null=True)
+	date_entered = models.DateField(auto_now_add=True)
 	location_earned = models.CharField(max_length=200, help_text="name of camp or powow")
-	counseler = models.CharField(max_length=200, blank=True, null=True)
+	instructor = models.CharField(max_length=200, blank=True, null=True, help_text="name of counselor")
+	awarded_by = models.ForeignKey(User, related_name='awarded')
+	
 
 class Userprofile(models.Model):
 	class Meta:
@@ -53,7 +56,7 @@ class Userprofile(models.Model):
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
-	badges = models.ManyToManyField(UserBadge, null=True, blank=True)
+	badges = models.ManyToManyField(UserAward, null=True, blank=True, limit_choices_to={"award__type":0})
 
 	
 	def is_scout(self):
@@ -128,8 +131,10 @@ class Userprofile(models.Model):
 			self.user.groups.clear()
 			group.user_set.add(self.user)
 			self.__original_position = self.position
-			
-		bday = Userprofile.objects.get(pk=self.id).birthday
+		
+		bday = None
+		if self.pk:	
+			bday = Userprofile.objects.get(pk=self.id).birthday
 			
 		super(Userprofile, self).save(*args, **kwargs)
 		

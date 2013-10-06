@@ -15,17 +15,23 @@ class NewScoutForm(forms.ModelForm):
     
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
-    login_name = forms.CharField(max_length=50)
+    login_name = forms.CharField(max_length=50, required=False)
     password = forms.CharField(max_length=50, widget=forms.PasswordInput(), required=False)
-    email = forms.CharField(max_length=50, required=False)
+    email = forms.CharField(max_length=50)
     bd_string = forms.CharField(max_length=50, required=False)
     
     bd_date = None
     
     def clean_bd_string(self):
-        bd_string = self.cleaned_data['bd_string']
+        bd_string = self.data['bd_string']
         if len(bd_string) > 0:
-            bd = datetime.datetime.strptime(bd_string, '%b %d, %Y')
+            try:
+                bd = datetime.datetime.strptime(bd_string, '%b %d, %Y')
+            except:
+                try:
+                    bd = datetime.datetime.strptime(bd_string, '%Y-%m-%d')
+                except:
+                    return None
             self.bd_date = bd
             return bd_string   
         else:
@@ -33,16 +39,19 @@ class NewScoutForm(forms.ModelForm):
         
     def clean_email(self):
         email = self.cleaned_data['email']
-        user = User.objects.filter(email__iexact=email)
-        if user.count() > 0 and len(email)>0:
-            raise forms.ValidationError('A user with that email already exists.')
+        
+        try:
+            user = User.objects.get(email__iexact=email)
+            if not self.instance or user != self.instance.user:
+                print self.instance.user, user
+                raise forms.ValidationError('A user with that email already exists.')
+        except User.DoesNotExist:
+            pass
         else:
             return email
     
     def clean_login_name(self):
-        username = self.cleaned_data['login_name']
-        unit = self.cleaned_data['unit']
-        gid = self.cleaned_data['google_id']
+        username = self.data['email']
 
         try:
             u = User.objects.get(username__iexact=username)

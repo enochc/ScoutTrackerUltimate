@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.db import models
 from utils.widgets import AdminImageWidget
-from applications.meritbadge.models import Badge, BadgeRequirement
+from applications.award.models import Award, AwardRequirement
 
-class BadgeRequirementAdmine(admin.ModelAdmin):
+class AwardRequirementAdmin(admin.ModelAdmin):
     pass
 
 
-class BadgeAdmin(admin.ModelAdmin):
+class AwardAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget},
     }
@@ -15,5 +15,5 @@ class BadgeAdmin(admin.ModelAdmin):
     list_editable = ('required','image')
     
     
-admin.site.register(Badge, BadgeAdmin)
-admin.site.register(BadgeRequirement, BadgeRequirementAdmine)
+admin.site.register(Award, AwardAdmin)
+admin.site.register(AwardRequirement, AwardRequirementAdmin)

@@ -32,7 +32,7 @@ $(function(){
     {%if profile%}
     $("input").attr('readonly', 'true');
     {%endif%}
-    var req_fields = ['first_name', 'last_name', 'login_name', 'password', 'confirm_password']
+    var req_fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password']
     for(field in req_fields){
         f = $("label[for='id_"+req_fields[field]+"']").prepend("<span class='req'>*</span>")
     }    
@@ -102,24 +102,27 @@ function submitForm(){
     {{form.nickname.errors}}
     -->
 
-    <label for='id_nickname'>Email:</label>{{form.email}}<br/>
+    <label for='id_email'>Email:</label>{{form.email}}<br/>
     {{form.email.errors}}
     
     <br/>
     {% if profile %}
     <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
-    {% else %}   
+    {% else %}  
+    <!--   
     <label for='id_login_name'>Login:</label>{{form.login_name}}<br/>
+    -->
     {{form.login_name.errors}}
+    
     <label for='id_password'>Password:</label>{{form.password}}<br/>
     {{form.password.errors}}
     <label for='id_confirm_password'>Confirm Password:</label><input id="confirm_password" name="confirm_password" type="password" value=""/><br/>
     {% endif %}
-    
-    <!-- 
     <label for='id_bd_string'>Birthday:</label>
-    <input type="text" class="date" name="bd_string" value="{{scout.birthday|date:'M d, Y'}}" id="id_bd_string">   
+    <input type="text" class="date" name="bd_string" value="{{form.bd_date|date:'M d, Y'}}" id="id_bd_string">   
     {{form.birthday.errors}}
+    <!-- 
+    
     
     <label for='id_phone_number'>Phone Number:</label>{{form.phone_number}}<br/>
     {{form.phone_number.errors}}

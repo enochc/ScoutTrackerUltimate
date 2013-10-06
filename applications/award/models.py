@@ -1,10 +1,11 @@
 from django.db import models
 from utils.funcs import get_sized_image
 
+AWARD_TYPES = ((0,"Merit Badge"),
+               )
 
-class BadgeRequirement(models.Model):
-    
-        
+class AwardRequirement(models.Model):
+            
     order = models.IntegerField()
     desc = models.TextField()
     short_desc = models.CharField(max_length=255, null=True, blank=True)
@@ -16,13 +17,13 @@ class BadgeRequirement(models.Model):
         ordering = ['order']
 
 
-class Badge(models.Model):
-        
+class Award(models.Model):
+    type = models.IntegerField(choices = AWARD_TYPES, default=0)
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='meritbadge')
+    image = models.ImageField(upload_to='awards')
     group = models.ManyToManyField('self', related_name="group", blank=True, null=True)
     required = models.BooleanField(default=False)
-    requirements = models.ManyToManyField(BadgeRequirement, blank=True, null=True)
+    requirements = models.ManyToManyField(AwardRequirement, blank=True, null=True)
     
     def __unicode__(self):
         return self.name

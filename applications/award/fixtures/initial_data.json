@@ -1,10 +1,10 @@
 [
 {
     "pk": 1, 
-    "model": "meritbadge.badge", 
+    "model": "award.award", 
     "fields": {
         "requirements": [], 
-        "image": "meritbadge/first_aid.gif", 
+        "image": "award/first_aid.gif", 
         "required": true, 
         "group": [], 
         "name": "First Aid"
@@ -12,10 +12,10 @@
 },
 {
     "pk": 2, 
-    "model": "meritbadge.badge", 
+    "model": "award.award", 
     "fields": {
         "requirements": [], 
-        "image": "meritbadge/Citizenship_in_the_Community.gif", 
+        "image": "award/Citizenship_in_the_Community.gif", 
         "required": true, 
         "group": [], 
         "name": "Citizenship in the Community"
@@ -23,10 +23,10 @@
 },
 {
     "pk": 3, 
-    "model": "meritbadge.badge", 
+    "model": "award.award", 
     "fields": {
         "requirements": [], 
-        "image": "meritbadge/Citizenship_in_the_Nation.gif", 
+        "image": "award/Citizenship_in_the_Nation.gif", 
         "required": true, 
         "group": [], 
         "name": "Citizenship in the Nation"
@@ -34,10 +34,10 @@
 },
 {
     "pk": 4, 
-    "model": "meritbadge.badge", 
+    "model": "award.award", 
     "fields": {
         "requirements": [], 
-        "image": "meritbadge/Citizenship_in_the_World.gif", 
+        "image": "award/Citizenship_in_the_World.gif", 
         "required": true, 
         "group": [], 
         "name": "Citizenship in the World"

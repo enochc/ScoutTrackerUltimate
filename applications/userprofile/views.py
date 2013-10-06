@@ -52,19 +52,24 @@ def add_scout(request, scout_id = None):
             scout = Userprofile.objects.get(pk=scout_id)
             form = NewScoutForm(instance=scout, initial={'first_name':scout.user.first_name,
                                                          'last_name':scout.user.last_name,
-                                                         'login_name':scout.user.username.split("_")[0]})
+                                                         'login_name':scout.user.username.split,
+                                                         'email':scout.user.email})
         else:
             form = NewScoutForm()
         return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout, 'edit':edit}
     
     else:
-        scout = NewScoutForm(request.POST)
-        if request.POST.get('scout_id',False):
-            scoutid = request.POST.get('scout_id')
-            scout = Userprofile.objects.get(pk=scoutid)
-            scoutform = NewScoutForm(request.POST, instance=scout)
-        else:
-            scoutform = NewScoutForm(request.POST)
+        try:
+            scout = NewScoutForm(request.POST)
+            if request.POST.get('scout_id',False):
+                scoutid = request.POST.get('scout_id')
+                scout = Userprofile.objects.get(pk=scoutid)
+                scoutform = NewScoutForm(request.POST, instance=scout)
+            else:
+                scoutform = NewScoutForm(request.POST)
+        except Exception,e:
+            print 'error', e
+            
         try:    
             if scoutform.is_valid():
                 scoutform.save()

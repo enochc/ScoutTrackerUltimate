@@ -7,16 +7,16 @@
  		once you've invited them to your troop
  		</p>
  		
- 	<form id="troop_form">
+ 	<form id="unit_form">
  		<label>Council Name:</label>{{form.council_name}}<br/>
- 		<label>Troop Number:</label>{{form.number}}<br/>
+ 		<label>Unit Number:</label>{{form.number}}<br/>
  		<label>My Role:</label><select name="user_role">
  		{%for role in roles%}
  			<option value="{{role.id}}">{{role}}</option>
  		{%endfor%}
  		</select><br/>
  		<label>Notes:</label>{{form.description}}
- 		<div class="button" onclick="request_troop()" style="width:150px;">Create</div>
+ 		<div class="button" onclick="request_unit()" style="width:150px;">Create</div>
  	</form>	
  	{{form.from_table}}
  

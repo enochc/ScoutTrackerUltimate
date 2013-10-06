@@ -3,6 +3,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.contrib.auth.models import User
 
 from utils.decorators import render_to_html, login_required
 from utils.google_funcs import get_token_from_code, get_google_profile
@@ -10,6 +11,7 @@ from utils.google_funcs import get_token_from_code, get_google_profile
 
 from userprofile.forms import NewScoutForm
 from userprofile.views import userhome
+from userprofile.models import Userprofile
 
 """
 /*
@@ -36,6 +38,7 @@ def anon_home(request):
 
 @render_to_html
 def oauth_callback(request):
+    print request.method
     if request.method == 'GET':
         code = request.GET.get('code',None)
         if 'google_access_token' in request.session:
@@ -48,16 +51,27 @@ def oauth_callback(request):
             user = authenticate(token=request.session['google_access_token'])
             if user is None:
                 profile = get_google_profile(request.session['google_access_token'])
-                print profile
-
-                form = NewScoutForm(initial={'first_name':profile["given_name"],
-                                             'last_name':profile["family_name"],
-                                             'nickname':profile["given_name"],
-                                             'login_name':profile["email"],
-                                             'email':profile["email"],
-                                             'google_id':profile["id"],
-                                             'position':7,
-                                             })
+                #if an existing user exists with this email address, update googlie id
+                try:
+                    user = User.objects.get(email=profile['email'])
+                    up = Userprofile.objects.get(user=user)
+                    up.google_id = profile["id"]
+                    up.save()
+                    user = authenticate(token=request.session['google_access_token'], google_id=profile["id"])
+                    if user:
+                        login(request, user)
+                        return HttpResponseRedirect("/user")
+                except User.DoesNotExist:
+                    pass
+                form = NewScoutForm({'first_name':profile["given_name"],
+                                     'last_name':profile["family_name"],
+                                     'nickname':profile["given_name"],
+                                     'login_name':profile["email"],
+                                     'bd_string':profile['birthday'],
+                                     'email':profile["email"],
+                                     'google_id':profile["id"],
+                                     'position':7,
+                                     })
                 return 'oauth.html', {'form':form, 'profile':True}
             else:
                 login(request, user)

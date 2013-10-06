@@ -4,7 +4,7 @@ from django.conf import settings
 from utils.views import oauth_callback, anon_home
 
 
-urlpatterns = patterns('meritbadge.views',
+urlpatterns = patterns('award.views',
   
-    url(r'^list/', 'badge_list'),
+    url(r'^list/', 'award_list'),
 )

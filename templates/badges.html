@@ -1,9 +1,12 @@
 
+{%if perms.userprofile.mark_requirements%}
+<p>
+Add Merit Badge: 
+<input class="autocomplete" data-url="/award/list/"
+	type="text" style="width:180px;" name="meritbadges" placeholder="start typing to search"/> <input type="button" value="add"/>
+</p>
+{%endif%}
 
 <div id="badges">
-{%if perms.userprofile.mark_requirements%}
-Add Merit Badge: 
-<input class="autocomplete" data-url="/meritbadge/list/"
-	type="text" style="width:200px;" name="meritbadges" placeholder="start typing to search"/> <input type="button" value="add"/>
-{%endif%}
+
 </div>

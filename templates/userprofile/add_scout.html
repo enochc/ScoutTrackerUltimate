@@ -23,7 +23,7 @@ span.req{
 <script>
 $(function(){
 	
-	var req_fields = ['first_name', 'last_name', 'login_name', 'position']
+	var req_fields = ['first_name', 'last_name', 'email', 'position']
 	for(field in req_fields){
 		f = $("label[for='id_"+req_fields[field]+"']").prepend("<span class='req'>*</span>")
 	}
@@ -88,6 +88,8 @@ function submitForm(){
 {%endif%}
 <input type="hidden" id="unit" name="unit" value='{{user.profile.unit.id}}'/>
 <input type="hidden" id="position" name="position" value='{{boyscout.id}}'/>
+<input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
+
 {%if scout.google_id.value|length > 0%}
 <input type="hidden" id="id_google_id" name="google_id" value='{{form.google_id.value}}'/>
 {%endif%}
@@ -97,13 +99,17 @@ function submitForm(){
 {{form.last_name.errors}}
 <label for='id_nickname'>Nickname:</label>{{form.nickname}}<br/>
 {{form.nickname.errors}}
+
 {%if scout.has_google_login %}
+	<label for='id_email'>Email:</label>
+	<input type="text" id="id_email" name="email" value="{{form.email.value}}" disabled="disabled"/><br/>
+	{{form.email.errors}}
+	
     <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
     <label for='id_login_name'>Login:</label>
     <span class="input"><img style="text-align:center;" src="{{MEDIA_URL}}/google.png"/></span><br/>
     {{form.login_name.errors}}
-{%else%}
-     <label>Login:</label>{{form.login_name}}<br/>
+
 {%endif%}
 <label for='id_bd_string'>Birthday:</label>
 
