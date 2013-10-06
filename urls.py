@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^user/', include('userprofile.urls')),
     url(r'^troop/', include('troop.urls')),
     url(r'^requirement/', include('requirement.urls')),
+    url(r'^meritbadge/', include('meritbadge.urls')),
     url(r'^oauth2callback/', oauth_callback),
     url(r'^register/', oauth_callback),
 )

@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseBadRequest

@@ -96,7 +96,10 @@ if($){
 		return this;
 	}
 }
+var autocomplete_lists = {}
+// On load bindings
 $(function(){
+	
 	$("#login_password").enter(login)
 	$("#add_scout_btn").click(function(){
 		window.open('/user/add_scout/', 'add_scout', 'width=400, height=400')
@@ -112,8 +115,35 @@ $(function(){
     	e.stopPropagation()
     	return false
     })
-
+    
+    $(".autocomplete").autocomplete({
+    	delay:0,
+    	source:function( request, response ) {
+    		var t = $(this.element)
+    		var noCache = t.hasClass("nocache")
+    		var url = t.attr("data-url")
+    		if(!noCache){
+    			var list = autocomplete_lists[url]
+    			if(!und(list)){
+    				response(filterList(list, request.term));
+    				return true
+    			}
+    		}
+    		$.getJSON(url, function(data){
+    			autocomplete_lists[url]=data.list
+    			response(filterList(data.list, request.term))
+    		})
+            
+          }		
+    })
+    
 })
+
+function filterList(list, val){
+	return $.map(list, function(v, i){
+		if(v.toLowerCase().indexOf(val.toLowerCase()) >=0){return v}
+	})
+}
 
 function close_popup(){
 	$('.popup').hide()

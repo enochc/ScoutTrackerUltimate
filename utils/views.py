@@ -53,7 +53,7 @@ def oauth_callback(request):
                 form = NewScoutForm(initial={'first_name':profile["given_name"],
                                              'last_name':profile["family_name"],
                                              'nickname':profile["given_name"],
-                                             'login_name':profile["given_name"],
+                                             'login_name':profile["email"],
                                              'email':profile["email"],
                                              'google_id':profile["id"],
                                              'position':7,

@@ -43,14 +43,10 @@ class NewScoutForm(forms.ModelForm):
         username = self.cleaned_data['login_name']
         troop = self.cleaned_data['troop']
         gid = self.cleaned_data['google_id']
-        if len(gid) > 0 and gid != 'None':
-            username='g:%s' %  gid
-        else:
-            username='%s_%s' % (username, troop or '100000')
+
         try:
             u = User.objects.get(username__iexact=username)
             if u != self.instance.user:
-                print 'doh %s'%u
                 raise forms.ValidationError('A user with that login already exists.')
             else:
                 return username

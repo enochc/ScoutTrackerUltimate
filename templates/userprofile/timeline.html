@@ -82,6 +82,12 @@ div.goal.bday{
     background: black;
     border: 2px solid white;
   }
+  .ui-tooltip .date{
+  	color:#b31e36;
+  	display:block;
+  	font:10px;
+  	font-weight:normal;
+  }
   .ui-tooltip {
   	max-width:200px;
     padding: 10px 20px;
@@ -91,6 +97,7 @@ div.goal.bday{
     text-transform: uppercase;
     box-shadow: 0 0 7px black;
   }
+  
   .arrow {
     width: 70px;
     height: 16px;
@@ -165,7 +172,7 @@ div.goal.bday{
 	function placeGoal(name, date, klass, gid, offset){
 		var offset = offset || 5
 		var left = getPlace(date)-offset
-		var goal = $("<div title=\""+date.toDateString()+" "+name+"\" class=\"goal "+klass+"\"></div>").css({
+		var goal = $("<div data-date=\""+date.toDateString()+"\" title=\""+name +"\" class=\"goal "+klass+"\"></div>").css({
 			//"top":ttop,
 			"left":left
 			})
@@ -212,7 +219,11 @@ div.goal.bday{
 		              .addClass( feedback.horizontal )
 		              .appendTo( this );
 		          }
-		        }
+		        },
+			content:function(ret){
+				var t = $(this)
+				return "<span class='date'>"+t.attr("data-date")+"</span>"+t.attr("title")
+				}
 		})
 		
 	})

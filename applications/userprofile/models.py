@@ -18,7 +18,12 @@ class UserGoal(models.Model):
 	user = models.ForeignKey("userprofile.Userprofile", related_name="goals")
 	klass = models.CharField(max_length=50, null=True, blank=True)
 	
-			
+
+class UserBadge(models.Model):
+	badge = models.ForeignKey('meritbadge.Badge')
+	dage_earned = models.DateField(blank=True, null=True)
+	location_earned = models.CharField(max_length=200, help_text="name of camp or powow")
+	counseler = models.CharField(max_length=200, blank=True, null=True)
 
 class Userprofile(models.Model):
 	class Meta:
@@ -48,6 +53,7 @@ class Userprofile(models.Model):
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
+	badges = models.ManyToManyField(UserBadge, null=True, blank=True)
 
 	
 	def is_scout(self):
@@ -60,26 +66,26 @@ class Userprofile(models.Model):
 	def has_google_login(self):
 		return self.google_id is not None and len(self.google_id)>0 and self.google_id != 'None'
 	
-	def set_goals(self):
-		if self.goals.all().count()==0:
-			from rank.models import Rank
+	def set_goals(self, force=False):
+		if force or self.goals.all().count()==0:
 		
 			eagle = self.birthday.replace(year=(self.birthday.year+18))
 			life = add_months(-6, eagle)
 			star = add_months(-6, life)
 			frstcls = add_months(-4, star)
 
-			goal_data = [('Receive Eagle',eagle),
-				('Receive Life',life),
-				('Receive Star',star),
-				('Receive First Class',frstcls)]
+			goal_data = [('Receive Eagle',eagle, 'eagle'),
+				('Receive Life',life, 'life'),
+				('Receive Star',star, 'star'),
+				('Receive First Class',frstcls, 'first_class')]
 			for data in goal_data:
 				try:
 					goal = UserGoal.objects.get(name=data[0], user=self)
 					goal.date_due = data[1]
+					goal.klass = data[2]
 					
 				except UserGoal.DoesNotExist:
-					goal = UserGoal(name=data[0],date_due=data[1], user=self)
+					goal = UserGoal(name=data[0],date_due=data[1], user=self, klass=data[2])
 				goal.save()
 				self.goals.add(goal)
 
@@ -123,10 +129,15 @@ class Userprofile(models.Model):
 			group.user_set.add(self.user)
 			self.__original_position = self.position
 			
+		bday = Userprofile.objects.get(pk=self.id).birthday
+			
 		super(Userprofile, self).save(*args, **kwargs)
 		
 		if self.birthday and self.is_scout():
-			self.set_goals()
+			force = False
+			if self.birthday != bday:
+				force = True
+			self.set_goals(force)
     	
     	
    

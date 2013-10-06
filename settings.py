@@ -222,7 +222,8 @@ GOOGLE_CLIENT_ID = "448849120100.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET = "XZDzn3t_ajXgEqp-g-MZJKGZ"
 GOOGLE_API_KEY = "AIzaSyChYYhFzxdAJr8XReiymLBxAkzimu7etHk"
 
-try:
-    from local_settings import *
-except ImportError:
-    print 'No local settings file'
+
+#try:
+#    from local_settings import *
+#except ImportError:
+#    print 'No local settings file'
