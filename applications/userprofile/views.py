@@ -12,7 +12,7 @@ from userprofile.models import Userprofile
 from position.models import Position
 from userrequirement.models import UserRequirement
 from rank.models import Rank
-
+from award.models import Award
 
 
 @render_to_html
@@ -36,11 +36,12 @@ def userhome(request, user_id=None):
         req_list = scout.profile.completed_list()  
         ranks = Rank.objects.all()
         
+    awards = Award.objects.all()
         
     return 'userprofile/user_home.html', {'scout':scout.profile, 
                                           'userrequirements':urs, 
                                           'req_list':req_list,
-                                          'ranks':ranks}
+                                          'ranks':ranks,'badges':awards}
 
 @render_to_html
 def add_scout(request, scout_id = None):  
@@ -48,6 +49,7 @@ def add_scout(request, scout_id = None):
         edit = int(request.GET.get('edit','0')) == 1
         boyscout = Position.objects.get(name='Boy Scout')
         scout = None
+
         if scout_id is not None:
             scout = Userprofile.objects.get(pk=scout_id)
             form = NewScoutForm(instance=scout, initial={'first_name':scout.user.first_name,
@@ -55,7 +57,7 @@ def add_scout(request, scout_id = None):
                                                          'login_name':scout.user.username.split,
                                                          'email':scout.user.email})
         else:
-            form = NewScoutForm()
+            form = NewScoutForm(initial={'email':'noemail'})
         return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout, 'edit':edit}
     
     else:

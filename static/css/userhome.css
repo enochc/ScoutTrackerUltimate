@@ -1,0 +1,90 @@
+/* line 5, ../scss/userhome.scss */
+div#rpane {
+  width: 60%;
+  float: right;
+}
+
+/* line 9, ../scss/userhome.scss */
+.rank_img {
+  width: 80px;
+  float: right;
+}
+
+/* line 14, ../scss/userhome.scss */
+.rank_div {
+  width: 570px;
+  margin-bottom: 10px;
+  background-color: #efeacc;
+  -webkit-box-shadow: 5px 5px 3px #1f3224;
+  -moz-box-shadow: 5px 5px 3px #1f3224;
+  box-shadow: 5px 5px 3px #1f3224;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* line 23, ../scss/userhome.scss */
+.slide_container {
+  display: none;
+  position: relative;
+  overflow: auto;
+}
+
+/* line 28, ../scss/userhome.scss */
+.rank_table {
+  float: left;
+  width: 490px;
+}
+
+/* line 34, ../scss/userhome.scss */
+.rank_table tr {
+  height: 30px;
+}
+
+/* line 37, ../scss/userhome.scss */
+h2 {
+  color: #005e9c;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* line 42, ../scss/userhome.scss */
+h2 span {
+  margin-right: 10px;
+  color: #f6bc56;
+  font-size: larger;
+}
+
+/* line 47, ../scss/userhome.scss */
+span.notes {
+  color: #888;
+}
+
+/* line 50, ../scss/userhome.scss */
+span.date {
+  color: #b31f36;
+}
+
+/* line 53, ../scss/userhome.scss */
+tr.tr_notes {
+  display: none;
+}
+
+/* line 56, ../scss/userhome.scss */
+tr.tr_notes.full {
+  display: table-row;
+}
+
+/* line 59, ../scss/userhome.scss */
+div#info {
+  display: none;
+}
+
+/* line 60, ../scss/userhome.scss */
+div#user_help {
+  float: right;
+  width: 70%;
+}

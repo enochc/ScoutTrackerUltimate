@@ -1,0 +1,258 @@
+@import "compass/reset";
+
+@import "_base";
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+@import "compass/css3/images";
+
+.red{color:$red}
+.blue{color:$blue}
+.gold{color:$gold;}
+.green{color:$green;}
+.ltgreen{color:$tan;}
+
+div.ui-datepicker{
+ font-size:.7em;
+}
+#block_message{
+	cursor:default;
+}
+html, body, table, tr, td, th{
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+body{
+	font-family:Helvetica, Neue, sans-serif;
+	font-size:1em;
+	margin:0;
+	padding:0;
+}
+a, .link{
+	color:$green;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+hr{
+	background-color:#005a9a;
+	border-color:#005a9a;
+}
+h1, legend{
+	margin:0;
+	padding:5px 0;
+	color:$red;
+	font-size:1.6em;
+}
+legend{
+	padding:0;
+}
+h2{
+    margin:0;
+    padding:3px 0px;
+    color:$blue;
+    font-size:1.2em;
+}
+ul.errorlist{
+	color:red;
+	margin:0;
+}
+ul.errorlist li{
+    color:red;
+    margin:0;
+    padding:0;
+    font-size:smaller;
+}
+
+p{
+	margin:5px 10px;	
+}
+#outer{
+	width:100%;
+	height:100%;
+}
+#frame{
+	width:1000px;
+    margin:0 auto;
+    height:100%;
+}
+#banner{
+	margin-top:10px;
+    padding:0;
+}
+#banner h1{
+	display:inline;
+	font-size:32px;
+	line-height:20px;
+	vertical-align:baseline;
+	position:relative;
+	bottom:0px;
+	color:#000;
+	padding-bottom:0;
+}
+#banner .button{
+	margin-top:2px;
+}
+#banner span{
+	/*margin-top:10px;*/
+	margin-right:20px;
+}
+.rt{
+	float:right;
+}
+
+.button{
+	height:20px;
+	line-height:20px;
+	background-color:$gold;
+	padding:0 10px;
+	margin:4px 5px;
+	cursor:pointer;
+    color:$red;
+	border:1px outset yellow;
+	font-weight:bold;
+
+}
+.button:hover{
+	border:1px inset yellow;
+}
+
+#nav{
+	@include background-image(linear-gradient(#000,$blue));
+	height:30px;
+	line-height:30px;
+	width:98%;
+	padding: 0 1%;
+	vertical-align:middle;
+	color:#fff;
+	margin-bottom:5px;
+	
+	& ul{
+		list-style-type: none;
+		margin:0;
+		padding:0;
+		
+		& li{
+			display:inline-block;
+		    margin:0 10px;
+		    cursor:pointer;
+		    font-weight:bold;
+		    & a{
+		    	text-decoration:none;
+				color:#fff;
+				&:hover{
+					text-decoration:underline;
+				}
+		    }
+		}
+	}
+	
+}
+
+
+.error{
+	background-color:yellow !important;
+}
+.float_spacer{
+	width:0;
+	height:0;
+	float:none;
+	clear:both;
+}
+
+/* ========== set requirement popup ==============*/
+
+#set_req_form h2{
+	color:$gold;
+}
+#set_req_form label{
+	color:#cecece;
+	display:inline-block;
+	padding-right:5px;
+}
+#set_req_form textarea{
+    width:240px;
+    height:70px;
+    margin:5px 0;
+    display:block;
+}
+#set_req_form .button{
+    float:left;
+    width:80px;
+}
+
+
+div#requirements .req{
+    width:60px;
+    text-align:center;
+    float:left;
+    height:24px;
+}
+
+.req.checkbox{
+    cursor:pointer;    
+    font-size:x-large;
+    line-height:25px;
+	&:hover{
+	    font-weight:bold;
+	}
+	&.stripe{
+		background-color:lighten($green,60%);
+	}
+	&.stripe.current_req{
+		background-color:lighten($green,50%);
+	}
+}
+
+span.info{
+	font-weight:bold;
+	padding:0 5px;
+	color:$blue;
+	cursor:pointer;
+}
+span.info:hover{
+	text-decoration:underline;
+}
+.float_panel{     
+    @include box-shadow;
+    border:none;
+    @include border_radius(10px);
+    background-color:$tan;       
+    padding:10px;
+}
+
+.popup{
+	background-color:$green;
+    padding:10px;
+    display:none;
+    position:absolute;
+    z-index:3;
+    @include box-shadow;
+    text-align:left;
+    @include border_radius;
+    color:#fff;
+    h1{
+    	color:$gold;
+    }
+    & #close_popup{
+	    float:right;
+	    cursor:pointer;
+	    margin:10px;
+	    color:white;
+	    font-weight:bold;
+	    display:block;
+	    @include border_radius(10px);
+	    width:20px;
+	    height:20px;
+	    background-color:$red;
+	    line-height:20px;
+	    padding:1px 0 0 1px;
+	    text-align:center;
+	}
+}
+
+
+
+@import "overview";
+@import "userhome";

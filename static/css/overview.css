@@ -1,0 +1,80 @@
+/* line 3, ../scss/overview.scss */
+div.rank_header {
+  float: left;
+  width: 14%;
+  height: 136px;
+  text-align: center;
+  padding: 5px 1px;
+}
+
+/* line 11, ../scss/overview.scss */
+div.rank_header:last-of-type {
+  float: right;
+  margin-right: 5px;
+  height: 146px;
+  margin-bottom: -10px;
+  padding: 5px 0;
+}
+
+/* line 18, ../scss/overview.scss */
+div.rank_header img {
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+/* line 24, ../scss/overview.scss */
+div.scout_name {
+  width: 100%;
+  text-align: right;
+  height: 24px;
+  white-space: nowrap;
+  font-size: smaller;
+}
+
+/* line 31, ../scss/overview.scss */
+.current_rank {
+  background-color: #efeacc;
+  box-shadow: 5px 5px 3px #32523b;
+  position: relative;
+  z-index: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* line 39, ../scss/overview.scss */
+div#requirements {
+  width: 900px;
+  padding: 10px;
+  background-color: #efeacc;
+  box-shadow: 5px 5px 3px #32523b;
+  position: relative;
+  z-index: 1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* line 50, ../scss/overview.scss */
+div#requirements .req_header {
+  float: left;
+  height: 20px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+/* line 58, ../scss/overview.scss */
+div.current_req {
+  background-color: #d3cfb6;
+}
+
+/* line 61, ../scss/overview.scss */
+div.current_req.stripe {
+  background-color: #c3d6bc;
+}
+
+/* line 64, ../scss/overview.scss */
+div#requirement_info {
+  margin-top: 30px;
+}

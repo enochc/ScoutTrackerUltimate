@@ -39,21 +39,23 @@ class NewScoutForm(forms.ModelForm):
         
     def clean_email(self):
         email = self.cleaned_data['email']
-        
-        try:
-            user = User.objects.get(email__iexact=email)
-            if not self.instance or user != self.instance.user:
-                print self.instance.user, user
-                raise forms.ValidationError('A user with that email already exists.')
-        except User.DoesNotExist:
-            pass
+        if email != 'noemail':
+            try:
+                user = User.objects.get(email__iexact=email)
+                if not self.instance or user != self.instance.user:
+                    print self.instance.user, user
+                    raise forms.ValidationError('A user with that email already exists.')
+            except User.DoesNotExist:
+                pass
         else:
             return email
     
     def clean_login_name(self):
         username = self.data['email']
-
+        if username =='noemail':
+            return "%s_%s"%(self.data.get("first_name"),self.data.get("unit"))
         try:
+            
             u = User.objects.get(username__iexact=username)
             if u != self.instance.user:
                 raise forms.ValidationError('A user with that login already exists.')

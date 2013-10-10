@@ -1,3 +1,17 @@
+<style>
+
+#badges{
+	background:url({{MEDIA_URL}}sash.jpg) repeat-y;
+	width:90%%;
+	min-height:400px;
+	margin:10px 0;
+	padding:20px;
+}
+.badge{
+	margin:2px;
+	width:110px;
+}
+</style>
 
 {%if perms.userprofile.mark_requirements%}
 <p>
@@ -8,5 +22,10 @@ Add Merit Badge:
 {%endif%}
 
 <div id="badges">
+{% for x in 1234|make_list %}
+{%for badge in badges%}
 
+<img class="badge" src="{{MEDIA_URL}}{{badge.image}}"/>
+{%endfor%}
+{%endfor%}
 </div>

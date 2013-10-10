@@ -3,8 +3,8 @@
     <div class='req req_header' id="r_{{r.pk}}" title="{{r.short_desc}}"><span class="button">#{{r.order}}</span></div>
 {%endfor%}
      <div class="float_spacer">&nbsp;</div>
-{%if troop%}
-    {%for scout in troop.scouts%}
+{%if unit%}
+    {%for scout in unit.scouts%}
         
         {%for r in rank.requirements.all%}
             <div class='req s_{{scout.pk}} r_{{r.pk}} checkbox {%if forloop.parentloop.counter|divisibleby:2%}stripe{%endif%}'>

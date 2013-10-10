@@ -1,78 +1,7 @@
 {%extends 'page_template.html'%}
 {% load scouttags%}
 {%block head%}
-<style>
-div#requirements{
-    width:60%;
-    float:right;
-}
-.rank_img{
-    width:80px;
-    float:right;
-    
-}
-.rank_div{
-    width:570px;
-    margin-bottom:10px;
-    
-    background-color:#efeacc;
-    box-shadow: 5px 5px 3px #32523b;
-    border-radius:5px;
-    padding:10px;
-}
-.slide_container{
-    display:none;
-    position:relative;
-    overflow:auto;
-}
-.rank_table{
-    float:left;
-    width:490px;
 
- 
-}
-.rank_table tr{
-    height:30px;
-}
-h2{
-    color:#005e9c;
-    cursor:pointer;
-    margin:0;
-}
-h2 span{
-    margin-right:10px;
-    color:#f6bc56;
-    font-size:larger;
-}
-span.notes{
-    color:#888;
-}
-span.date{
-    color:#b31f36;
-}
-tr.tr_notes{
-    display:none;
-}
-tr.tr_notes.full{
-    display:table-row;
-}
-div#info{display:none;}
-div#user_help{
-	float:right;
-	width:70%;
-}
-
-
-/* Badges */
-#badges{
-
-	background:url({{MEDIA_URL}}sash.jpg) repeat-y;
-	width:100%;
-	min-height:400px;
-	margin-top:10px;
-}
-
-</style>
 <script>
 $(function(){
 
@@ -191,7 +120,7 @@ function afterSet(box, data){
 </div>    
 {%if scout.position.youth%}
 
-	<div id="requirements"/>
+	<div id="rpane"/>
 	   
         {%for r in ranks%}
              <div class="rank_div">

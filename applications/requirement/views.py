@@ -35,7 +35,7 @@ def req_set(request, req_id, user_id, completed = True):
         except Exception, e:
             return HttpJsonFailure(str(e))
 
-        if request.user.has_perm('userrank.change_userrank') or request.user.profile == profile:
+        if request.user.has_perm('userprofile.mark_requirements') or request.user.profile == profile:
             try:
                 ur = UserRequirement.objects.get(user=profile.user, requirement=req)
             except UserRequirement.DoesNotExist:

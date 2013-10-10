@@ -100,17 +100,28 @@ function submitForm(){
 <label for='id_nickname'>Nickname:</label>{{form.nickname}}<br/>
 {{form.nickname.errors}}
 
-{%if scout.has_google_login %}
-	<label for='id_email'>Email:</label>
-	<input type="text" id="id_email" name="email" value="{{form.email.value}}" disabled="disabled"/><br/>
-	{{form.email.errors}}
-	
-    <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
-    <label for='id_login_name'>Login:</label>
-    <span class="input"><img style="text-align:center;" src="{{MEDIA_URL}}/google.png"/></span><br/>
-    {{form.login_name.errors}}
+{%if scout%}
+	{%if scout.has_google_login %}
+		<label for='id_email'>Email:</label>
+		<input type="text" id="id_email" name="email" value="{{form.email.value}}" disabled="disabled"/><br/>
+		{{form.email.errors}}
+		
+	    <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
+	    <label for='id_login_name'>Login:</label>
+	    <span class="input"><img style="text-align:center;" src="{{MEDIA_URL}}/google.png"/></span><br/>
+	    {{form.login_name.errors}}
+	 {%else%}
+	 	<label for='id_email'>Email:</label>{{form.email}}<br/>
+	 	{{form.email.errors}}
+	 	
+	 {%endif%}
+{%else%}
+	<input type="hidden" id="id_email" name="email" value='{{form.email.value}}'/>	
 
+	
 {%endif%}
+
+
 <label for='id_bd_string'>Birthday:</label>
 
  
