@@ -63,11 +63,12 @@ def oauth_callback(request):
                         return HttpResponseRedirect("/user")
                 except User.DoesNotExist:
                     pass
+                print profile
                 form = NewScoutForm({'first_name':profile["given_name"],
                                      'last_name':profile["family_name"],
                                      'nickname':profile["given_name"],
                                      'login_name':profile["email"],
-                                     'bd_string':profile['birthday'],
+                                     'bd_string':profile.get('birthday',''),
                                      'email':profile["email"],
                                      'google_id':profile["id"],
                                      'position':7,

@@ -23,6 +23,7 @@ def userhome(request, user_id=None):
     req_list = {}
     ranks = {}
     urs = {}
+    patrols = []
     
 
 
@@ -35,13 +36,16 @@ def userhome(request, user_id=None):
         urs = UserRequirement.objects.filter(user=scout)
         req_list = scout.profile.completed_list()  
         ranks = Rank.objects.all()
+    else:
+        patrols = scout.profile.patrols.all()
         
     awards = Award.objects.all()
         
     return 'userprofile/user_home.html', {'scout':scout.profile, 
                                           'userrequirements':urs, 
                                           'req_list':req_list,
-                                          'ranks':ranks,'badges':awards}
+                                          'ranks':ranks,'badges':awards,
+                                          'patrols':patrols}
 
 @render_to_html
 def add_scout(request, scout_id = None):  

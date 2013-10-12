@@ -9,3 +9,4 @@ class UnitForm(forms.ModelForm):
 
     user_role = forms.IntegerField()
     council_name = forms.CharField(max_length=255)
+    

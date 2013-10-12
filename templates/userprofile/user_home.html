@@ -70,6 +70,25 @@ $(function(){
 	{%else%}
 	$("#sc1").prev(".rank_div h2").click()
 	{%endif%}
+	
+	$("#newpatrol_btn").on("click",function(){
+		
+		var pn = $("#np_name").val()
+		if(pn.length <=2 ){
+			alert("Please enter a Patrol name longer then 2 characters")
+			return false
+		}else{
+			$(".rpane").block()
+			$.post("/unit/newpatrol/",{"pname":pn},function(data){
+				if(!data.success){
+					alert(data.message)
+					$(".rpane").unblock()
+				}else{
+					window.location = window.location
+				}
+			})
+		}
+	})
 })
 
 function afterSet(box, data){
@@ -134,7 +153,7 @@ function afterSet(box, data){
                                 <td valign="middle">
                                     <div class="req checkbox s_{{scout.pk}} r_{{req.pk}}">
                                         {%if user_requirement.completed %}<img src='{{MEDIA_URL}}check.png'/>
-                                        {%else%}<span class='empty red'>&mdash;</span>{%endif%}
+                                        {%else%}<span class='empty'>&nbsp;</span>{%endif%}
                                     </div>
                                 </td>
                                 <td><span class="info" ref="/requirement/info/{{req.pk}}/">?</span>{{req.short_desc}}
@@ -162,9 +181,9 @@ function afterSet(box, data){
 
 {% else %}
 	<!-- Is a parent or guardian or scout leader-->
-	<div id="user_help">
+	
 		{% if user.profile.unit = None%}
-			
+		<div id="user_help">
 			<fieldset class="float_panel"><legend>Join a Unit</legend>
 			For security purposes you can only join a unit via an invitation. Eventually I'll have a search option here where you can 
 			search for local unitss and request to be invited. Until that happens you must contact one of your local Scout Representatives
@@ -177,13 +196,26 @@ function afterSet(box, data){
 			
 			<div id="unit_div">
 			 
-			 </div>
+			</div>
 			</fieldset>
 			
-			 
+		</div>	 
 		{%else%}
+			<div id="rpane">
+				
+					<h2>Patrols:</h2>
+					<div>
+					<input type="text" size="50" placeholder="Patrol Name" id="np_name"/>
+					<span class="button" id="newpatrol_btn">+ Add Patrol</span>
+					</div>
+					{%for p in patrols%}
+						{{p.name}}
+					{%empty%}
+						<h1>Oh no! no patrols yet</h1>
+					{%endfor%}
+				
+			</div>
 			
-			<p>Your Unit</p>
 		{%endif%}
 	</div>
 {%endif%}

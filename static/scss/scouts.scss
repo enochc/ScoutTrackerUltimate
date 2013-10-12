@@ -4,6 +4,7 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/border-radius";
 @import "compass/css3/images";
+@import "compass/css3/opacity";
 
 .red{color:$red}
 .blue{color:$blue}
@@ -183,27 +184,41 @@ p{
 }
 
 
-div#requirements .req{
+div.req{
     width:60px;
     text-align:center;
     float:left;
-    height:24px;
+    height:25px;
+    &.checkbox{
+	    font-size:x-large;
+	    line-height:25px;
+		&:hover{
+		    font-weight:bold;
+		}
+		&.stripe{
+			background-color:lighten($green,60%);
+		}
+		&.stripe.current_req{
+			background-color:lighten($green,50%);
+		}
+	}
+	& img{
+		cursor:pointer;
+	}
+	& .empty{
+		margin-top:3px;
+		cursor:pointer;
+		width:16px;
+		height:16px;
+		display:inline-block;
+		border:2px outset;
+		background-color:lighten($green, 55%);
+		&:hover{
+			border:2px inset;
+		}
+	}
 }
 
-.req.checkbox{
-    cursor:pointer;    
-    font-size:x-large;
-    line-height:25px;
-	&:hover{
-	    font-weight:bold;
-	}
-	&.stripe{
-		background-color:lighten($green,60%);
-	}
-	&.stripe.current_req{
-		background-color:lighten($green,50%);
-	}
-}
 
 span.info{
 	font-weight:bold;

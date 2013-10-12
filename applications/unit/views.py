@@ -8,6 +8,7 @@ from utils.response import HttpJsonSuccess, HttpJsonFailure, HttpJsonFormError
 from requirement.models import Requirement
 from rank.models import Rank
 from unit.forms import UnitForm
+from unit.models import Patrol
 from position.models import Position
 
 @render_to_html
@@ -15,6 +16,21 @@ from position.models import Position
 def unitHome(request):
     return 'unit/unit_home.html'
 
+@render_to_html
+@login_required
+def newPatrol(request):
+    pname = request.REQUEST.get("pname")
+    scout = request.user.profile
+    unit = scout.unit
+    try:
+        patrol = Patrol.objects.get(unit=unit,name=pname)
+        return HttpJsonFailure("Patrol %s already exists"%pname)
+    except:
+        patrol = Patrol.objects.create(name=pname,unit=unit)
+        scout.add_patrol(patrol)
+        return HttpJsonSuccess()
+    
+    
 
 @render_to_html
 @login_required

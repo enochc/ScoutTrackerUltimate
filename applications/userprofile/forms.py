@@ -11,7 +11,7 @@ class NewScoutForm(forms.ModelForm):
         
     class Meta:
         model = Userprofile
-        exclude = ('user','goals')
+        exclude = ('user','goals', 'patrol')
     
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
@@ -39,6 +39,7 @@ class NewScoutForm(forms.ModelForm):
         
     def clean_email(self):
         email = self.cleaned_data['email']
+        print 'clean email', email
         if email != 'noemail':
             try:
                 user = User.objects.get(email__iexact=email)
@@ -46,7 +47,7 @@ class NewScoutForm(forms.ModelForm):
                     print self.instance.user, user
                     raise forms.ValidationError('A user with that email already exists.')
             except User.DoesNotExist:
-                pass
+                return email
         else:
             return email
     
@@ -69,7 +70,9 @@ class NewScoutForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         cd = self.cleaned_data
         username='%s' % (cd.get('login_name'))
+        print 'one'
         if not self.instance.pk:
+            print 'two'
             try:
                 password = cd.get('password','password')
                 user = User.objects.create_user(username, '', password=password)
@@ -78,12 +81,14 @@ class NewScoutForm(forms.ModelForm):
         else:
             user = self.instance.user
             user.username = username
-            
+        
+        print 'three'
         user.first_name = cd.get('first_name')
         user.last_name = cd.get('last_name') 
         user.email = cd.get('email') 
         
-        
+        print 'four'
+        print cd
         profile = super(NewScoutForm, self).save(*args, **kwargs)
         if len(profile.google_id) > 0:
             user.is_active = False
