@@ -29,5 +29,8 @@ class Patrol(models.Model):
     unit = models.ForeignKey(Unit)
     name = models.CharField(max_length=200)
     
+    def scouts(self):
+        return self.patrol_members.filter(position__youth=True)
+    
     def __unicode__(self):
         return "%s - %s"%(self.unit.number, self.name)

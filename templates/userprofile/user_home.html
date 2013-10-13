@@ -1,5 +1,6 @@
 {%extends 'page_template.html'%}
 {% load scouttags%}
+{% load thumbnail %}
 {%block head%}
 
 <script>
@@ -128,7 +129,7 @@ function afterSet(box, data){
 
     <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
 
-    <h1>{{scout.fullname}} </h1>
+    <h1>{{scout.fullname}}{%if scout.patrol%} ( {{scout.patrol.name}} ) {%endif%}</h1>
     {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
     {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
     
@@ -204,15 +205,41 @@ function afterSet(box, data){
 			<div id="rpane">
 				
 					<h2>Patrols:</h2>
-					<div>
-					<input type="text" size="50" placeholder="Patrol Name" id="np_name"/>
-					<span class="button" id="newpatrol_btn">+ Add Patrol</span>
+					<div style="margin-bottom:10px;">
+						<input type="text" size="50" placeholder="Patrol Name" id="np_name"/>
+						<span class="button" id="newpatrol_btn">+ Add Patrol</span>
 					</div>
+					{%if orphans%}
+					<div class="rank_div">
+						<h2>Members not in a Patrol (Drag to assign to Patrol)</h2>
+						{%for o in orphans%}
+							<div class="draggable" data-scout="{{o.id}}" title="Drag to a Patrol">{{o.name}}</div>
+						{%endfor%}
+					</div>
+					{%endif%}
 					{%for p in patrols%}
-						{{p.name}}
+						<div class="rank_div droppable" data-patrol="{{p.id}}">
+							<h2>{{p.name}}</h2>
+							<div style="padding:5px 0;" class="scoutList">
+							{%for u in p.scouts %}
+								<div class="draggable" data-scout="{{u.id}}" title="Drag to a Patrol">
+								<a href="/user/{{u.user.id}}/">{{u.user.first_name}} {{u.user.last_name}}</a> 
+								{% thumbnail u.position.patch "23x23" as im %}
+								    <img src="{{ im.url }}" width="{{im.width}}" height="{{im.height}}" title="{{u.position.name}}">
+								{% endthumbnail %}
+								{%comment%}
+								{%if u.position.patch%}<img src='{{MEDIA_URL}}{{u.position.patch}}'/>{%endif%}
+								{%endcomment%}
+								</div>
+							{%endfor%}
+							</div>
+							<div class="button add_scout" style="width:100px;margin:0 0 0 auto;" data-patrol="{{p.id}}">Add Scout</div>
+						</div>
 					{%empty%}
 						<h1>Oh no! no patrols yet</h1>
 					{%endfor%}
+
+					
 				
 			</div>
 			

@@ -101,8 +101,13 @@ var autocomplete_lists = {}
 $(function(){
 	
 	$("#login_password").enter(login)
-	$("#add_scout_btn").click(function(){
-		window.open('/user/add_scout/', 'add_scout', 'width=400, height=400')
+	$("#add_scout_btn,.add_scout").click(function(){
+		var url = '/user/add_scout/'
+		var patrol = $(this).attr("data-patrol")
+		if(!und(patrol) && patrol.length >0){
+			url+="?patrol="+patrol
+		}
+		window.open(url, 'add_scout', 'width=400, height=400')
 	})
 	
 	$("#outer").click(function(e){
@@ -136,8 +141,36 @@ $(function(){
             
           }		
     })
-    
+    $(".draggable").draggable({ 
+    	revert: "invalid",
+    	revertDuration: "200"
+    });
+	$(".droppable").droppable({
+		hoverClass: "drop_hover",
+		activeClass: "drop_active",
+		drop:function(event, ui){
+			var drop = $(event.target)
+			drop.block()
+			var data = {"scout":ui.draggable.attr("data-scout"),
+				"patrol":$(this).attr("data-patrol")
+			}
+			$.post("/unit/add/", data, function(data){
+				if(data.success){
+					drop.find(".scoutList").append(ui.draggable.css({"top":"","left":""}))
+					drop.unblock()
+				}else{
+					alert(data.message)
+					ui.draggable.css({"top":"","left":""})
+					drop.unblock()
+				}
+				
+			})
+	
+		}
+	});
 })
+
+
 
 function filterList(list, val){
 	return $.map(list, function(v, i){

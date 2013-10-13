@@ -28,12 +28,17 @@ div.rank_header img {
 div.scout_name {
   width: 100%;
   text-align: right;
-  height: 24px;
+  height: 25px;
   white-space: nowrap;
   font-size: smaller;
 }
-
 /* line 31, ../scss/overview.scss */
+div.scout_name.patrol_name {
+  color: #b31f36;
+  font-weight: bold;
+}
+
+/* line 36, ../scss/overview.scss */
 .current_rank {
   background-color: #efeacc;
   box-shadow: 5px 5px 3px #32523b;
@@ -43,7 +48,7 @@ div.scout_name {
   border-top-right-radius: 5px;
 }
 
-/* line 39, ../scss/overview.scss */
+/* line 44, ../scss/overview.scss */
 div#requirements {
   width: 900px;
   padding: 10px;
@@ -56,7 +61,7 @@ div#requirements {
   border-top-right-radius: 5px;
 }
 
-/* line 50, ../scss/overview.scss */
+/* line 55, ../scss/overview.scss */
 div#requirements .req_header {
   float: left;
   height: 20px;
@@ -64,17 +69,17 @@ div#requirements .req_header {
   cursor: pointer;
 }
 
-/* line 58, ../scss/overview.scss */
+/* line 63, ../scss/overview.scss */
 div.current_req {
   background-color: #d3cfb6;
 }
 
-/* line 61, ../scss/overview.scss */
+/* line 66, ../scss/overview.scss */
 div.current_req.stripe {
   background-color: #c3d6bc;
 }
 
-/* line 64, ../scss/overview.scss */
+/* line 69, ../scss/overview.scss */
 div#requirement_info {
   margin-top: 30px;
 }

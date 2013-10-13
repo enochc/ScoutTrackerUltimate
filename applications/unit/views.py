@@ -10,11 +10,27 @@ from rank.models import Rank
 from unit.forms import UnitForm
 from unit.models import Patrol
 from position.models import Position
+from userprofile.models import Userprofile
+
 
 @render_to_html
 @login_required
 def unitHome(request):
     return 'unit/unit_home.html'
+
+@render_to_html
+@login_required
+def addToPatrol(request):
+    scout_id = request.REQUEST.get("scout")
+    patrol_id = request.REQUEST.get("patrol")
+    if scout_id and patrol_id:
+        scout = Userprofile.objects.get(pk=scout_id)
+        scout.patrol = Patrol.objects.get(pk=patrol_id)
+        scout.save()
+        return HttpJsonSuccess()
+    else:
+        
+        return HttpJsonFailure("patrol or scout does not exist")
 
 @render_to_html
 @login_required
@@ -27,7 +43,7 @@ def newPatrol(request):
         return HttpJsonFailure("Patrol %s already exists"%pname)
     except:
         patrol = Patrol.objects.create(name=pname,unit=unit)
-        scout.add_patrol(patrol)
+        patrol.save()
         return HttpJsonSuccess()
     
     
@@ -68,10 +84,12 @@ def unitOverview(request):
     #    member_list[m.pk] = m.completed_list()
         
     ranks = Rank.objects.all()
+    patrols = Patrol.objects.filter(unit=unit)
     
     return 'unit/overview.html', {
                                    'ranks':ranks,
-                                   'unit':unit, 
+                                   'unit':unit,
+                                   'patrols':patrols 
                                    #'requirements':requirements, 
                                    #'member_list':member_list
                                    }

@@ -27,10 +27,6 @@ class UserAward(models.Model):
 	instructor = models.CharField(max_length=200, blank=True, null=True, help_text="name of counselor")
 	awarded_by = models.ForeignKey(User, related_name='awarded')
 
-class UserPatrols(models.Model):
-	patrol = models.ForeignKey('unit.Patrol')
-	member = models.ForeignKey('userprofile.Userprofile')
-	default = models.BooleanField(default=False)
 
 class Userprofile(models.Model):
 	class Meta:
@@ -45,8 +41,7 @@ class Userprofile(models.Model):
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
 	unit = models.ForeignKey(Unit, blank=True, null=True, related_name='members')
-	patrols = models.ManyToManyField('unit.Patrol', blank=True, null=True, 
-								related_name='patrol_members', through=UserPatrols)
+	patrol = models.ForeignKey('unit.Patrol', blank=True, null=True, related_name='patrol_members')
 	
 	position = models.ForeignKey('position.Position', default=2)
 	__original_position = None;
@@ -64,20 +59,6 @@ class Userprofile(models.Model):
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
 	badges = models.ManyToManyField(UserAward, null=True, blank=True, limit_choices_to={"award__type":0})
-
-	def add_patrol(self, patrol, default=False):
-		up, created = UserPatrols.objects.get_or_create(member=self, patrol=patrol)
-		if len(self.patrol.all()) <=0:
-			default=True
-		elif default:
-			#if user has patrols and default is True:
-			patrol = self.patrols.filter(patrol__default=True)
-			for p in patrol:
-				p.default=False
-				p.save()
-				
-		up.default=default
-		up.save()
 		
 	def is_scout(self):
 		return self.position.youth

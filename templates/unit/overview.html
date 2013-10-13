@@ -74,17 +74,24 @@ function get_req(rid){
     </tr>
     <tr>
         <td valign="top" style="padding-top:43px;padding-right:5px;width:70px">
-        {%if unit%}
-            {%for scout in unit.scouts%}              
-                <div class="scout_name" id='scout_{{scout.user.pk}}'>
-                <a href="/user/{{scout.user.pk}}/" title="{{scout.name}}">{{scout.name|truncate_chars:10}}</a>:</div>
-            {%endfor%} 
-        {%else%}
-            {%if user.profile.position.youth%}
+        {% if unit %}
+	        {% for patrol in patrols %}
+	       
+	        	<div class="scout_name patrol_name" id='scout_{{scout.user.pk}}'>
+	                {{patrol.name|truncate_chars:10}}
+	            </div>
+	         
+	            {% for scout in patrol.patrol_members.all %}              
+	                <div class="scout_name" id='scout_{{scout.user.pk}}'>
+	                <a href="/user/{{scout.user.pk}}/" title="{{scout.name}}">{{scout.name|truncate_chars:10}}</a>:</div>
+	            {% endfor %} 
+	        {% endfor %}
+        {% else %}
+            {% if user.profile.position.youth %}
             <div class="scout_name" id='scout_{{user.pk}}'>
             <a href="/user/{{user.pk}}/" title="{{user.profile.name}}">{{user.profile.name|truncate_chars:10}}</a>:</div>
-            {%endif%}
-        {%endif%}  
+            {% endif %}
+        {% endif %}  
         </td>
         <td valign="top">
             <div id='requirements'>

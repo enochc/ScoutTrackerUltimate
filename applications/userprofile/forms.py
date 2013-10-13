@@ -11,7 +11,7 @@ class NewScoutForm(forms.ModelForm):
         
     class Meta:
         model = Userprofile
-        exclude = ('user','goals', 'patrol')
+        exclude = ('user','goals')
     
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
@@ -19,6 +19,19 @@ class NewScoutForm(forms.ModelForm):
     password = forms.CharField(max_length=50, widget=forms.PasswordInput(), required=False)
     email = forms.CharField(max_length=50)
     bd_string = forms.CharField(max_length=50, required=False)
+    
+    
+    def __init__(self, *args, **kwargs):
+        
+        super(NewScoutForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            unit = self.instance.unit
+        else:
+            unit = self.initial.get("unit")
+
+        if unit:
+            self.fields['patrol']=forms.ModelChoiceField(queryset=unit.patrol_set.all())
+        
     
     bd_date = None
     
@@ -54,7 +67,7 @@ class NewScoutForm(forms.ModelForm):
     def clean_login_name(self):
         username = self.data['email']
         if username =='noemail':
-            return "%s_%s"%(self.data.get("first_name"),self.data.get("unit"))
+            return "%s_%s_%s"%(self.data.get("first_name"),self.data.get("last_name"),self.data.get("unit"))
         try:
             
             u = User.objects.get(username__iexact=username)
@@ -70,9 +83,9 @@ class NewScoutForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         cd = self.cleaned_data
         username='%s' % (cd.get('login_name'))
-        print 'one'
+
         if not self.instance.pk:
-            print 'two'
+
             try:
                 password = cd.get('password','password')
                 user = User.objects.create_user(username, '', password=password)
@@ -81,14 +94,11 @@ class NewScoutForm(forms.ModelForm):
         else:
             user = self.instance.user
             user.username = username
-        
-        print 'three'
+
         user.first_name = cd.get('first_name')
         user.last_name = cd.get('last_name') 
         user.email = cd.get('email') 
-        
-        print 'four'
-        print cd
+
         profile = super(NewScoutForm, self).save(*args, **kwargs)
         if len(profile.google_id) > 0:
             user.is_active = False
@@ -97,6 +107,8 @@ class NewScoutForm(forms.ModelForm):
         
         user.save()
         profile.save()
+
+        
         return profile
         
             

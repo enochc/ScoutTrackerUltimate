@@ -88,3 +88,46 @@ div#user_help {
   float: right;
   width: 70%;
 }
+
+/* line 64, ../scss/userhome.scss */
+.draggable {
+  cursor: pointer;
+  border: 1px solid #f6bc56;
+  padding: 3px;
+  margin: 5px 0px;
+  background-color: #32523b;
+  height: 20px;
+}
+/* line 72, ../scss/userhome.scss */
+.draggable a {
+  line-height: 20px;
+  color: #f6bc56;
+  text-decoration: none;
+}
+/* line 76, ../scss/userhome.scss */
+.draggable a:hover {
+  text-decoration: underline;
+}
+/* line 80, ../scss/userhome.scss */
+.draggable:hover {
+  border: 1px solid #005e9c;
+}
+/* line 83, ../scss/userhome.scss */
+.draggable img {
+  float: right;
+  position: relative;
+  top: -2px;
+}
+
+/* line 90, ../scss/userhome.scss */
+.drop_active {
+  -webkit-box-shadow: #f6bc56 0 0 10px 5px;
+  -moz-box-shadow: #f6bc56 0 0 10px 5px;
+  box-shadow: #f6bc56 0 0 10px 5px;
+}
+/* line 92, ../scss/userhome.scss */
+.drop_active.drop_hover {
+  -webkit-box-shadow: #005e9c 0 0 10px 5px;
+  -moz-box-shadow: #005e9c 0 0 10px 5px;
+  box-shadow: #005e9c 0 0 10px 5px;
+}

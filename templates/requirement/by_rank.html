@@ -4,16 +4,19 @@
 {%endfor%}
      <div class="float_spacer">&nbsp;</div>
 {%if unit%}
-    {%for scout in unit.scouts%}
-        
-        {%for r in rank.requirements.all%}
-            <div class='req s_{{scout.pk}} r_{{r.pk}} checkbox {%if forloop.parentloop.counter|divisibleby:2%}stripe{%endif%}'>
-            {%if r.id in member_list|attribute:scout.pk%}<img src='{{MEDIA_URL}}check.png'/>
-            {%else%}<span class='empty'>&nbsp;</span>{%endif%}
-            </div>
-        {%endfor%}    
-        <div class="float_spacer" >&nbsp;</div>
-    {%endfor%}  
+	{%for patrol in patrols%}
+	<div style="width:900px;height:25px;">&nbsp;</div>
+	    {%for scout in patrol.patrol_members.all%}
+	        
+	        {%for r in rank.requirements.all%}
+	            <div class='req s_{{scout.pk}} r_{{r.pk}} checkbox {%if forloop.parentloop.counter|divisibleby:2%}stripe{%endif%}'>
+	            {%if r.id in member_list|attribute:scout.pk%}<img src='{{MEDIA_URL}}check.png'/>
+	            {%else%}<span class='empty'>&nbsp;</span>{%endif%}
+	            </div>
+	        {%endfor%}    
+	        <div class="float_spacer" >&nbsp;</div>
+	    {%endfor%}  
+	{%endfor%}
 {%else%}  
     {%if user.profile.position.youth%}
     

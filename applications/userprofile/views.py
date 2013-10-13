@@ -13,6 +13,7 @@ from position.models import Position
 from userrequirement.models import UserRequirement
 from rank.models import Rank
 from award.models import Award
+from unit.models import Patrol
 
 
 @render_to_html
@@ -24,7 +25,7 @@ def userhome(request, user_id=None):
     ranks = {}
     urs = {}
     patrols = []
-    
+    orphans = []
 
 
     if user_id is not None and request.user.has_perm('userprofile.add_scouts'):
@@ -36,8 +37,9 @@ def userhome(request, user_id=None):
         urs = UserRequirement.objects.filter(user=scout)
         req_list = scout.profile.completed_list()  
         ranks = Rank.objects.all()
-    else:
-        patrols = scout.profile.patrols.all()
+    elif scout.profile.unit:
+        patrols = scout.profile.unit.patrol_set.all()
+        orphans = Userprofile.objects.filter(patrol=None, unit=scout.profile.unit, position__youth=True)
         
     awards = Award.objects.all()
         
@@ -45,7 +47,8 @@ def userhome(request, user_id=None):
                                           'userrequirements':urs, 
                                           'req_list':req_list,
                                           'ranks':ranks,'badges':awards,
-                                          'patrols':patrols}
+                                          'patrols':patrols,
+                                          'orphans':orphans}
 
 @render_to_html
 def add_scout(request, scout_id = None):  
@@ -53,15 +56,29 @@ def add_scout(request, scout_id = None):
         edit = int(request.GET.get('edit','0')) == 1
         boyscout = Position.objects.get(name='Boy Scout')
         scout = None
+        unit = None
+        try:
+            unit = request.user.profile.unit
+        except:
+            pass
+        
+        patrol = request.REQUEST.get('patrol')
+        if patrol and unit:
+            try:
+                patrol = Patrol.objects.get(name=patrol, unit=unit)
+            except Patrol.DoesNotExist:
+                pass
+        
 
         if scout_id is not None:
             scout = Userprofile.objects.get(pk=scout_id)
-            form = NewScoutForm(instance=scout, initial={'first_name':scout.user.first_name,
-                                                         'last_name':scout.user.last_name,
-                                                         'login_name':scout.user.username.split,
-                                                         'email':scout.user.email})
+            form = NewScoutForm(instance=scout, initial={"first_name":scout.user.first_name,
+                                                         "last_name":scout.user.last_name,
+                                                         "email":scout.user.email})
         else:
-            form = NewScoutForm(initial={'email':'noemail'})
+            form = NewScoutForm(initial={'email':'noemail', 'unit':unit, 'patrol':patrol})
+        
+            
         return 'userprofile/add_scout.html', {'form':form, 'boyscout':boyscout, 'scout':scout, 'edit':edit}
     
     else:

@@ -24,9 +24,14 @@ div.rank_header img{
 div.scout_name{
     width:100%;
     text-align:right;
-    height:24px;
+    height:25px;
     white-space: nowrap;
     font-size:smaller;
+    
+    &.patrol_name{
+    	color:$red;
+    	font-weight:bold;
+    }
 }
 .current_rank{
     background-color:$tan;

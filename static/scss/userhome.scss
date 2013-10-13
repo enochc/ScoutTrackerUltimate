@@ -61,3 +61,35 @@ div#user_help{
 	float:right;
 	width:70%;
 }
+.draggable{
+	cursor:pointer;
+	border:1px solid $gold;
+	padding:3px;
+	margin:5px 0px;
+	background-color:$green;
+	height:20px;
+	
+	& a{
+		line-height:20px;
+		color:$gold;
+		text-decoration:none;
+		&:hover{
+			text-decoration:underline;
+		}
+	}
+	&:hover{
+		border:1px solid $blue;
+	}
+	& img{
+		float:right;
+		position:relative;
+		top:-2px;
+	}
+}
+
+.drop_active{
+	@include box-shadow($gold 0 0 10px 5px);
+	&.drop_hover{
+		@include box-shadow($blue 0 0 10px 5px);
+	}
+}
