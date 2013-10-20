@@ -1,0 +1,15 @@
+{%extends 'email/base_email.html'%}
+
+{%block body%}
+	<h3>{{req.member.first_name}} {{req.member.last_name}} as requested to have access to Unit: {{req.unit}}</h3>
+	{%if req.comments%}
+	<p><i>"{{req.comments}}"</i></p>
+	{%endif%}
+	<p>
+	If you know {{req.member.first_name}}, you can login to <a href="ultimatescouttracker.com">UltimateScouttracker.com</a> and approve this request.
+	</p>
+	<p>
+	If you do not know {{req.member.first_name}}, You can choose to ignore the request or reply to: {{req.email}}
+	</p>
+	
+{%endblock%}

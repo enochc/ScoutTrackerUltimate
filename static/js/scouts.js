@@ -55,6 +55,7 @@ function doSuccess(data, success_func, fail_func, dontClear){
 		if(message.length > 0){
 			alert(message)
 		}
+		console.log(fail_func)
 		if(typeof(fail_func) == "function"){
 			fail_func()	
 		}
@@ -66,15 +67,18 @@ function doSuccess(data, success_func, fail_func, dontClear){
 
 function refresh(){window.location=window.location}
 
-function login(e){
+function login_user(e){
+	$("#loc_login_form").submit()
+	/*
+	$("#local_login").block();
+	
 	username = $("#login_username").val().trim()
 	pass = $("#login_password").val().trim()
-	//unit = $("#login_unit").val().trim()
-	//if(unit.length <1)unit = "100000"
-	//username = username+"_"+unit
+
 	$.post("/login/",{login: username, password: pass},function(data){
-		doSuccess(data, function(){window.location = '/user'})
+		doSuccess(data, function(){window.location = '/user'}, function(){$("#local_login").unblock()})
 	})
+	*/
 }
 
 function logout(){
@@ -99,8 +103,10 @@ if($){
 var autocomplete_lists = {}
 // On load bindings
 $(function(){
-	
-	$("#login_password").enter(login)
+	$("form.block").on("submit", function(){
+		$(this).block()
+	})
+	$("#login_password").enter(login_user)
 	$("#add_scout_btn,.add_scout").click(function(){
 		var url = '/user/add_scout/'
 		var patrol = $(this).attr("data-patrol")
@@ -168,9 +174,75 @@ $(function(){
 	
 		}
 	});
+	
+	$("#unit_requests span.close_x").on("click", function(){
+		var req = $(this)
+		$.post("/unit/invite/cancel/"+req.attr("data-req")+"/", function(ret_data){
+			if(ret_data.success){
+				req.parents("li")[0].remove()
+			}
+		})
+	})
+	$("#unit_requests span.approve_req").on("click", function(){
+		var req = $(this)
+		$.post("/unit/invite/approve/"+req.attr("data-req")+"/", function(ret_data){
+			if(ret_data.success){
+				window.location = window.location
+			}
+		})
+	})
+	$(".del_patrol").on("click", function(){
+		var p = $(this)
+		var pane = p.parents(".pane").eq(0)
+		pane.block()
+		if(confirm("Any scouts in this patroll will need to be reassigned! No records will be lost")){
+			p.parents(".pane").block()
+			$.post("/unit/del_patrol/"+p.attr("data-id")+"/", function(ret_data){
+				if(ret_data.success){
+					window.location = window.location
+				}else{
+					pane.unblock()
+				}
+			})
+		}else{
+			pane.unblock()
+		}
+		
+	})
+	$(".del_leader").on("click", function(){
+		var p = $(this)
+		if(confirm("Remove leader from Unit?")){
+			$.post("/unit/del_leader/"+p.attr("data-id")+"/", function(ret_data){
+				if(ret_data.success){
+					window.location = window.location
+				}else{
+					pane.unblock()
+				}
+			})
+		}else{
+			pane.unblock()
+		}
+		
+	})
+	$("#send_invite").on("click", function(){
+		var email = $("#inv_email").val()
+		send_invite(email, $(this))
+	})
 })
 
 
+function send_invite(email, obj){
+	var pane = obj.parents(".pane").eq(0)
+	pane.block({"message":"Sending invitation"})
+	$.post("/unit/invite/", {"email":email}, function(data){
+		if(data.success){
+			alert("Inivatation Sent")
+		}else{
+			alert(data.message)
+		}
+		pane.unblock()
+	})
+}
 
 function filterList(list, val){
 	return $.map(list, function(v, i){

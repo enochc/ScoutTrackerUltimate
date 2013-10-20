@@ -3,6 +3,8 @@ from sorl.thumbnail import get_thumbnail, delete
 from django.conf import settings
 from utils.google_funcs import get_google_profile, validate_token
 
+from django.core.mail import EmailMultiAlternatives, send_mass_mail, EmailMessage
+from django.template.loader import render_to_string
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
@@ -70,3 +72,23 @@ class GoogleOauthModelBackend(ModelBackend):
 
     def has_perm(self, user_obj, perm):
         return perm in self.get_all_permissions(user_obj)
+    
+
+def email(template_name="base_email.html", to="notify@ultimatescouttracker.com", dict=None, 
+          email_from=settings.DEFAULT_FROM_EMAIL, subject="UST notification", cc=[]):
+    
+
+    if not isinstance(to, list):
+        to = [to]
+    if not isinstance(cc, list):
+        cc = [cc]
+
+
+    template_html = render_to_string("email/%s"%template_name, dict)
+    #template_text = template_to_string("email/%s.txt"%template_name, dict)
+    #for to in email_to:
+
+    msg = EmailMessage(subject, template_html, email_from, to, cc=cc)
+    msg.content_subtype = "html"
+    #msg.attach_alternative(template_html, "text/html")
+    msg.send()

@@ -1,12 +1,5 @@
 
-
- 	<p class="red">You must be a committee member or scout leader to request a troop.
- 		Once the troop has been approved you will be solely responsible for inviting
- 		other users to your troop.  All requests will be approved through you.  You
- 		can delicate this responsibility to other committee members or scout leaders 
- 		once you've invited them to your troop
- 		</p>
- 		
+	<br/> 		
  	<form id="unit_form">
  		<label>Council Name:</label>{{form.council_name}}<br/>
  		<label>Unit Number:</label>{{form.number}}<br/>
@@ -16,7 +9,7 @@
  		{%endfor%}
  		</select><br/>
  		<label>Notes:</label>{{form.description}}
- 		<div class="button" onclick="request_unit()" style="width:150px;">Create</div>
+ 		<div class="button" onclick="request_unit()" style="width:150px; margin:0 auto;margin-top:10px;">Create</div>
  	</form>	
  	{{form.from_table}}
  

@@ -40,6 +40,9 @@ AUTHENTICATION_BACKENDS = (
     'utils.funcs.CaseInsensitiveBackend',    
     'utils.funcs.GoogleOauthModelBackend',            
 )
+
+
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -223,7 +226,7 @@ GOOGLE_CLIENT_SECRET = "XZDzn3t_ajXgEqp-g-MZJKGZ"
 GOOGLE_API_KEY = "AIzaSyChYYhFzxdAJr8XReiymLBxAkzimu7etHk"
 
 
-#try:
-#    from local_settings import *
-#except ImportError:
-#    print 'No local settings file'
+try:
+    from local_settings import *
+except ImportError:
+    print 'No local settings file'

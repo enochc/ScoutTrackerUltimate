@@ -4,6 +4,14 @@ from django.views.generic import TemplateView
 urlpatterns = patterns('unit.views',
     url(r'^$', 'unitHome', name='unit_home'),
     url(r'^home/', 'unitHome', name='unit_home'),
+    url(r'^invite/cancel/(?P<req_id>\d+)/', 'cancelUnitRequest', name='cancel_unit_request'),
+    url(r'^invite/approve/(?P<req_id>\d+)/', 'approveUnitRequest', name='approve_unit_request'),
+    url(r'^invite/', 'unitInvite', name='unit_invite'),
+    url(r'^request/', 'unitRequest', name='unit_request'),
+    url(r'^del_patrol/(?P<patrol_id>\d+)/', 'delPatrol', name='del_patrol'),
+    url(r'^del_leader/(?P<leader_id>\d+)/', 'delLeader', name='del_leader'),
+    
+    
     url(r'^new/', 'newUnit', name='new_unit'),
     url(r'^newpatrol/', 'newPatrol', name='new_patrol'),
     url(r'^add/', 'addToPatrol', name='add_to_patrol'),

@@ -73,7 +73,13 @@ def oauth_callback(request):
                                      'google_id':profile["id"],
                                      'position':7,
                                      })
-                return 'oauth.html', {'form':form, 'profile':True}
+                if form.is_valid():
+                    profile = form.save()
+                    user = authenticate(token=request.session['google_access_token'], google_id=profile.google_id)
+                    login(request, user)
+                    return HttpResponseRedirect("/")
+                else:
+                    return 'oauth.html', {'form':form, 'profile':True}
             else:
                 login(request, user)
                 return HttpResponseRedirect("/user")
@@ -91,11 +97,8 @@ def oauth_callback(request):
             profile = scoutform.save()
             if len(profile.google_id) > 0:
                 user = authenticate(token=request.session['google_access_token'], google_id=profile.google_id)
-                print 'auth1, %s'%user
             else:
-                print 'password: %s, %s'%(scoutform.cleaned_data['password'],profile.user.username)
                 user = authenticate(username=profile.user.username, password=scoutform.cleaned_data['password'])
-                print 'auth2, %s'%user
             if user:
                 login(request, user)
             return HttpResponseRedirect("/")

@@ -40,8 +40,8 @@ class Userprofile(models.Model):
 	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)
 	nickname = models.CharField(max_length=50, null=True, blank=True)
 	
-	unit = models.ForeignKey(Unit, blank=True, null=True, related_name='members')
-	patrol = models.ForeignKey('unit.Patrol', blank=True, null=True, related_name='patrol_members')
+	unit = models.ForeignKey(Unit, blank=True, null=True, related_name='members', on_delete=models.SET_NULL)
+	patrol = models.ForeignKey('unit.Patrol', blank=True, null=True, related_name='patrol_members', on_delete=models.SET_NULL)
 	
 	position = models.ForeignKey('position.Position', default=2)
 	__original_position = None;
@@ -59,6 +59,16 @@ class Userprofile(models.Model):
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
 	badges = models.ManyToManyField(UserAward, null=True, blank=True, limit_choices_to={"award__type":0})
+	
+	@property
+	def email(self):
+		return self.user.email
+	@property
+	def first_name(self):
+		return self.user.first_name
+	@property
+	def last_name(self):
+		return self.user.last_name
 		
 	def is_scout(self):
 		return self.position.youth
@@ -81,7 +91,7 @@ class Userprofile(models.Model):
 			goal_data = [('Receive Eagle',eagle, 'eagle'),
 				('Receive Life',life, 'life'),
 				('Receive Star',star, 'star'),
-				('Receive First Class',frstcls, 'first_class')]
+				('Receive First Class',frstcls, 'first-class')]
 			for data in goal_data:
 				try:
 					goal = UserGoal.objects.get(name=data[0], user=self)
@@ -145,8 +155,6 @@ class Userprofile(models.Model):
 				force = True
 			self.set_goals(force)
     	
-    	
-   
     	
     	
 	

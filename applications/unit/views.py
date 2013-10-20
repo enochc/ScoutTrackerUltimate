@@ -1,5 +1,7 @@
+import hashlib
+
 from django.contrib.auth.decorators import permission_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -7,18 +9,70 @@ from utils.decorators import render_to_html, login_required
 from utils.response import HttpJsonSuccess, HttpJsonFailure, HttpJsonFormError
 from requirement.models import Requirement
 from rank.models import Rank
-from unit.forms import UnitForm
+from unit.forms import UnitForm, UnitRequestForm
 from unit.models import Patrol
 from position.models import Position
 from userprofile.models import Userprofile
 
+from userprofile.views import userhome
+from models import UnitRequest
 
 @render_to_html
 @login_required
 def unitHome(request):
     return 'unit/unit_home.html'
 
-@render_to_html
+
+@login_required
+def unitRequest(request):
+    if request.method == "GET":
+        return HttpResponseRedirect("/")
+    elif request.method == "POST":
+        form = UnitRequestForm(request.POST, scout=request.user)
+        if form.is_valid():
+            req = form.save()
+            req.notify()
+        else:
+            return userhome(request, request_form=form)
+        return userhome(request)
+
+@login_required
+def unitInvite(request):
+    email = request.REQUEST.get('email')
+    if email:
+        form = UnitRequestForm({'member':request.user.profile.id,
+                                        'email':email,
+                                        'type':'invite',
+                                        'unit':request.user.profile.unit.id})
+        print form
+        print form.is_valid()
+        if form.is_valid():
+            req = form.save()
+            req.notify()
+        else:
+            print 'errors', form._errors
+            return HttpJsonFailure("Doh! failed")
+        return HttpJsonSuccess()
+
+@login_required
+def cancelUnitRequest(request, req_id):
+    try:
+        req = UnitRequest.objects.get(pk=req_id)
+        req.delete()
+        return HttpJsonSuccess()
+    except UnitRequest.DoesNotExist:
+        return HttpJsonFailure("Request specified does not exist")
+    
+@login_required
+def approveUnitRequest(request, req_id):
+    try:
+        req = UnitRequest.objects.get(pk=req_id)
+        req.approve()
+        return HttpJsonSuccess()
+    except UnitRequest.DoesNotExist:
+        return HttpJsonFailure("Request specified does not exist")
+    
+
 @login_required
 def addToPatrol(request):
     scout_id = request.REQUEST.get("scout")
@@ -31,8 +85,22 @@ def addToPatrol(request):
     else:
         
         return HttpJsonFailure("patrol or scout does not exist")
+    
+@login_required
+def delPatrol(request, patrol_id):
 
-@render_to_html
+    patrol = Patrol.objects.get(pk=patrol_id)
+    patrol.delete()
+    return HttpJsonSuccess()
+
+@login_required
+def delLeader(request, leader_id):
+    user = Userprofile.objects.get(pk=leader_id)
+    user.unit = None
+    user.position = Position.objects.get(name="Guardian")
+    user.save()
+    return HttpJsonSuccess()
+
 @login_required
 def newPatrol(request):
     pname = request.REQUEST.get("pname")

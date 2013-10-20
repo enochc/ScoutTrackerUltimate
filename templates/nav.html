@@ -3,17 +3,18 @@
     <h1>Ultimate Scout Tracker</h1>
 </div>
 <div id='nav' class='grade'>
+    {%include "donate_btn.html"%}
     
-    
-{% if user.is_authenticated %}
-    <div class="button rt red" onclick="logout()">logout</div>
-
-    {%if perms.userprofile.add_scouts%}
-    <div class="button rt" id='add_scout_btn'>Add Member</div>
-    {%endif%}
-
-    
-{%endif%}
+	{% if user.is_authenticated %}
+	    <div class="button rt red" onclick="logout()">logout</div>
+		
+	    {%if perms.userprofile.add_scouts%}
+	    <div class="button rt" id='add_scout_btn'>Add Member</div>
+	    {%endif%}
+	
+	    
+	{%endif%}
+	 
      <ul>
         <li><a href="/user">Home</a></li>
         {%if user.is_authenticated%}
@@ -25,5 +26,8 @@
             <li><a href="/unit/calendar/">Calendar</a></li>
         
         {%endif%}
+        
+       
     </ul>
+    
 </div>

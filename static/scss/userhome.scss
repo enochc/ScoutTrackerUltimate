@@ -6,6 +6,25 @@ div#rpane{
     width:60%;
     float:right;
 }
+div#lpane{
+    padding:10px;
+    margin:10px 5px 10px 0;
+    
+    background-color:darken($tan,20%);
+    
+    & .button{
+		width:150px;
+	}
+	& .request{
+		& .button{
+			display:block;
+			float:right;
+			width:auto;
+			margin:0 10px;
+		}
+		
+	}
+}
 .rank_img{
     width:80px;
     float:right;
@@ -14,10 +33,6 @@ div#rpane{
 .rank_div{
     width:570px;
     margin-bottom:10px;
-    
-    background-color:$tan;
-    @include box-shadow;
-    @include border-radius;
     padding:10px;
 }
 .slide_container{
@@ -25,6 +40,7 @@ div#rpane{
     position:relative;
     overflow:auto;
 }
+
 .rank_table{
     float:left;
     width:490px;
@@ -38,6 +54,7 @@ h2{
     color:$blue;
     cursor:pointer;
     margin:0;
+    
 }
 h2 span{
     margin-right:10px;
@@ -57,10 +74,7 @@ tr.tr_notes.full{
     display:table-row;
 }
 div#info{display:none;}
-div#user_help{
-	float:right;
-	width:70%;
-}
+
 .draggable{
 	cursor:pointer;
 	border:1px solid $gold;
@@ -92,4 +106,18 @@ div#user_help{
 	&.drop_hover{
 		@include box-shadow($blue 0 0 10px 5px);
 	}
+}
+
+div.request{
+	& p{
+		margin:3px 0 0 3px;
+		color:grey;
+	}
+	
+}
+ul.scoutList{
+	& li{
+		margin:3px 0;
+	}
+	
 }

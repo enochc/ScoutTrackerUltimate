@@ -53,18 +53,23 @@ function google_login(){
     
 {%block content%}   
 <!-- <a href="mailto:scoutmaster@ultimatescouttracker.com">contact me</a> -->
-<div id="login" class="float_panel">
+<div id="login" class="pane">
     <div id="oquth_login">
-        <h2>Login with an existing social media account</h2><hr/>
+        <h2>Login with an existing social media account</h2>
         <p class="red">*Use the same login method every time you visit the site to prevent creating multiple accounts.</p>
         <a href="javascript:google_login()"><img src="{{MEDIA_URL}}/google.png"/></a>
     </div>
     <div id="local_login">      
-        <h2>Don't use or like social websites? Login locally</h2><hr/>
-            <form>
-               <label>Email:</label><input type="text" id="login_username"/>
-               <label>Password:</label><input type="password" id="login_password"/>
-               <div class="button " onclick="login()">login</div>
+        <h2>Don't use or like social websites? Login locally</h2>
+            <form class="block" method="POST" action="/login/" id="loc_login_form">
+            {%csrf_token%}
+
+            	{%if login_error%}
+            	<div class="error">{{login_error}}</div>
+            	{%endif%}
+               <label>Email:</label><input type="text" id="login_username" name="login"/>
+               <label>Password:</label><input type="password" id="login_password" name="password"/>
+               <div class="button" onclick="login_user()">login</div>
                <a href="/register">register for a new account</a>
             </form>
            

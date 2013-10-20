@@ -81,29 +81,28 @@ p{
 #banner{
 	margin-top:10px;
     padding:0;
+    & h1{
+    	display:inline;
+		font-size:32px;
+		line-height:20px;
+		vertical-align:baseline;
+		position:relative;
+		bottom:0px;
+		color:#000;
+		padding-bottom:0;
+    }
+    & span{
+		margin-right:20px;
+    }
 }
-#banner h1{
-	display:inline;
-	font-size:32px;
-	line-height:20px;
-	vertical-align:baseline;
-	position:relative;
-	bottom:0px;
-	color:#000;
-	padding-bottom:0;
-}
-#banner .button{
-	margin-top:2px;
-}
-#banner span{
-	/*margin-top:10px;*/
-	margin-right:20px;
-}
+
 .rt{
 	float:right;
 }
 
-.button{
+.button, input[type="submit"]{
+	font-size:.9em;
+	line-height:14px;
 	height:20px;
 	line-height:20px;
 	background-color:$gold;
@@ -113,12 +112,26 @@ p{
     color:$red;
 	border:1px outset yellow;
 	font-weight:bold;
-
+	
+	&:hover{
+		border:1px inset yellow;
+	}
 }
-.button:hover{
-	border:1px inset yellow;
-}
 
+#donate{
+	float:right;
+	margin-left:10px;
+	height:100%;
+	& input{
+		margin:auto 0px;
+		width:92px;
+		height:26px;
+	}
+}
+.wrapper{
+	overflow:auto;
+	clear:both;
+}
 #nav{
 	@include background-image(linear-gradient(#000,$blue));
 	height:30px;
@@ -150,7 +163,36 @@ p{
 	}
 	
 }
+#page_content{
+	width:100%;
+	padding-bottom:30px;
+}
+#footer{
+	text-align: right;
+	width:100%;
+	max-width:1000px;
+	height:30px;
+	line-height:30px;
+	position:fixed;
+	bottom:0px;
 
+	background-color:darken($blue, 20%);
+	color:$gold;
+	
+	@include opacity(.9);
+	
+	& a{
+		text-decoration:None;
+		color:inherit;
+		padding:2px;
+		&:hover{
+			@include box-shadow($gold 0 0 15px 5px);
+		}
+	}
+	& ul{
+		margin-right:15px;
+	}
+}
 
 .error{
 	background-color:yellow !important;
@@ -184,8 +226,11 @@ p{
 }
 
 
+#requirements div.req{
+	width:60px;
+}
 div.req{
-    width:60px;
+    
     text-align:center;
     float:left;
     height:25px;
@@ -229,12 +274,9 @@ span.info{
 span.info:hover{
 	text-decoration:underline;
 }
-.float_panel{     
-    @include box-shadow;
-    border:none;
-    @include border_radius(10px);
-    background-color:$tan;       
-    padding:10px;
+
+.close_x{
+	@include cancel();
 }
 
 .popup{
@@ -251,22 +293,37 @@ span.info:hover{
     	color:$gold;
     }
     & #close_popup{
-	    float:right;
-	    cursor:pointer;
 	    
-	    color:white;
-	    font-weight:bold;
-	    display:block;
-	    @include border_radius(10px);
-	    width:20px;
-	    height:20px;
-	    background-color:$red;
-	    line-height:20px;
-	    padding:1px 0 0 1px;
-	    text-align:center;
+	    @include cancel();
 	}
 }
 
+.pane{
+	@include box-shadow;
+    @include border-radius;
+    background-color:$tan;
+	padding:10px;
+	margin-right:5px;
+	margin-bottom:5px;
+	& h2{
+		border-bottom:2px groove lighten($blue,60%);
+		padding-bottom:5px;
+		margin-bottom:10px;
+	}
+	&.rank_div h2{
+		padding:none;
+		margin:none;
+		border-bottom:none;
+	}
+	
+	& .button{
+		width:100px;
+		margin:0px 0px 0px auto;
+	}
+	& fieldset{
+		padding:10px;
+	}
+}
 
 
 @import "overview";

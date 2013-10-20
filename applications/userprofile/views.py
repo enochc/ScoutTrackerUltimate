@@ -13,12 +13,13 @@ from position.models import Position
 from userrequirement.models import UserRequirement
 from rank.models import Rank
 from award.models import Award
-from unit.models import Patrol
+from unit.models import Patrol, Unit, UnitRequest
+from unit.forms import UnitRequestForm
 
 
 @render_to_html
 @login_required
-def userhome(request, user_id=None):
+def userhome(request, user_id=None, **kwargs):
     user = request.user
     scout = None
     req_list = {}
@@ -26,7 +27,11 @@ def userhome(request, user_id=None):
     urs = {}
     patrols = []
     orphans = []
-
+    requests = []
+    invites = []
+    leaders = []
+    rform = None
+    positions = []
 
     if user_id is not None and request.user.has_perm('userprofile.add_scouts'):
         scout = get_object_or_404(User, id=user_id, profile__unit=user.profile.unit)
@@ -37,18 +42,49 @@ def userhome(request, user_id=None):
         urs = UserRequirement.objects.filter(user=scout)
         req_list = scout.profile.completed_list()  
         ranks = Rank.objects.all()
+        
     elif scout.profile.unit:
         patrols = scout.profile.unit.patrol_set.all()
         orphans = Userprofile.objects.filter(patrol=None, unit=scout.profile.unit, position__youth=True)
+        reqs = UnitRequest.objects.filter(unit=scout.profile.unit)
+        requests = reqs.filter(type="request")
+        invites = reqs.filter(type="invite")
+        leaders = scout.profile.unit.adults()
+        positions = Position.objects.filter(youth=False)
+         
+            
+    else:
+        """
+        Not youth and no unit
+        """
+        if kwargs.get("request_form"):
+            rform = kwargs.get("request_form")
+        else:
+            rform = UnitRequestForm(scout=scout)
         
+        reqs = UnitRequest.objects.filter(member=request.user.profile, type="request")
+        requests=reqs
+
+    
     awards = Award.objects.all()
+    
+    args = {'scout':scout.profile, 
+          'userrequirements':urs, 
+          'req_list':req_list,
+          'ranks':ranks,'badges':awards,
+          'patrols':patrols,
+          'orphans':orphans,
+          'requests':requests,
+          'invites':invites,
+          'r_form':rform,
+          'leaders':leaders,
+          'positions':positions,
+          }
+    
+    
+    
         
-    return 'userprofile/user_home.html', {'scout':scout.profile, 
-                                          'userrequirements':urs, 
-                                          'req_list':req_list,
-                                          'ranks':ranks,'badges':awards,
-                                          'patrols':patrols,
-                                          'orphans':orphans}
+    return 'userprofile/user_home.html', args
 
 @render_to_html
 def add_scout(request, scout_id = None):  

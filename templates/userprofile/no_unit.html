@@ -1,0 +1,38 @@
+<div id="user_help">
+
+{%if requests%}
+	<fieldset class="pane"><legend>Pending Requests</legend>
+		<ul id="unit_requests">
+			{%for r in requests%}
+			<li>Unit: {{r.unit.number}} <span class="close_x" title="cancel request" data-req="{{r.id}}">X</span></li>
+			{%endfor%}
+		</ul>
+	</fieldset>
+	<br/>
+{%endif%}
+
+	<fieldset class="pane"><legend>Join a Unit</legend>
+	
+		Send a request to join an existing Unit:
+		<form class="block" style="margin:10px;" method="post" action="/unit/request/">
+			{%csrf_token%}
+			<ul class="form">
+				{{r_form.as_ul}}
+			</ul>
+			
+			
+			<input type="submit" value="Send Invite"/>
+		</form>
+
+	</fieldset>
+	<br/>
+	<fieldset class="pane"><legend>Create a Unit</legend>
+	If you are a scout leader or a committee member and would like to start using Ultimate scout Tracker then click 
+	<span class="link" id="unit_button">here</span> to create a new unit.
+	
+	<div id="unit_div">
+	 
+	</div>
+	</fieldset>
+	
+</div>	 

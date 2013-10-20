@@ -6,6 +6,21 @@ $gold:#f6bc56;
 $green:#32523b;
 $tan:#efeacc;
 
+@mixin cancel{
+	float:right;
+	cursor:pointer;
+    color:white;
+    font-weight:bold;
+    display:inline-block;
+    @include border_radius(10px);
+    width:20px;
+    height:20px;
+    background-color:$red;
+    line-height:20px;
+    padding:1px 0 0 1px;
+    text-align:center;
+}
+
 
 $default-box-shadow-color:darken($green,10%);
 $default-box-shadow-h-offset:5px;

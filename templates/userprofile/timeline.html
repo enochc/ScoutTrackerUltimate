@@ -1,4 +1,4 @@
-
+{% load thumbnail %}
 <style>
 #timeline{
 	
@@ -40,31 +40,17 @@ div.goal{
 	z-index:1;
 	
 }
-div.goal.first_class{
-	background:url(/images/rank/1class_thumb.gif) no-repeat center center ;
-	width:20px;
-	margin-right:-20px;
-	z-index:100
-}
-div.goal.star{
-	background:url(/images/rank/star_thumb.gif) no-repeat center center ;
-	width:20px;
-	margin-right:-20px;
-	z-index:100
-}
-div.goal.life{
-	background:url(/images/rank/life_thumb.gif) no-repeat center center ;
-	width:20px;
-	margin-right:-20px;
-	z-index:100
-}
-div.goal.eagle{
-	background:url(/images/rank/eagle_thumb.gif) no-repeat center center ;
-	width:20px;
-	margin-right:-20px;
-	z-index:100
-}
 
+{%for r in ranks%}
+div.goal.{{r.name|slugify}}{
+	{% thumbnail r.patch "20x25" as rank %}
+	background:url({{ rank.url }}) no-repeat center center ;
+	{% endthumbnail %}
+	width:20px;
+	margin-right:-20px;
+	z-index:100
+}
+{%endfor%}
 div.goal.bday{
 	background:url(/images/mark2.png) center center;
 	height:28px;

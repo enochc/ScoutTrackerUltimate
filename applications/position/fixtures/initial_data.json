@@ -24,7 +24,7 @@
         "model": "position.position", 
         "fields": {
             "youth": true, 
-            "patch": "position/SPL.jpg", 
+            "patch": "position/SPL.gif", 
             "name": "Senior Patrol Leader", 
             "description": "Leads the patrol"
         }
@@ -34,7 +34,7 @@
         "model": "position.position", 
         "fields": {
             "youth": true, 
-            "patch": "position/patrol_leader.jpg", 
+            "patch": "position/patrol_leader.gif", 
             "name": "Patrol Leader", 
             "description": "leads a patrol"
         }

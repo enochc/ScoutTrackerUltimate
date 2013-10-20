@@ -5,11 +5,20 @@
 {%block body%}
     <div id="outer">
     <div id="frame">
+    	
         {%block nav%}
             {%include "nav.html"%}
         {%endblock%}
+        <div id="page_content">
         {%block content%}  
         {%endblock%}
+       	</div>
+        <div id="footer">
+		    <ul>
+		    	<li><a href="mailto:scoutmaster@ultimatescouttracker.com" target="_blank">Contact</a></li>
+		    </ul>
+	    </div>
     </div>
+    
     </div>
 {%endblock%}

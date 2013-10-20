@@ -123,27 +123,90 @@ function afterSet(box, data){
 {%if scout.position.youth%}
 	{%include "userprofile/timeline.html"%}
 {%endif%}
+<div class="wrapper">
+<!----------------------------------------------   Left Pane   -------------------------------------------->
+	<div style="float:left;width:39%">
+	
+	
+	    <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
+	
+	    <h1>{{scout.fullname}}{%if scout.patrol%} ( {{scout.patrol.name}} ) {%endif%}</h1>
+	    {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
+	    {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
+	    
+	    {%if scout.position.youth%}
+	    	{%include 'badges.html'%}
+	    {%else%}
+		    {%if scout.unit%}
+		    	<!-- Troop adult leaders -->
+		    	<div id="lpane" class="pane">
+		    		<h2>Unit {{scout.unit.number}} Adult Leaders</h2>
+		    		<ul style="padding:5px 0;" class="scoutList">
+		    		{%for l in leaders%}
+						<li>
+		    			{% if scout == l%}You{%else%}
+		    				<a href="mailto:{{l.email}}?subject=UltimateScouttracker.com" target="_blank">
+		    				{{l.first_name}} {{l.last_name}}</a>
+		    			{%endif%}: 
+		    			{%if perms.userprofile.add_leaders%}
+			    			<select>
+			    				{%for p in positions%}
+			    				<option value="{{p.id}}"{%if p == l.position%}selected="selected"{%endif%}>{{p.name}}</option>
+			    				{%endfor%}
+			    			</select>
+			    			<span class="close_x del_leader" title="remove leader from unit" data-id="{{l.id}}">X</span>
+			    		{%else%}
+			    			{{l.position.name}}
+		    			{%endif%}
+		    			</li>
+		    		{%endfor%}
+		    		</ul>
+		    		<input type="text" placeholder="Email invite to UST" id="inv_email">
+		    		<span class="button" id="send_invite">Send Invite to Unit</span>
+		    		{% if requests%}
+		    		<h2 style="margin-top:20px;">Requests to Join Unit</h2>
+		    		<div class="request" id="unit_requests">
+			    		<ul>
+			    			{%for r in requests%}
+			    			<li>
+				    			<a href="mailto:{{r.email}}?subject=Unit {{r.unit.number}} - UltimateScouttracker.com" 
+				    			target="_blank">{{r.member.first_name}} {{r.member.last_name}}</a>
+				    			<span class="close_x" title="cancel request" data-req="{{r.id}}">X</span>
+				    			<span class="button approve_req" data-req="{{r.id}}">Approve</span>				    			
+				    			<p>{{r.comments}}</p>
+			    			</li>
+			    			{%endfor%}
+			    		</ul>
+		    		</div>
+		    		{%endif%}
+		    		{% if invites%}
+		    		<h2 style="margin-top:20px;">Invitations Sent</h2>
+		    		<div class="invites" id="unit_invites">
+			    		<ul>
+			    			{%for r in invites%}
+			    			<li>
+				    			<a href="mailto:{{r.email}}?subject=Unit {{r.unit.number}} - UltimateScouttracker.com" 
+				    			target="_blank">{{r.email}}</a>
+				    			<span class="close_x" title="cancel invite" data-req="{{r.id}}">X</span>			    			
+				    			<p>{{r.comments}}</p>
+			    			</li>
+			    			{%endfor%}
+			    		</ul>
+		    		</div>
+		    		{%endif%}
+		    	</div>
+		    {%endif%}
+	    {%endif%}
+	    
+	</div>    
+	
+	<!-----------------------------------  Right Pane ---------------------------------------------->
+	{%if scout.position.youth%}
 
-<div style="float:left;width:39%">
-
-
-    <div id="edit_user" class='button' style="margin-left:0;">Edit personal info</div>
-
-    <h1>{{scout.fullname}}{%if scout.patrol%} ( {{scout.patrol.name}} ) {%endif%}</h1>
-    {%if scout.rank.patch%}<img src='{{MEDIA_URL}}{{scout.rank.patch}}'/>{%endif%}
-    {%if scout.position.patch%}<img src='{{MEDIA_URL}}{{scout.position.patch}}'/>{%endif%}
-    
-    {%if scout.position.youth%}
-    {%include 'badges.html'%}
-    {%endif%}
-    
-</div>    
-{%if scout.position.youth%}
-
-	<div id="rpane"/>
+	<div id="rpane">
 	   
         {%for r in ranks%}
-             <div class="rank_div">
+             <div class="rank_div pane">
                  <h2><span class='toggle'>+</span>{{r.name}}</h2>
                  <div class="slide_container" id="sc{{r.id}}">
                      <table class="rank_table" id="rank_{{r.id}}"> 
@@ -179,72 +242,58 @@ function afterSet(box, data){
 	
 	<div id="set_req_form" class="popup">
 	</div> 
-
-{% else %}
-	<!-- Is a parent or guardian or scout leader-->
 	
-		{% if user.profile.unit = None%}
-		<div id="user_help">
-			<fieldset class="float_panel"><legend>Join a Unit</legend>
-			For security purposes you can only join a unit via an invitation. Eventually I'll have a search option here where you can 
-			search for local unitss and request to be invited. Until that happens you must contact one of your local Scout Representatives
-			and ask them to add you to there units.
-			</fieldset>
-			<br/>
-			<fieldset class="float_panel"><legend>Create a Unit</legend>
-			If you are a scout leader or a committee member and would like to start using Ultimate scout Tracker then click 
-			<span class="link" id="unit_button">here</span> to create a new unit.
+	{% else %}
+		<!-- Is a parent or guardian or scout leader-->
+		
 			
-			<div id="unit_div">
-			 
-			</div>
-			</fieldset>
-			
-		</div>	 
-		{%else%}
-			<div id="rpane">
+		<div id="rpane">
+			{% if user.profile.unit = None%}
+				{%include 'userprofile/no_unit.html'%}
+			{%else%}
+				<h2>Patrols:</h2>
 				
-					<h2>Patrols:</h2>
-					<div style="margin-bottom:10px;">
-						<input type="text" size="50" placeholder="Patrol Name" id="np_name"/>
-						<span class="button" id="newpatrol_btn">+ Add Patrol</span>
-					</div>
-					{%if orphans%}
-					<div class="rank_div">
-						<h2>Members not in a Patrol (Drag to assign to Patrol)</h2>
-						{%for o in orphans%}
-							<div class="draggable" data-scout="{{o.id}}" title="Drag to a Patrol">{{o.name}}</div>
-						{%endfor%}
-					</div>
-					{%endif%}
-					{%for p in patrols%}
-						<div class="rank_div droppable" data-patrol="{{p.id}}">
-							<h2>{{p.name}}</h2>
-							<div style="padding:5px 0;" class="scoutList">
-							{%for u in p.scouts %}
-								<div class="draggable" data-scout="{{u.id}}" title="Drag to a Patrol">
-								<a href="/user/{{u.user.id}}/">{{u.user.first_name}} {{u.user.last_name}}</a> 
-								{% thumbnail u.position.patch "23x23" as im %}
-								    <img src="{{ im.url }}" width="{{im.width}}" height="{{im.height}}" title="{{u.position.name}}">
-								{% endthumbnail %}
-								{%comment%}
-								{%if u.position.patch%}<img src='{{MEDIA_URL}}{{u.position.patch}}'/>{%endif%}
-								{%endcomment%}
-								</div>
-							{%endfor%}
-							</div>
-							<div class="button add_scout" style="width:100px;margin:0 0 0 auto;" data-patrol="{{p.id}}">Add Scout</div>
-						</div>
-					{%empty%}
-						<h1>Oh no! no patrols yet</h1>
+				{%if orphans%}
+				<div class="rank_div" class="pane">
+					<h2>Members not in a Patrol (Drag to assign to Patrol)</h2>
+					{%for o in orphans%}
+						<div class="draggable" data-scout="{{o.id}}" title="Drag to a Patrol">{{o.name}}</div>
 					{%endfor%}
-
-					
+				</div>
+				{%endif%}
+				{%for p in patrols%}
+					<div class="rank_div droppable pane" data-patrol="{{p.id}}">
+						<span class="close_x del_patrol" title="remove patrol" data-id="{{p.id}}">X</span>
+						<h2>{{p.name}}</h2>
+						<div style="padding:5px 0;" class="scoutList">
+						{%for u in p.scouts %}
+							<div class="draggable" data-scout="{{u.id}}" title="Drag to a Patrol">
+							<a href="/user/{{u.user.id}}/">{{u.user.first_name}} {{u.user.last_name}}</a> 
+							{% thumbnail u.position.patch "23x23" as im %}
+							    <img src="{{ im.url }}" width="{{im.width}}" height="{{im.height}}" title="{{u.position.name}}">
+							{% endthumbnail %}
+							{% thumbnail u.rank.patch "23x23" as rank %}
+							    <img src="{{ rank.url }}" width="{{rank.width}}" height="{{rank.height}}" title="{{u.rank.name}}">
+							{% endthumbnail %}
+							
+							</div>
+						{%endfor%}
+						</div>
+						<div class="button add_scout" data-patrol="{{p.id}}">Add Scout</div>
+					</div>
+				{%empty%}
+					<h1>Oh no! no patrols yet</h1>
+				{%endfor%}
+				<div style="margin-bottom:10px;">
+					<input type="text" size="50" placeholder="Patrol Name" id="np_name"/>
+					<span class="button" id="newpatrol_btn">+ Add Patrol</span>
+				</div>
 				
-			</div>
-			
-		{%endif%}
-	</div>
+			{%endif%}
+		</div>
+	</div>		
+		
+	
 {%endif%}
 
 {%endblock%}
