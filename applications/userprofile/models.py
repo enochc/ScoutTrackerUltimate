@@ -35,6 +35,7 @@ class Userprofile(models.Model):
             ("add_scouts", "Can add scouts"),
             ("edit_scouts", "Can edit scouts"),
             ("mark_requirements", "Can sign off requirements"),
+            ("add_calendar", "Can add unit calendar"),
         )
 		
 	user = models.OneToOneField(User, related_name='profile', null=True, blank=True)
@@ -58,6 +59,7 @@ class Userprofile(models.Model):
 	google_refresh_token = models.CharField(max_length=255, null=True, blank=True)
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
+	facebook_id = models.CharField(max_length=25, null=True, blank=True)
 	badges = models.ManyToManyField(UserAward, null=True, blank=True, limit_choices_to={"award__type":0})
 	
 	@property
@@ -80,8 +82,12 @@ class Userprofile(models.Model):
 	def has_google_login(self):
 		return self.google_id is not None and len(self.google_id)>0 and self.google_id != 'None'
 	
-	def set_goals(self, force=False):
-		if force or self.goals.all().count()==0:
+	def has_fb_login(self):
+		return self.facebook_id is not None and len(self.facebook_id)>0 and self.facebook_id != 'None'
+	
+	def set_goals(self):
+		
+		if self.goals.all().count()==0:
 		
 			eagle = self.birthday.replace(year=(self.birthday.year+18))
 			life = add_months(-6, eagle)
@@ -150,10 +156,8 @@ class Userprofile(models.Model):
 		super(Userprofile, self).save(*args, **kwargs)
 		
 		if self.birthday and self.is_scout():
-			force = False
 			if self.birthday != bday:
-				force = True
-			self.set_goals(force)
+				self.set_goals(force)
     	
     	
     	

@@ -14,20 +14,42 @@ class UnitRequest(models.Model):
     key = models.CharField(max_length=255, blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
     
-    def notify(self, is_approved=False):
+    def notify(self, is_approved=False, member=None):
+        
         if self.type == "request":
-            to = [u.email for u in self.unit.adults()]
             if is_approved:
+                to = [self.email]
+                self.member = member.profile
                 template = "request_approved.html"
+                subject = "UST request approved"
             else:
+                to = [u.email for u in self.unit.adults()]
                 template = "request.html"
-            email('request.html', to, {'req':self})
+                subject = "UST request"
+        else:
+            if is_approved:
+                to = [u.email for u in self.unit.adults().exclude(user__email=self.email)]
+                self.member = member.profile
+                template = "invite_accepted.html"
+                subject = "UST invite accepted"
+            else:
+                to = [self.email]
+                template = "invite.html"
+                subject = "Invitation to UltimateScoutTracker.com"
             
-    def approve(self):
+        email(template, to, {'req':self}, subject=subject)
+    
+    def claim(self, user):
+        user.profile.unit = self.unit
+        user.profile.save()
+        self.notify(True, user)
+        self.delete()
+            
+    def approve(self, user):
         if self.type == "request":
             self.member.unit = self.unit
             self.member.save()
-            self.notify(True)
+            self.notify(True, user)
             self.delete()
             
     

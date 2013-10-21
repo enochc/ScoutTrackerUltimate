@@ -137,4 +137,12 @@ def add_scout(request, scout_id = None):
             return HttpJsonSuccess()
         except Exception, e:
             print e
+
+@login_required      
+def setUserPosition(request, user_id, pos_id):
+    profile = Userprofile.objects.get(user__id=user_id)
+    pos = Position.objects.get(pk=pos_id)
+    profile.position = pos
+    profile.save()
+    return HttpJsonSuccess()
         

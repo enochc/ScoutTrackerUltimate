@@ -35,7 +35,9 @@ $.blockUI.defaults = $.extend($.blockUI.defaults,{
 
 function doSuccess(data, success_func, fail_func, dontClear){
 	if(data.success){
-		success_func(data)
+		if(typeof(success_func) == "function"){
+			success_func(data)
+		}
 	}else{
 		message = ''
 		if(data.form){
@@ -55,7 +57,6 @@ function doSuccess(data, success_func, fail_func, dontClear){
 		if(message.length > 0){
 			alert(message)
 		}
-		console.log(fail_func)
 		if(typeof(fail_func) == "function"){
 			fail_func()	
 		}
@@ -83,7 +84,13 @@ function login_user(e){
 
 function logout(){
 	$.post('/logout/',function(data){
-		doSuccess(data, refresh)
+		doSuccess(data, function(){
+			
+			/*try{
+				FB.logout()
+			}catch(e){}*/
+			refresh()
+		})
 	})
 }
 
@@ -175,7 +182,7 @@ $(function(){
 		}
 	});
 	
-	$("#unit_requests span.close_x").on("click", function(){
+	$(".request span.close_x").on("click", function(){
 		var req = $(this)
 		$.post("/unit/invite/cancel/"+req.attr("data-req")+"/", function(ret_data){
 			if(ret_data.success){
@@ -185,9 +192,14 @@ $(function(){
 	})
 	$("#unit_requests span.approve_req").on("click", function(){
 		var req = $(this)
+		var pane = req.parents(".pane").eq(0)
+		pane.block()
 		$.post("/unit/invite/approve/"+req.attr("data-req")+"/", function(ret_data){
 			if(ret_data.success){
 				window.location = window.location
+			}else{
+				alert(data.message)
+				pane.unblock()
 			}
 		})
 	})
@@ -237,6 +249,7 @@ function send_invite(email, obj){
 	$.post("/unit/invite/", {"email":email}, function(data){
 		if(data.success){
 			alert("Inivatation Sent")
+			window.location=window.location
 		}else{
 			alert(data.message)
 		}
@@ -275,6 +288,25 @@ function set_scout_requiremnt(r, s, b, options){
     })
 }
 
+function updateLeaderPosition(event){
+	var sel = $(event.target)
+	var pos = sel.val()
+	var leader = sel.attr("data-lid")
+	var url = "/user/set_pos/"+leader+"/"+pos+"/"
+	var pane = sel.parents(".pane").eq(0)
+	pane.block({"message":"Updating Leader Position"})
+	$.post(url, function(data){
+		doSuccess(data, function(){pane.unblock()})
+	})
+}
+
+function addCalendar(event){
+	$.blockUI()
+	var cal_id = $("#calendar_id").val()
+	$.post("/unit/update_calendar/",{"calendar_id":cal_id}, function(){
+		window.location = window.location
+	})
+}
 
 
 function openRecForm(box, opt){

@@ -20,6 +20,11 @@ user friendly solution to tracking scout advancement for scouts, parents, and en
     padding:0 5%;
     float:left;
    }
+   #oquth_login li{
+   	float:left;
+   	height:30px;
+   	margin:5px;
+   }
    #local_login{
     width:40%;
     padding:0 4%;
@@ -34,6 +39,17 @@ user friendly solution to tracking scout advancement for scouts, parents, and en
 <script>
 var google_client_id = "{{google_client_id}}"
 
+function facebook_login(){
+	$.blockUI()
+	FB.login(function(response) {
+		if(response.status === 'connected'){ 
+			fblogin(response.authResponse)
+		}else{
+		   $.unblockUI()
+		}
+	}, {scope: 'email'});
+	
+}
 
 function google_login(){
 	$.blockUI()
@@ -56,8 +72,13 @@ function google_login(){
 <div id="login" class="pane">
     <div id="oquth_login">
         <h2>Login with an existing social media account</h2>
-        <p class="red">*Use the same login method every time you visit the site to prevent creating multiple accounts.</p>
-        <a href="javascript:google_login()"><img src="{{MEDIA_URL}}/google.png"/></a>
+        
+        <ul>
+        	<li><a href="javascript:google_login()"><img src="{{MEDIA_URL}}google.png" height="25"/></a></li>
+        	<li><a href="javascript:facebook_login()"><img src="{{MEDIA_URL}}facebook_login.png" height="25"/></a></li>
+        </ul>
+        
+        
     </div>
     <div id="local_login">      
         <h2>Don't use or like social websites? Login locally</h2>
@@ -69,7 +90,7 @@ function google_login(){
             	{%endif%}
                <label>Email:</label><input type="text" id="login_username" name="login"/>
                <label>Password:</label><input type="password" id="login_password" name="password"/>
-               <div class="button" onclick="login_user()">login</div>
+               <div class="button" style="margin:10px auto;" onclick="login_user()">login</div>
                <a href="/register">register for a new account</a>
             </form>
            

@@ -41,18 +41,28 @@ def unitInvite(request):
     email = request.REQUEST.get('email')
     if email:
         form = UnitRequestForm({'member':request.user.profile.id,
-                                        'email':email,
-                                        'type':'invite',
-                                        'unit':request.user.profile.unit.id})
-        print form
-        print form.is_valid()
+                                'email':email,
+                                'type':'invite',
+                                'unit':request.user.profile.unit.id})
         if form.is_valid():
             req = form.save()
             req.notify()
         else:
-            print 'errors', form._errors
             return HttpJsonFailure("Doh! failed")
         return HttpJsonSuccess()
+    
+@render_to_html
+def acceptInvite(request, key):
+    req = UnitRequest.objects.get(key=key)
+    if req:
+        if request.user.is_authenticated():
+            req.claim(request.user)
+            return HttpResponseRedirect("/")
+        else:
+            request.session['req'] = req
+    else:
+        del request.session['req']
+    return 'home.html',{}
 
 @login_required
 def cancelUnitRequest(request, req_id):
@@ -67,7 +77,7 @@ def cancelUnitRequest(request, req_id):
 def approveUnitRequest(request, req_id):
     try:
         req = UnitRequest.objects.get(pk=req_id)
-        req.approve()
+        req.approve(request.user)
         return HttpJsonSuccess()
     except UnitRequest.DoesNotExist:
         return HttpJsonFailure("Request specified does not exist")
@@ -113,7 +123,14 @@ def newPatrol(request):
         patrol = Patrol.objects.create(name=pname,unit=unit)
         patrol.save()
         return HttpJsonSuccess()
-    
+
+@login_required
+def updateCalendar(request):
+    unit = request.user.profile.unit
+    cal_id = request.REQUEST.get("calendar_id")
+    unit.calendar = cal_id
+    unit.save()
+    return HttpJsonSuccess()
     
 
 @render_to_html

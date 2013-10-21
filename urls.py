@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/', 'auth.views.login_view'),
+    url(r'^fblogin/', 'auth.views.fblogin_view'),
     url(r'^logout/', 'auth.views.logout_view'),
     
     (r'^js/(?P<path>.*)$', 'django.views.static.serve',

@@ -3,20 +3,22 @@
 {% block content%}
 
 {%if user.profile.unit.calendar%}
-<br/>
-<center>
-
-<iframe src="https://www.google.com/calendar/b/0/embed?title=Unit%20{{user.profile.unit}}&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src={{user.profile.unit.calendar}}&amp;color=%238D6F47&amp;ctz=America%2FDenver" 
-style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-</center>
+	<br/>
+	<center>
+	
+	<iframe src="https://www.google.com/calendar/b/0/embed?title=Unit%20{{user.profile.unit}}&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src={{user.profile.unit.calendar}}&amp;color=%238D6F47&amp;" 
+	style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
+	</center>
 {%else%}
-    {%if user.profile.unit%}
-    <p>Add a Calendar</p>
+    {%if user.profile.unit and perms.userprofile.add_calendar%}
+    <p>Add a public google calendar by entering your calendar ID here (example: 1cojbmkrprl39t58eqablihao8@group.calendar.google.com)</p>
+    <input id="calendar_id" type="text" style="width:300px;" placeholder="calendar id">
+    <span onclick="addCalendar(event)" class="button" id="add_calendar">Add calendar</span>
     {%else%}
     <p>
-    You must be a member of a unit to add a calendar.
+    	Contact your unit committee or scout leader to add a calendar
     </p>
     {%endif%}
 {%endif%}
+
 {%endblock%}

@@ -13,6 +13,8 @@ from userprofile.forms import NewScoutForm
 from userprofile.views import userhome
 from userprofile.models import Userprofile
 
+from utils.funcs import USTLogin
+
 """
 /*
 {u'family_name': u'Carter', u'name': u'Enoch Carter', u'picture': 
@@ -38,7 +40,7 @@ def anon_home(request):
 
 @render_to_html
 def oauth_callback(request):
-    print request.method
+    invite = request.session.get("req")
     if request.method == 'GET':
         code = request.GET.get('code',None)
         if 'google_access_token' in request.session:
@@ -57,13 +59,12 @@ def oauth_callback(request):
                     up = Userprofile.objects.get(user=user)
                     up.google_id = profile["id"]
                     up.save()
-                    user = authenticate(token=request.session['google_access_token'], google_id=profile["id"])
+                    user = USTLogin(request, token=request.session['google_access_token'], google_id=profile["id"])                    
                     if user:
-                        login(request, user)
                         return HttpResponseRedirect("/user")
                 except User.DoesNotExist:
                     pass
-                print profile
+
                 form = NewScoutForm({'first_name':profile["given_name"],
                                      'last_name':profile["family_name"],
                                      'nickname':profile["given_name"],
@@ -74,33 +75,39 @@ def oauth_callback(request):
                                      'position':7,
                                      })
                 if form.is_valid():
-                    profile = form.save()
-                    user = authenticate(token=request.session['google_access_token'], google_id=profile.google_id)
-                    login(request, user)
+                    up = form.save()
+                    user = USTLogin(request, token=request.session['google_access_token'], google_id=profile["id"])                    
                     return HttpResponseRedirect("/")
+                    
+                    
                 else:
                     return 'oauth.html', {'form':form, 'profile':True}
             else:
                 login(request, user)
                 return HttpResponseRedirect("/user")
         else:
+            print 'in here four'
             form = NewScoutForm(initial={
                                          'position':7,#Guardian
                                          })
             return 'oauth.html', {'form':form}  
         
     elif request.method == 'POST':
+        invite = request.session.get("req")
 
         scoutform = NewScoutForm(request.POST)
        
         if scoutform.is_valid():
             profile = scoutform.save()
+                    
             if len(profile.google_id) > 0:
-                user = authenticate(token=request.session['google_access_token'], google_id=profile.google_id)
+                user = USTLogin(request, token=request.session['google_access_token'], google_id=profile.google_id)                    
+ 
+                #user = authenticate(token=request.session['google_access_token'], google_id=profile.google_id)
             else:
-                user = authenticate(username=profile.user.username, password=scoutform.cleaned_data['password'])
-            if user:
-                login(request, user)
+                user = USTLogin(request, username=profile.user.username, password=scoutform.cleaned_data['password'])
+                #user = authenticate(username=profile.user.username, password=scoutform.cleaned_data['password'])
+            
             return HttpResponseRedirect("/")
         else:
             print 'form errors: %s'%scoutform.errors

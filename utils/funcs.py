@@ -2,12 +2,24 @@ import datetime
 from sorl.thumbnail import get_thumbnail, delete
 from django.conf import settings
 from utils.google_funcs import get_google_profile, validate_token
+from django.contrib.auth import login, authenticate
 
 from django.core.mail import EmailMultiAlternatives, send_mass_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
+def USTLogin(request, **kwargs):
+    invite = request.session.get("req")
+    user = authenticate(**kwargs)
+    if user:
+        login(request, user)
+        if invite:
+            invite.claim(user)
+        return user
+    
+    return None
+    
 
 def get_sized_image(img, size_tuple=None):
 
@@ -21,6 +33,7 @@ def baseProcessor(httprequest):
     return {
             #'host':'%s:%s'%(httprequest.META.get('REMOTE_ADDR'),httprequest.META.get('SERVER_PORT')),
             'google_client_id':settings.GOOGLE_CLIENT_ID,
+            'facebook_appid':settings.FACEBOOK_APPID,
             }
 
 def add_months(months, date):
@@ -54,6 +67,24 @@ class CaseInsensitiveBackend(ModelBackend):
         except User.DoesNotExist:
             return None   
 
+class FacebookModelBackend(ModelBackend):
+    #supports_object_permissions = False
+    #supports_anonymous_user = True
+    supports_inactive_user = True
+    
+    def authenticate(self, username=None, facebook_id=None):
+        print 'facebook auth', username, facebook_id
+        try:
+            if facebook_id is not None:
+                print 'auth facebook', username, facebook_id
+                return User.objects.get(username__iexact=username, profile__facebook_id=facebook_id)
+            else:
+                return None
+        except User.DoesNotExist:
+            return None
+
+    def has_perm(self, user_obj, perm):
+        return perm in self.get_all_permissions(user_obj)
    
 class GoogleOauthModelBackend(ModelBackend):
     #supports_object_permissions = False

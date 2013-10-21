@@ -10,6 +10,13 @@
     <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript" src="/js/myscript.js"></script>
     <script type="text/javascript" src="/js/scouts.js"></script>
+    <script>
+    var is_authenticated = {{user.is_authenticated|lower}}
+    </script>
+    
+    {%include "facebook_crap.html"%}
+    
+    
     {%endif%}
     {%block head%}
     
@@ -17,9 +24,12 @@
     {%csrf_token%}
     </head>
     <body>
+    <div id="fb-root"></div>
     {%block body%}
         
     {%endblock%}
     
     </body>
+    
+    
 </html>

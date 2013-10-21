@@ -1,0 +1,18 @@
+{%extends 'email/base_email.html'%}
+
+{%block body%}
+	<h3>{{req.member.first_name}} {{req.member.last_name}} has invited you to join Unit: {{req.unit}} on 
+	<a href="ultimatescouttracker.com">UltimateScouttracker.com</a></h3>
+	<p>
+	To join {{req.member.first_name}} on UltimateScouttracker.com use the provided link:<br/>
+	<a href="http://ultimatescouttracker.com/unit/invite/accept/{{req.key}}/">UltimateScouttracker.com</a>
+	Or copy and paste the text below into your browser<br/>
+	</p>
+	<p>
+	http://ultimatescouttracker.com/unit/invite/accept/{{req.key}}/
+	</p>
+	<p>
+	Then Follow the simple instructions to create a new account or sign in with one click using an existing google account.
+	</p>
+	
+{%endblock%}

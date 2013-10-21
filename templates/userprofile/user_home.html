@@ -149,7 +149,7 @@ function afterSet(box, data){
 		    				{{l.first_name}} {{l.last_name}}</a>
 		    			{%endif%}: 
 		    			{%if perms.userprofile.add_leaders%}
-			    			<select>
+			    			<select data-lid="{{l.user.id}}" class="leader_position_sel" onchange="updateLeaderPosition(event)">
 			    				{%for p in positions%}
 			    				<option value="{{p.id}}"{%if p == l.position%}selected="selected"{%endif%}>{{p.name}}</option>
 			    				{%endfor%}
@@ -161,8 +161,8 @@ function afterSet(box, data){
 		    			</li>
 		    		{%endfor%}
 		    		</ul>
-		    		<input type="text" placeholder="Email invite to UST" id="inv_email">
-		    		<span class="button" id="send_invite">Send Invite to Unit</span>
+		    		<input type="email" style="width:200px;" placeholder="Email invite to UST" id="inv_email">
+		    		<span class="button" id="send_invite">Send Invite</span>
 		    		{% if requests%}
 		    		<h2 style="margin-top:20px;">Requests to Join Unit</h2>
 		    		<div class="request" id="unit_requests">
@@ -181,7 +181,7 @@ function afterSet(box, data){
 		    		{%endif%}
 		    		{% if invites%}
 		    		<h2 style="margin-top:20px;">Invitations Sent</h2>
-		    		<div class="invites" id="unit_invites">
+		    		<div class="request" id="unit_invites">
 			    		<ul>
 			    			{%for r in invites%}
 			    			<li>

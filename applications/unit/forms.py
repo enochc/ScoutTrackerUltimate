@@ -1,4 +1,4 @@
-import hashlib
+
 from django import forms
 from unit.models import Unit, UnitRequest
 
@@ -18,7 +18,8 @@ class UnitRequestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         scout = kwargs.pop("scout", None)
         super(UnitRequestForm, self).__init__(*args, **kwargs)
-        type = self.initial.get("type", 'request')
+        type = self.initial.get("type") or self.data.get('type') or 'request'
+
         
         if scout and type == 'request':
             
@@ -28,17 +29,5 @@ class UnitRequestForm(forms.ModelForm):
             self.fields['member'].widget = forms.widgets.HiddenInput()
             self.fields['key'].widget = forms.widgets.HiddenInput()
             
-        elif type == 'invite':
-            m = hashlib.sha1()
-            key = "%s-%s"%(self.initial['email'], self.initial['member'].email)
-            print key
-            m.update("%s-%s"%(self.initial['email'], self.initial['member'].email))
-            key = m.hexdigest()
-            self.initial['key'] = key
+       
             
-            print 'initial',self.initial
-            
-    def clean(self, *args, **kwargs):
-        print 'clean data', self.cleaned_data
-        
-        return self.cleaned_data

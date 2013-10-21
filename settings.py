@@ -37,7 +37,8 @@ CACHES = {
 
 AUTHENTICATION_BACKENDS = (
     #'django.contrib.auth.backends.ModelBackend',
-    'utils.funcs.CaseInsensitiveBackend',    
+    'utils.funcs.CaseInsensitiveBackend',  
+    'utils.funcs.FacebookModelBackend',  
     'utils.funcs.GoogleOauthModelBackend',            
 )
 
@@ -224,6 +225,8 @@ LOGIN_URL = '/'
 GOOGLE_CLIENT_ID = "448849120100.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET = "XZDzn3t_ajXgEqp-g-MZJKGZ"
 GOOGLE_API_KEY = "AIzaSyChYYhFzxdAJr8XReiymLBxAkzimu7etHk"
+
+FACEBOOK_APPID = "572689142780250"
 
 
 try:

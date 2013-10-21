@@ -101,14 +101,21 @@ function submitForm(){
 {{form.nickname.errors}}
 
 {%if scout%}
-	{%if scout.has_google_login %}
+	 {%if scout.has_google_login or scout.has_fb_login%}
 		<label for='id_email'>Email:</label>
 		<input type="text" id="id_email" name="email" value="{{form.email.value}}" disabled="disabled"/><br/>
 		{{form.email.errors}}
 		
 	    <input type="hidden" id="id_login_name" name="login_name" value='{{form.login_name.value}}'/>
 	    <label for='id_login_name'>Login:</label>
-	    <span class="input"><img style="text-align:center;" src="{{MEDIA_URL}}/google.png"/></span><br/>
+	    <span class="input">
+	    {%if scout.has_google_login%}
+	    <img style="text-align:center;" src="{{MEDIA_URL}}google.png" height="20"/>
+	    {%endif%}
+	    {%if scout.has_fb_login%}
+	    <img style="text-align:center;" src="{{MEDIA_URL}}facebook_login.png"/>
+	    {%endif%}
+	    </span><br/>
 	    {{form.login_name.errors}}
 	 {%else%}
 	 	<label for='id_email'>Email:</label>{{form.email}}<br/>
