@@ -3,44 +3,120 @@
     "pk": 1, 
     "model": "award.award", 
     "fields": {
-        "requirements": [], 
+        "group": [], 
+        "name": "First Aid", 
         "image": "award/first_aid.gif", 
         "required": true, 
-        "group": [], 
-        "name": "First Aid"
+        "requirements": [], 
+        "type": 0
     }
 },
 {
     "pk": 2, 
     "model": "award.award", 
     "fields": {
-        "requirements": [], 
+        "group": [], 
+        "name": "Citizenship in the Community", 
         "image": "award/Citizenship_in_the_Community.gif", 
         "required": true, 
-        "group": [], 
-        "name": "Citizenship in the Community"
+        "requirements": [], 
+        "type": 0
     }
 },
 {
     "pk": 3, 
     "model": "award.award", 
     "fields": {
-        "requirements": [], 
+        "group": [], 
+        "name": "Citizenship in the Nation", 
         "image": "award/Citizenship_in_the_Nation.gif", 
         "required": true, 
-        "group": [], 
-        "name": "Citizenship in the Nation"
+        "requirements": [], 
+        "type": 0
     }
 },
 {
     "pk": 4, 
     "model": "award.award", 
     "fields": {
-        "requirements": [], 
+        "group": [], 
+        "name": "Citizenship in the World", 
         "image": "award/Citizenship_in_the_World.gif", 
         "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 5, 
+    "model": "award.award", 
+    "fields": {
         "group": [], 
-        "name": "Citizenship in the World"
+        "name": "Camping", 
+        "image": "awards/Camping.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 6, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Communication", 
+        "image": "awards/Communication.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 7, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Cycling", 
+        "image": "awards/Cycling.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 8, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Emergency Preparedness", 
+        "image": "awards/Emergency_Preparedness.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 9, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Environmental Science", 
+        "image": "awards/Environmental_Science.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 10, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Family Life", 
+        "image": "awards/Family_Life.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
     }
 }
 ]

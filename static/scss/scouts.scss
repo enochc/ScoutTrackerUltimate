@@ -12,6 +12,17 @@
 .green{color:$green;}
 .ltgreen{color:$tan;}
 
+ol{
+  list-style:decimal;
+  & ul li{
+  	list-style:circle;
+  	margin-left:10px;
+  }
+  & li{
+  	list-style:decimal;
+  }
+}
+
 div.ui-datepicker{
  font-size:.7em;
 }

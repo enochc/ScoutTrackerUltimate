@@ -71,6 +71,7 @@ def req_info(request, req_id):
 
 
 @render_to_html
+@login_required
 def rank_requirements(request, rank_id):
     rank = Rank.objects.get(pk=rank_id)
     unit = request.user.profile.unit

@@ -1,0 +1,68 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Guardian", 
+        "permissions": [
+            38, 
+            34, 
+            35, 
+            36, 
+            39, 
+            40
+        ]
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Committee Member", 
+        "permissions": [
+            41, 
+            37, 
+            38, 
+            34, 
+            35, 
+            36, 
+            39, 
+            40
+        ]
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Scoutmaster", 
+        "permissions": [
+            41, 
+            37, 
+            38, 
+            34, 
+            35, 
+            36, 
+            39, 
+            40
+        ]
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "Assistant Scoutmaster", 
+        "permissions": [
+            41, 
+            37, 
+            38, 
+            34, 
+            35, 
+            36, 
+            39, 
+            40
+        ]
+    }
+}
+]

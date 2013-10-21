@@ -21,9 +21,10 @@ class UserGoal(models.Model):
 
 class UserAward(models.Model):
 	award = models.ForeignKey('award.Award')
+	user = models.ForeignKey('userprofile.Userprofile')
 	date_earned = models.DateField(blank=True, null=True)
 	date_entered = models.DateField(auto_now_add=True)
-	location_earned = models.CharField(max_length=200, help_text="name of camp or powow")
+	location_earned = models.CharField(max_length=200, help_text="name of camp or powow", blank=True, null=True)
 	instructor = models.CharField(max_length=200, blank=True, null=True, help_text="name of counselor")
 	awarded_by = models.ForeignKey(User, related_name='awarded')
 
@@ -49,7 +50,7 @@ class Userprofile(models.Model):
 	birthday = models.DateTimeField(null=True, blank=True)
 	phone_number = models.CharField(max_length=20, null=True, blank=True)
 	
-	state = models.CharField(max_length=2, choices=reverse_states, default='UT', null=True, blank=True)
+	state = models.CharField(max_length=2, choices=reverse_states, null=True, blank=True)
 	city = models.CharField(max_length=100, null=True, blank=True)
 	street1 = models.CharField(max_length=255, help_text='Street name and house number.', null=True, blank=True)
 	street2 = models.CharField(max_length=100, help_text='Floor or room number.', null=True, blank=True)
@@ -60,7 +61,19 @@ class Userprofile(models.Model):
 	google_code = models.CharField(max_length=255, null=True, blank=True)
 	google_id = models.CharField(max_length=25, null=True, blank=True)
 	facebook_id = models.CharField(max_length=25, null=True, blank=True)
-	badges = models.ManyToManyField(UserAward, null=True, blank=True, limit_choices_to={"award__type":0})
+	awards = models.ManyToManyField("award.Award", through=UserAward, null=True, blank=True)
+	
+	def add_award(self, award, user, **kwargs):
+		try:
+			award = UserAward.objects.get(user=self, award=award)
+		except UserAward.DoesNotExist:
+			award = UserAward(user=self, award=award, awarded_by=user)
+		award.save()
+
+	
+	@property
+	def badges(self): 
+		return self.awards.filter(type=0)
 	
 	@property
 	def email(self):
@@ -85,9 +98,9 @@ class Userprofile(models.Model):
 	def has_fb_login(self):
 		return self.facebook_id is not None and len(self.facebook_id)>0 and self.facebook_id != 'None'
 	
-	def set_goals(self):
+	def set_goals(self, force=False):
 		
-		if self.goals.all().count()==0:
+		if self.goals.all().count()==0 or force:
 		
 			eagle = self.birthday.replace(year=(self.birthday.year+18))
 			life = add_months(-6, eagle)
@@ -157,7 +170,7 @@ class Userprofile(models.Model):
 		
 		if self.birthday and self.is_scout():
 			if self.birthday != bday:
-				self.set_goals(force)
+				self.set_goals(True)
     	
     	
     	

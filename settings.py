@@ -2,10 +2,11 @@ import os
 import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(BASE_DIR)
 sys.path.append('%s/applications' % BASE_DIR)
 sys.path.append('%s/contrib-applications' % BASE_DIR)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 THUMBNAIL_COLORSPACE = 'RGB'
@@ -16,12 +17,14 @@ ADMINS = (
 	('Enoch Carter', 'mrenoch@gmail.com'),
 )
 
+ALLOWED_HOSTS = ("192.168.20.149",".ultimatescouttracker.com")
+
 MANAGERS = ADMINS
 FORMAT_MODULE_PATH = 'locales'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'scouts',                      # Or path to database file if using sqlite3.
+        'NAME': 'scouts2',                      # Or path to database file if using sqlite3.
         'USER': 'web',                      # Not used with sqlite3.
         'PASSWORD': 'web',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -169,6 +172,7 @@ INSTALLED_APPS = (
 	'userrank',
 	'council',
 	'award',
+	'auth',
 )
 
 # A sample logging configuration. The only tangible logging

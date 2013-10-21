@@ -11,7 +11,7 @@ class NewScoutForm(forms.ModelForm):
         
     class Meta:
         model = Userprofile
-        exclude = ('user','goals')
+        exclude = ('user','goals','awards')
     
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)

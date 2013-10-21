@@ -1,4 +1,4 @@
-import simplejson as json
+import json
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseNotFound, \
     HttpResponseForbidden, HttpResponseBadRequest
@@ -7,7 +7,7 @@ def json_vals(vals, mimetype):
     if settings.DEBUG:
         return HttpResponse( json.dumps( vals, indent=2 ), mimetype )
     else:
-        return HttpResponse( json.dumps( vals, seperators=(',',':') ), mimetype)
+        return HttpResponse( json.dumps( vals, separators=(',',':') ), mimetype)
 
 def HttpJsonResponse(vals, mimetype="application/json"):
     return json_vals(vals, mimetype)

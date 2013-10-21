@@ -136,6 +136,7 @@ $(function(){
     
     $(".autocomplete").autocomplete({
     	delay:0,
+    	minLength:0,
     	source:function( request, response ) {
     		var t = $(this.element)
     		var noCache = t.hasClass("nocache")
@@ -298,6 +299,22 @@ function updateLeaderPosition(event){
 	$.post(url, function(data){
 		doSuccess(data, function(){pane.unblock()})
 	})
+}
+
+function add_badge(event){
+	var btn = $(event.target)
+	var scout = btn.attr("data-scout")
+	var badge = $("#meritbadges").val()
+	if(badge.length>0){
+		$("#badge_cont").block()
+		$.post("/user/add_award/",{'scout':scout,'award':badge}, function(){
+			window.location = window.location
+		})
+	}
+	
+	/*$.post(url, function(data){
+		doSuccess(data, function(){pane.unblock()})
+	})*/
 }
 
 function addCalendar(event){

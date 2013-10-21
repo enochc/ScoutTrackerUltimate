@@ -32,10 +32,10 @@ def userhome(request, user_id=None, **kwargs):
     leaders = []
     rform = None
     positions = []
-
     if user_id is not None and request.user.has_perm('userprofile.add_scouts'):
         scout = get_object_or_404(User, id=user_id, profile__unit=user.profile.unit)
     else:   
+        
         scout = user  
     
     if scout.profile.position.youth:
@@ -71,7 +71,8 @@ def userhome(request, user_id=None, **kwargs):
     args = {'scout':scout.profile, 
           'userrequirements':urs, 
           'req_list':req_list,
-          'ranks':ranks,'badges':awards,
+          'ranks':ranks,
+          'badges':awards,
           'patrols':patrols,
           'orphans':orphans,
           'requests':requests,
@@ -144,5 +145,16 @@ def setUserPosition(request, user_id, pos_id):
     pos = Position.objects.get(pk=pos_id)
     profile.position = pos
     profile.save()
+    return HttpJsonSuccess()
+
+@login_required      
+def add_award(request):
+    award = request.REQUEST.get("award")
+    scout = request.REQUEST.get("scout")
+    
+    award = Award.objects.get(name=award)
+    scout = Userprofile.objects.get(pk=scout)
+    scout.add_award(award, request.user)
+
     return HttpJsonSuccess()
         

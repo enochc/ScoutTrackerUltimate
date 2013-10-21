@@ -3,29 +3,63 @@
 #badges{
 	background:url({{MEDIA_URL}}sash.jpg) repeat-y;
 	width:90%;
-	min-height:400px;
+	min-height:600px;
 	margin:10px 0;
 	padding:20px;
 }
 .badge{
 	margin:2px;
 	width:110px;
+	height:110px;
+	float:left;
+}
+.badge img{
+	width:100%;
+	height:100%;
+	vertical-align:middle;		
+}
+.badge .overlay{
+/*
+	
+	margin:2px;
+	
+	position:relative;
+	top:-110px;
+	
+	margin-right:-110px;
+	*/
+	text-align:center;
+	width:110px;
+	height:110px;
+	display:table-cell;
+	vertical-align: middle;
+	
+	
+	
+}
+.badge .overlay p{
+	padding:0;
 }
 </style>
 
 {%if perms.userprofile.mark_requirements%}
+<div id="badge_cont">
 <p>
 Add Merit Badge: 
 <input class="autocomplete" data-url="/award/list/"
-	type="text" style="width:180px;" name="meritbadges" placeholder="start typing to search"/> <input type="button" value="add"/>
+	type="text" style="width:180px;" id="meritbadges" placeholder="start typing to search"/> 
+	<input onclick="add_badge(event)" type="button" value="add" data-scout="{{scout.id}}"/>
 </p>
 {%endif%}
 
 <div id="badges">
-	{% for x in 1234|make_list %}
-		{%for badge in badges%}
-		
-		<img class="badge" src="{{MEDIA_URL}}{{badge.image}}"/>
+	
+		{%for badge in scout.badges.all%}
+		<div class="badge">
+			<img src="{{MEDIA_URL}}{{badge.image}}"/>
+			<!-- <div class="overlay"><p>{{badge.name}}</p></div> -->
+		</div>
 		{%endfor%}
-	{%endfor%}
+	
+</div>
 </div>
