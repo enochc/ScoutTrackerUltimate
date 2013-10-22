@@ -10,11 +10,22 @@
             {%include "nav.html"%}
         {%endblock%}
         <div id="page_content">
+        <div id="motd">
+	        {%if user.profile.unit.message%}
+	        	{{user.profile.unit.message}}
+	        {%else%}
+	        	Welcome To UltimateScoutTracker! Please report any bugs or 
+	        	requests to scoutmaster@ultimatescouttracker.com. 
+	        	Tell me what you would like to see to truly make this the "Ultimate" Scout tracker.
+	        {%endif%}
+        </div>
+        
         {%block content%}  
         {%endblock%}
        	</div>
         <div id="footer">
 		    <ul>
+		    	<li><a href="/privacy/" target="_blank">Privacy</a></li>
 		    	<li><a href="mailto:scoutmaster@ultimatescouttracker.com" target="_blank">Contact</a></li>
 		    </ul>
 	    </div>

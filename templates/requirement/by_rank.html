@@ -6,7 +6,7 @@
 {%if unit%}
 	{%for patrol in patrols%}
 	<div style="width:900px;height:25px;">&nbsp;</div>
-	    {%for scout in patrol.patrol_members.all%}
+	    {%for scout in patrol.scouts%}
 	        
 	        {%for r in rank.requirements.all%}
 	            <div class='req s_{{scout.pk}} r_{{r.pk}} checkbox {%if forloop.parentloop.counter|divisibleby:2%}stripe{%endif%}'>

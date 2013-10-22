@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.views.generic import TemplateView
 
 from utils.views import oauth_callback, anon_home
 
@@ -20,6 +21,8 @@ urlpatterns = patterns('',
     url(r'^login/', 'auth.views.login_view'),
     url(r'^fblogin/', 'auth.views.fblogin_view'),
     url(r'^logout/', 'auth.views.logout_view'),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.STATIC_ROOT}),
     
     (r'^js/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.STATIC_ROOT +'/js'}),
@@ -35,4 +38,5 @@ urlpatterns = patterns('',
     url(r'^award/', include('award.urls')),
     url(r'^oauth2callback/', oauth_callback),
     url(r'^register/', oauth_callback),
+    url(r'^privacy/', TemplateView.as_view(template_name='privacy.html'))
 )

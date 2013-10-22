@@ -48,6 +48,7 @@ def unitInvite(request):
             req = form.save()
             req.notify()
         else:
+            print form._errors
             return HttpJsonFailure("Doh! failed")
         return HttpJsonSuccess()
     

@@ -1,6 +1,9 @@
 from django.contrib import admin
 
-from applications.userprofile.models import Userprofile
+from applications.userprofile.models import Userprofile, UserAward
+
+class UserawardAdmin(admin.ModelAdmin):
+    list_display = ("user","award")
 
 class UserprofileAdmin(admin.ModelAdmin):
     list_display = ('user', 'nickname', 'unit', 'google_id', 'facebook_id')
@@ -8,3 +11,4 @@ class UserprofileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Userprofile, UserprofileAdmin)
+admin.site.register(UserAward, UserawardAdmin)

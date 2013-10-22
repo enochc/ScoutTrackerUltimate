@@ -1,6 +1,12 @@
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
     <head class="{{edit}}">
+    <title>{%block title%}Ultimate Scout Tracker{%endblock%}</title>
+	<META name="description" content="UST is the last place you'll ever need to go to manage, track, and colaborate with your Unit">
+	<META name="keywords" content="scout, tracker, boyscouts, boy scouts, Enoch Carter, UST, Ultimatescouttracker">
+
     {%if not edit%}
+    <LINK REL="SHORTCUT ICON" HREF="/favicon.png">
+
     <LINK REL=StyleSheet HREF="/css/scouts.css" TYPE="text/css"/>
     <LINK REL=StyleSheet HREF="/css/jquery-ui-1.10.3.css" TYPE="text/css"/>
     <LINK REL=StyleSheet HREF="/css/forms.css" TYPE="text/css"/>
@@ -25,6 +31,7 @@
     </head>
     <body>
     <div id="fb-root"></div>
+	
     {%block body%}
         
     {%endblock%}

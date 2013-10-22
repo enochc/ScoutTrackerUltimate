@@ -1,8 +1,17 @@
 <div id="banner">
-    <span class='rt'>{{user.profile.name}} {%if user.profile.unit%}: {{user.profile.unit.number}} {%endif%}</span>
+    <span class='rt'>
+    
+     <span>{{user.profile.name}} {%if user.profile.unit%}: {{user.profile.unit.number}} {%endif%}</span>
+     <span class='fbrec'>
+	     <fb:like href="http://UltimateScoutTracker.com" 
+		colorscheme="light" layout="button_count" action="recommend" 
+		show_faces="true" send="false"></fb:like>
+		</span>
+     </span>
     <h1>Ultimate Scout Tracker</h1>
 </div>
 <div id='nav' class='grade'>
+	
     {%include "donate_btn.html"%}
     
 	{% if user.is_authenticated %}
@@ -19,7 +28,7 @@
         <li><a href="/user">Home</a></li>
         {%if user.is_authenticated%}
     
-       
+       		
     
             <li id="unit_stats"><a href="/unit/overview/">Overview</a></li>
     

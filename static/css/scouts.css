@@ -63,56 +63,61 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 9, ../scss/scouts.scss */
+@font-face {
+  font-family: "HelveticaNeueW01-55Roma";
+  src: url(/static/fonts/helv_heavy.woff) format('woff');
+}
+
+/* line 11, ../scss/scouts.scss */
 .red {
   color: #b31f36;
 }
 
-/* line 10, ../scss/scouts.scss */
+/* line 12, ../scss/scouts.scss */
 .blue {
   color: #005e9c;
 }
 
-/* line 11, ../scss/scouts.scss */
+/* line 13, ../scss/scouts.scss */
 .gold {
   color: #f6bc56;
 }
 
-/* line 12, ../scss/scouts.scss */
+/* line 14, ../scss/scouts.scss */
 .green {
   color: #32523b;
 }
 
-/* line 13, ../scss/scouts.scss */
+/* line 15, ../scss/scouts.scss */
 .ltgreen {
   color: #efeacc;
 }
 
-/* line 15, ../scss/scouts.scss */
+/* line 17, ../scss/scouts.scss */
 ol {
   list-style: decimal;
 }
-/* line 17, ../scss/scouts.scss */
+/* line 19, ../scss/scouts.scss */
 ol ul li {
   list-style: circle;
   margin-left: 10px;
 }
-/* line 21, ../scss/scouts.scss */
+/* line 23, ../scss/scouts.scss */
 ol li {
   list-style: decimal;
 }
 
-/* line 26, ../scss/scouts.scss */
+/* line 28, ../scss/scouts.scss */
 div.ui-datepicker {
   font-size: .7em;
 }
 
-/* line 29, ../scss/scouts.scss */
+/* line 32, ../scss/scouts.scss */
 #block_message {
   cursor: default;
 }
 
-/* line 32, ../scss/scouts.scss */
+/* line 35, ../scss/scouts.scss */
 html, body, table, tr, td, th {
   margin: 0;
   padding: 0;
@@ -120,7 +125,7 @@ html, body, table, tr, td, th {
   border-collapse: collapse;
 }
 
-/* line 38, ../scss/scouts.scss */
+/* line 41, ../scss/scouts.scss */
 body {
   font-family: Helvetica, Neue, sans-serif;
   font-size: 1em;
@@ -128,20 +133,20 @@ body {
   padding: 0;
 }
 
-/* line 44, ../scss/scouts.scss */
+/* line 47, ../scss/scouts.scss */
 a, .link {
   color: #32523b;
   text-decoration: underline;
   cursor: pointer;
 }
 
-/* line 50, ../scss/scouts.scss */
+/* line 53, ../scss/scouts.scss */
 hr {
   background-color: #005a9a;
   border-color: #005a9a;
 }
 
-/* line 54, ../scss/scouts.scss */
+/* line 57, ../scss/scouts.scss */
 h1, legend {
   margin: 0;
   padding: 5px 0;
@@ -149,12 +154,12 @@ h1, legend {
   font-size: 1.6em;
 }
 
-/* line 60, ../scss/scouts.scss */
+/* line 63, ../scss/scouts.scss */
 legend {
   padding: 0;
 }
 
-/* line 63, ../scss/scouts.scss */
+/* line 66, ../scss/scouts.scss */
 h2 {
   margin: 0;
   padding: 3px 0px;
@@ -162,13 +167,13 @@ h2 {
   font-size: 1.2em;
 }
 
-/* line 69, ../scss/scouts.scss */
+/* line 72, ../scss/scouts.scss */
 ul.errorlist {
   color: red;
   margin: 0;
 }
 
-/* line 73, ../scss/scouts.scss */
+/* line 76, ../scss/scouts.scss */
 ul.errorlist li {
   color: red;
   margin: 0;
@@ -176,33 +181,39 @@ ul.errorlist li {
   font-size: smaller;
 }
 
-/* line 80, ../scss/scouts.scss */
+/* line 83, ../scss/scouts.scss */
 p {
   margin: 5px 10px;
 }
 
-/* line 83, ../scss/scouts.scss */
+/* line 86, ../scss/scouts.scss */
 #outer {
   width: 100%;
   height: 100%;
 }
 
-/* line 87, ../scss/scouts.scss */
+/* line 90, ../scss/scouts.scss */
 #frame {
   width: 1000px;
   margin: 0 auto;
   height: 100%;
 }
 
-/* line 92, ../scss/scouts.scss */
-#banner {
-  margin-top: 10px;
-  padding: 0;
-}
 /* line 95, ../scss/scouts.scss */
+#banner {
+  margin-top: 5px;
+  margin-bottom: -11px;
+  padding-top: 5px;
+  float: none;
+  clear: both;
+  overflow: hidden;
+  height: 32px;
+}
+/* line 106, ../scss/scouts.scss */
 #banner h1 {
+  font-family: "HelveticaNeueW01-55Roma";
   display: inline;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 20px;
   vertical-align: baseline;
   position: relative;
@@ -210,17 +221,24 @@ p {
   color: #000;
   padding-bottom: 0;
 }
-/* line 105, ../scss/scouts.scss */
-#banner span {
-  margin-right: 20px;
+/* line 117, ../scss/scouts.scss */
+#banner .rt {
+  height: 20px;
+  display: block;
+}
+/* line 121, ../scss/scouts.scss */
+#banner .fbrec {
+  display: inline-block;
+  height: 20px;
+  width: 130px;
 }
 
-/* line 110, ../scss/scouts.scss */
+/* line 129, ../scss/scouts.scss */
 .rt {
   float: right;
 }
 
-/* line 114, ../scss/scouts.scss */
+/* line 133, ../scss/scouts.scss */
 .button, input[type="submit"] {
   font-size: .9em;
   line-height: 14px;
@@ -234,31 +252,31 @@ p {
   border: 1px outset yellow;
   font-weight: bold;
 }
-/* line 127, ../scss/scouts.scss */
+/* line 146, ../scss/scouts.scss */
 .button:hover, input[type="submit"]:hover {
   border: 1px inset yellow;
 }
 
-/* line 132, ../scss/scouts.scss */
+/* line 151, ../scss/scouts.scss */
 #donate {
   float: right;
   margin-left: 10px;
   height: 100%;
 }
-/* line 136, ../scss/scouts.scss */
+/* line 155, ../scss/scouts.scss */
 #donate input {
   margin: auto 0px;
   width: 92px;
   height: 26px;
 }
 
-/* line 142, ../scss/scouts.scss */
+/* line 161, ../scss/scouts.scss */
 .wrapper {
   overflow: auto;
   clear: both;
 }
 
-/* line 146, ../scss/scouts.scss */
+/* line 165, ../scss/scouts.scss */
 #nav {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #000000), color-stop(100%, #005e9c));
   background-image: -webkit-linear-gradient(#000000, #005e9c);
@@ -273,36 +291,36 @@ p {
   color: #fff;
   margin-bottom: 5px;
 }
-/* line 156, ../scss/scouts.scss */
+/* line 175, ../scss/scouts.scss */
 #nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-/* line 161, ../scss/scouts.scss */
+/* line 180, ../scss/scouts.scss */
 #nav ul li {
   display: inline-block;
   margin: 0 10px;
   cursor: pointer;
   font-weight: bold;
 }
-/* line 166, ../scss/scouts.scss */
+/* line 185, ../scss/scouts.scss */
 #nav ul li a {
   text-decoration: none;
   color: #fff;
 }
-/* line 169, ../scss/scouts.scss */
+/* line 188, ../scss/scouts.scss */
 #nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* line 177, ../scss/scouts.scss */
+/* line 196, ../scss/scouts.scss */
 #page_content {
   width: 100%;
   padding-bottom: 30px;
 }
 
-/* line 181, ../scss/scouts.scss */
+/* line 200, ../scss/scouts.scss */
 #footer {
   text-align: right;
   width: 100%;
@@ -316,29 +334,30 @@ p {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
   opacity: 0.9;
 }
-/* line 195, ../scss/scouts.scss */
+/* line 214, ../scss/scouts.scss */
 #footer a {
   text-decoration: None;
   color: inherit;
   padding: 2px;
 }
-/* line 199, ../scss/scouts.scss */
+/* line 218, ../scss/scouts.scss */
 #footer a:hover {
   -webkit-box-shadow: #f6bc56 0 0 15px 5px;
   -moz-box-shadow: #f6bc56 0 0 15px 5px;
   box-shadow: #f6bc56 0 0 15px 5px;
 }
-/* line 203, ../scss/scouts.scss */
-#footer ul {
-  margin-right: 15px;
+/* line 224, ../scss/scouts.scss */
+#footer ul li {
+  margin-right: 20px;
+  display: inline;
 }
 
-/* line 208, ../scss/scouts.scss */
+/* line 231, ../scss/scouts.scss */
 .error {
   background-color: yellow !important;
 }
 
-/* line 211, ../scss/scouts.scss */
+/* line 234, ../scss/scouts.scss */
 .float_spacer {
   width: 0;
   height: 0;
@@ -347,19 +366,19 @@ p {
 }
 
 /* ========== set requirement popup ==============*/
-/* line 220, ../scss/scouts.scss */
+/* line 243, ../scss/scouts.scss */
 #set_req_form h2 {
   color: #f6bc56;
 }
 
-/* line 223, ../scss/scouts.scss */
+/* line 246, ../scss/scouts.scss */
 #set_req_form label {
   color: #cecece;
   display: inline-block;
   padding-right: 5px;
 }
 
-/* line 228, ../scss/scouts.scss */
+/* line 251, ../scss/scouts.scss */
 #set_req_form textarea {
   width: 240px;
   height: 70px;
@@ -367,45 +386,45 @@ p {
   display: block;
 }
 
-/* line 234, ../scss/scouts.scss */
+/* line 257, ../scss/scouts.scss */
 #set_req_form .button {
   float: left;
   width: 80px;
 }
 
-/* line 240, ../scss/scouts.scss */
+/* line 263, ../scss/scouts.scss */
 #requirements div.req {
   width: 60px;
 }
 
-/* line 243, ../scss/scouts.scss */
+/* line 266, ../scss/scouts.scss */
 div.req {
   text-align: center;
   float: left;
   height: 25px;
 }
-/* line 248, ../scss/scouts.scss */
+/* line 271, ../scss/scouts.scss */
 div.req.checkbox {
   font-size: x-large;
   line-height: 25px;
 }
-/* line 251, ../scss/scouts.scss */
+/* line 274, ../scss/scouts.scss */
 div.req.checkbox:hover {
   font-weight: bold;
 }
-/* line 254, ../scss/scouts.scss */
+/* line 277, ../scss/scouts.scss */
 div.req.checkbox.stripe {
   background-color: #d2e4d7;
 }
-/* line 257, ../scss/scouts.scss */
+/* line 280, ../scss/scouts.scss */
 div.req.checkbox.stripe.current_req {
   background-color: #b3d0bb;
 }
-/* line 261, ../scss/scouts.scss */
+/* line 284, ../scss/scouts.scss */
 div.req img {
   cursor: pointer;
 }
-/* line 264, ../scss/scouts.scss */
+/* line 287, ../scss/scouts.scss */
 div.req .empty {
   margin-top: 3px;
   cursor: pointer;
@@ -415,12 +434,12 @@ div.req .empty {
   border: 2px outset;
   background-color: #c2dac9;
 }
-/* line 272, ../scss/scouts.scss */
+/* line 295, ../scss/scouts.scss */
 div.req .empty:hover {
   border: 2px inset;
 }
 
-/* line 279, ../scss/scouts.scss */
+/* line 302, ../scss/scouts.scss */
 span.info {
   font-weight: bold;
   padding: 0 5px;
@@ -428,12 +447,12 @@ span.info {
   cursor: pointer;
 }
 
-/* line 285, ../scss/scouts.scss */
+/* line 308, ../scss/scouts.scss */
 span.info:hover {
   text-decoration: underline;
 }
 
-/* line 289, ../scss/scouts.scss */
+/* line 312, ../scss/scouts.scss */
 .close_x {
   float: right;
   cursor: pointer;
@@ -453,7 +472,7 @@ span.info:hover {
   text-align: center;
 }
 
-/* line 293, ../scss/scouts.scss */
+/* line 316, ../scss/scouts.scss */
 .popup {
   background-color: #32523b;
   padding: 10px;
@@ -471,11 +490,11 @@ span.info:hover {
   border-radius: 5px;
   color: #fff;
 }
-/* line 303, ../scss/scouts.scss */
+/* line 326, ../scss/scouts.scss */
 .popup h1 {
   color: #f6bc56;
 }
-/* line 306, ../scss/scouts.scss */
+/* line 329, ../scss/scouts.scss */
 .popup #close_popup {
   float: right;
   cursor: pointer;
@@ -495,7 +514,7 @@ span.info:hover {
   text-align: center;
 }
 
-/* line 312, ../scss/scouts.scss */
+/* line 335, ../scss/scouts.scss */
 .pane {
   -webkit-box-shadow: 5px 5px 3px #1f3224;
   -moz-box-shadow: 5px 5px 3px #1f3224;
@@ -510,26 +529,40 @@ span.info:hover {
   margin-right: 5px;
   margin-bottom: 5px;
 }
-/* line 319, ../scss/scouts.scss */
+/* line 342, ../scss/scouts.scss */
 .pane h2 {
   border-bottom: 2px groove #cfecff;
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
-/* line 324, ../scss/scouts.scss */
+/* line 347, ../scss/scouts.scss */
 .pane.rank_div h2 {
   padding: none;
   margin: none;
   border-bottom: none;
 }
-/* line 330, ../scss/scouts.scss */
+/* line 353, ../scss/scouts.scss */
 .pane .button {
   width: 100px;
   margin: 0px 0px 0px auto;
 }
-/* line 334, ../scss/scouts.scss */
+/* line 357, ../scss/scouts.scss */
 .pane fieldset {
   padding: 10px;
+}
+
+/* line 361, ../scss/scouts.scss */
+#motd {
+  padding: 10px;
+  text-align: center;
+  background-color: #efeacc;
+  color: #32523b;
+  margin-bottom: 10px;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  -ms-border-radius: 10;
+  -o-border-radius: 10;
+  border-radius: 10;
 }
 
 /* line 3, ../scss/overview.scss */
@@ -764,4 +797,9 @@ div.request p {
 /* line 119, ../scss/userhome.scss */
 ul.scoutList li {
   margin: 3px 0;
+}
+
+/* line 125, ../scss/userhome.scss */
+#unit_invites li {
+  height: 24px;
 }

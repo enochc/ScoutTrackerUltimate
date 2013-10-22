@@ -1,3 +1,9 @@
+<meta property="fb:app_id" content="{{facebook_appid}}"/> 
+<meta property="og:title" content="UltimateScoutTracker"/> 
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://UltimateScoutTracker.com"/>
+<meta property="og:image" content="http://ultimatescouttracker.com/images/ust_image.gif"/> 
+
 <script>
       window.fbAsyncInit = function() {
 	      FB.init({
@@ -11,17 +17,15 @@
 	    // for any authentication related change, such as login, logout or session refresh. This means that
 	    // whenever someone who was previously logged out tries to log in again, the correct case below 
 	    // will be handled. 
-	    /*
-	    FB.Event.subscribe('auth.login', function(response) {
-	    	alert("login detected")
-	      if (response.status === 'connected') {
-	    	  
-	        // The response object is returned with a status field that lets the app know the current
-	        // login status of the person. In this case, we're handling the situation where they 
-	        // have logged in to the app.
-	        fblogin(response.authResponse)
-	      } 
-	    });*/
+	    
+	    FB.getLoginStatus(function(response) {
+	    	
+	    	if(response.status === 'connected' && !is_authenticated){ 
+	    		$.blockUI({"message":"Logging in via Facebook.."})
+				fblogin(response.authResponse)
+			}
+	       
+	    });
     };
     
     function fblogin(response){

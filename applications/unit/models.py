@@ -3,8 +3,6 @@ from utils.values import reverse_states
 from utils.funcs import email
 
 class UnitRequest(models.Model):
-    class Meta():
-        unique_together = ("unit","member")
         
     unit = models.ForeignKey('unit.Unit')
     member = models.ForeignKey('userprofile.Userprofile')
@@ -63,6 +61,7 @@ class Unit(models.Model):
     state = models.CharField(max_length="2", choices=reverse_states, blank=True)
     city = models.CharField(max_length="255", blank=True)
     calendar = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
     
     def scouts(self):
         return self.members.filter(position__youth=True)

@@ -1,10 +1,12 @@
 @import "compass/reset";
-
+@import "compass/css3/font-face";
 @import "_base";
 @import "compass/css3/box-shadow";
 @import "compass/css3/border-radius";
 @import "compass/css3/images";
 @import "compass/css3/opacity";
+
+@include font-face("HelveticaNeueW01-55Roma", font-files("/static/fonts/helv_heavy.woff"));
 
 .red{color:$red}
 .blue{color:$blue}
@@ -26,6 +28,7 @@ ol{
 div.ui-datepicker{
  font-size:.7em;
 }
+
 #block_message{
 	cursor:default;
 }
@@ -90,11 +93,20 @@ p{
     height:100%;
 }
 #banner{
-	margin-top:10px;
-    padding:0;
+	
+	
+	margin-top:5px;
+	margin-bottom:-11px;
+    padding-top:5px;
+    float:none;
+    clear:both;
+    overflow:hidden;
+    height:32px;
+
     & h1{
+    	font-family:"HelveticaNeueW01-55Roma";
     	display:inline;
-		font-size:32px;
+		font-size:30px;
 		line-height:20px;
 		vertical-align:baseline;
 		position:relative;
@@ -102,8 +114,15 @@ p{
 		color:#000;
 		padding-bottom:0;
     }
-    & span{
-		margin-right:20px;
+    & .rt{
+    	height:20px;
+    	display:block;
+    }
+    & .fbrec{
+		display:inline-block;
+		height:20px;
+		width:130px;
+		
     }
 }
 
@@ -201,7 +220,11 @@ p{
 		}
 	}
 	& ul{
-		margin-right:15px;
+		
+		& li{
+			margin-right:20px;
+			display:inline;
+		}
 	}
 }
 
@@ -335,7 +358,14 @@ span.info:hover{
 		padding:10px;
 	}
 }
-
+#motd{
+	padding:10px;
+	text-align:center;
+	background-color:$tan;
+	color:$green;
+	margin-bottom:10px;
+	@include border-radius(10);
+}
 
 @import "overview";
 @import "userhome";

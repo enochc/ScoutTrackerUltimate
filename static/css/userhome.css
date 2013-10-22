@@ -145,3 +145,8 @@ div.request p {
 ul.scoutList li {
   margin: 3px 0;
 }
+
+/* line 125, ../scss/userhome.scss */
+#unit_invites li {
+  height: 24px;
+}

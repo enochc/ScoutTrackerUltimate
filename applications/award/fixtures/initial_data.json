@@ -65,7 +65,7 @@
     "fields": {
         "group": [], 
         "name": "Communication", 
-        "image": "awards/Communication.gif", 
+        "image": "awards/Communication_1.gif", 
         "required": true, 
         "requirements": [], 
         "type": 0
@@ -114,6 +114,66 @@
         "group": [], 
         "name": "Family Life", 
         "image": "awards/Family_Life.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 11, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Hiking", 
+        "image": "awards/Hiking.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 12, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Lifesaving", 
+        "image": "awards/Lifesaving.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 13, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Personal Fitness", 
+        "image": "awards/Personal_Fitness.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 14, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Personal Management", 
+        "image": "awards/Personal_Management.gif", 
+        "required": true, 
+        "requirements": [], 
+        "type": 0
+    }
+},
+{
+    "pk": 15, 
+    "model": "award.award", 
+    "fields": {
+        "group": [], 
+        "name": "Swimming", 
+        "image": "awards/Swimming.gif", 
         "required": true, 
         "requirements": [], 
         "type": 0

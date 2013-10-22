@@ -81,7 +81,7 @@ function get_req(rid){
 	                {{patrol.name|truncate_chars:10}}
 	            </div>
 	         
-	            {% for scout in patrol.patrol_members.all %}              
+	            {% for scout in patrol.scouts %}              
 	                <div class="scout_name" id='scout_{{scout.user.pk}}'>
 	                <a href="/user/{{scout.user.pk}}/" title="{{scout.name}}">{{scout.name|truncate_chars:10}}</a>:</div>
 	            {% endfor %} 
